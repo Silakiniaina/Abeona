@@ -7,5 +7,6 @@
 </head>
 <body>
     <h1>Hello, Bienvenue dans Abeona</h1>
+    <h2>Votre agence de voyage</h2>
 </body>
 </html>
