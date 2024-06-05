@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Abeona Travel" company="" webLink="http://abeona.com" view-date="2024-06-01" view-index="0" gantt-divider-location="619" resource-divider-location="421" version="3.3.3300" locale="en">
+    <description/>
+    <view zooming-state="default:2" id="gantt-chart">
+        <field id="tpd3" name="Name" width="304" order="0"/>
+        <field id="tpd4" name="Begin date" width="115" order="1"/>
+        <field id="tpd5" name="End date" width="115" order="2"/>
+        <field id="tpd15" name="Notes" width="20" order="3"/>
+        <field id="tpd7" name="Completion" width="69" order="3"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Name" width="266" order="0"/>
+        <field id="1" name="Default role" width="148" order="1"/>
+    </view>
+    <!-- -->
+    <calendars base-id="none">
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="0"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" uid="b8496417cf6345839f6f574571ccd88b" name="Cahier des charges" meeting="false" start="2024-05-27" duration="1" complete="0" thirdDate="2024-06-03" thirdDate-constraint="0" expand="false">
+            <depend id="6" type="2" difference="0" hardness="Strong"/>
+            <task id="1" uid="20232e9442c54993baceab5194d76009" name="Liste des fonctionnalites Clients" meeting="false" start="2024-05-27" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+            <task id="2" uid="57d85d6af40942fb865e1daf56ab9338" name="Liste des fonctionnalites Partenaire" meeting="false" start="2024-05-27" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+            <task id="3" uid="5c96d8610b644ee1a79ceba112772e82" name="Liste des fonctionnalites Administrateur" meeting="false" start="2024-05-27" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+            <task id="4" uid="f3f14d4b680c4571a9514d85ae220f95" name="Liste des regles de gestions" meeting="false" start="2024-05-27" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+            <task id="5" uid="9c7ddfe6cffb4f3a8972f6ec949342d6" name="Evaluation des couts" meeting="false" start="2024-05-27" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="6" uid="4b01c4584d774e49b29b3f413bc4e363" name="Liste a faire" meeting="false" start="2024-05-28" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="false">
+            <depend id="10" type="2" difference="0" hardness="Strong"/>
+            <task id="7" uid="9292bf4e5f66474cbab74211054522aa" name="Liste à faire fonctionnalités clients" meeting="false" start="2024-05-28" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+            <task id="8" uid="2d052e8411154a8b988da0acd3f609b7" name="Liste à faire fonctionnalité parteniaire" meeting="false" start="2024-05-28" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+            <task id="9" uid="b6fabcf0d97f4dcbabfb4b8c2b940d66" name="Liste à faire fonctionnalité Administrateur" meeting="false" start="2024-05-28" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="10" uid="58ed8bf9a0734561bd672a854ea1ac8c" name="Maquette" meeting="false" start="2024-05-29" duration="3" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="false">
+            <depend id="13" type="2" difference="0" hardness="Strong"/>
+            <task id="17" uid="fa087f02d4e044cb8d0adb487caf3292" name="Creation des wireframes" meeting="false" start="2024-05-29" duration="2" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="false">
+                <task id="18" uid="2efb2b66649d4c789e1229c22794b0b5" name="Wireframes coté client" meeting="false" start="2024-05-29" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+                <task id="19" uid="a746e6d7895843dea171374345887a6f" name="Wireframe coté Partenaire" meeting="false" start="2024-05-30" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+                <task id="20" uid="cc89f21ad6ea4f5abcfd5e09016dbd4c" name="Wireframe coté Administrateur" meeting="false" start="2024-05-30" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="12" uid="0b516b4bd9164b99a6831cbfd9e55720" name="Mise en design des wireframes" meeting="false" start="2024-05-30" duration="2" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="false">
+                <task id="21" uid="454728f376614903955e3a09e04cb8ce" name="Design coté client" meeting="false" start="2024-05-30" duration="2" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+                <task id="22" uid="30b210a4036e4110a9482cb617b7217b" name="Design coté Partenaire" meeting="false" start="2024-05-31" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+                <task id="23" uid="f3a417ce4c0342af97800f40d59bfe06" name="Design coté Administrateur" meeting="false" start="2024-05-31" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+            </task>
+        </task>
+        <task id="13" uid="5bdbac7a89e34fe8b12002681c306f72" name="Developpement" meeting="false" start="2024-06-03" duration="12" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true">
+            <task id="14" uid="98b59593dfc04d7b9cee48e95479b56e" name="Client" meeting="false" start="2024-06-03" duration="10" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="false">
+                <task id="38" uid="79050cbff47544bbbb1cbcb51d272ffe" name="Authentification" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="false">
+                    <depend id="37" type="2" difference="0" hardness="Strong"/>
+                    <task id="24" uid="6d4a61d7fa8e43c4a961cd4bac289b70" name="Login" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="false">
+                        <task id="101" uid="e735e793bf4a4b22ad9eaff12d7ac4cd" name="Creation formulaire de login" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                        <task id="102" uid="0b194e98c3184d62b6020e76e842f936" name="Creation fonction login" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                        <task id="103" uid="eee01fd453fd48e185a740731ee73477" name="Creation table Utilisateur" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                        <task id="104" uid="b60780ff18094715a58cf908e4284cd9" name="Dynamisation et Integration" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                    </task>
+                    <task id="25" uid="249b13bf4ce24ddf8d8897cb7f3bd740" name="Inscription" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="false">
+                        <task id="105" uid="2663288cf8ac4573bf1a59cd38d285ad" name="Creation formulaire d'inscription" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                        <task id="106" uid="1bfebe7ba33c434983304fb92ee57e79" name="Creation fonction inscrire" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                        <task id="107" uid="caa7c56b464940399bc64a63bf5c96a0" name="Dynamisation et Integration" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                    </task>
+                </task>
+                <task id="37" uid="4950f1a57ac747c4bd53819c46f78452" name="Liste et description des evenements  avec preference" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="false">
+                    <task id="26" uid="2d677a8613e6407d8229482af470fb45" name="Choix de preference" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+                    <task id="27" uid="921cd5e3548740eabdf1028b737895b5" name="Liste de toutes les evenents du calendriers" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+                    <task id="28" uid="5c0b6ef962bc4e898c1cca367e6cd7de" name="Liste des evenements du calendrier par preferences" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+                    <task id="29" uid="f9b915408a28437485ac7f0e4f777561" name="Description evenement" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="36" uid="6a4c7f2f298047cb9e8408167344472f" name="Liste et description des partenaires" meeting="false" project="true" start="2024-06-06" duration="3" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="false">
+                    <task id="30" uid="a070cb6c579840168c4381c3f57af491" name="Liste des hotels" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="31" uid="e456d61ca117416da79ad186c36cad96" name="Description hotel" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="32" uid="62ae260711a348ed8c7b6a362a2d3181" name="Liste des Attraction" meeting="false" start="2024-06-07" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="33" uid="c73d5e08b27445cf8bd2fe6aab9d2406" name="Description des attractions" meeting="false" start="2024-06-07" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="34" uid="653012fccd1643a9a510f35b3f325dbe" name="Liste des guides" meeting="false" start="2024-06-08" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="35" uid="a04cc629b10b4f21beaa9c6578554246" name="Description guide" meeting="false" start="2024-06-08" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="39" uid="c207554086f7442e8b70e36a14432810" name="Recherche et filtre" meeting="false" start="2024-06-10" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="false">
+                    <task id="40" uid="bcb85bbbde284e699e050c2d5750d3f0" name="Recherche de destination par mot cle" meeting="false" start="2024-06-10" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="41" uid="fa58ab9ba2eb48e89b59833e4507a8f7" name="Filtre des resultats de recherche par region,prix, evaluation" meeting="false" start="2024-06-10" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="42" uid="4d393afc60364b98a08c672bf6c62d8b" name="Reservation des partenaires" meeting="false" start="2024-06-11" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="false">
+                    <task id="43" uid="b83872a203cb4342a3fe57977478ab4a" name="Reservation hotel" meeting="false" start="2024-06-11" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="44" uid="9718a75cb6c04b9da487599c9d8de865" name="Reservation Transport" meeting="false" start="2024-06-11" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="45" uid="48e1459eeb5e4433a356bfaa1846c3c4" name="Reservation Attraction" meeting="false" start="2024-06-11" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="51" uid="aff8f4d809a5414388ea24f46c2d77e6" name="Historique de reservation" meeting="false" start="2024-06-11" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="46" uid="8582d50d6c58493982d305ba67079070" name="Avis et evaluation" meeting="false" start="2024-06-12" duration="2" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="false">
+                    <task id="47" uid="086983054b564d0dabb06e92dda79b42" name="Liste des avis sur une partenaire" meeting="false" start="2024-06-12" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="48" uid="4907104ddaaa4cef9f31fdf27de27dc8" name="Creation avis" meeting="false" start="2024-06-12" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="49" uid="30bfa62b2f064ff1b494da708d87ebe2" name="Calcul et affichage evaluation" meeting="false" start="2024-06-13" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="50" uid="fce05ac8723a4bc495bc41e34a1041da" name="Insertion evaluation" meeting="false" start="2024-06-13" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="52" uid="b340cbbf86d545728cbac284adfadb23" name="Proposition et achat pack" meeting="false" start="2024-06-13" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="false">
+                    <task id="53" uid="83f8c090ac05481f9dd9267ed7a76884" name="Proposition pack par budget" meeting="false" start="2024-06-13" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="54" uid="35591347110147969a98e349da01657f" name="Achat pack" meeting="false" start="2024-06-13" duration="1" complete="0" thirdDate="2024-06-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="55" uid="239c5945321b484bbf12b5f715440b2a" name="Historique Achat" meeting="false" start="2024-06-13" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true"/>
+                </task>
+            </task>
+            <task id="15" uid="3c0f745a8f7840cd8579bb0fd18c1931" name="Partenaire" meeting="false" start="2024-06-03" duration="12" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="false">
+                <task id="56" uid="de060501375a4fbaab08bdba8599415a" name="Authentification" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="false">
+                    <depend id="61" type="2" difference="0" hardness="Strong"/>
+                    <task id="57" uid="b1908665ae2e4ebba8ad80a37dac1551" name="Login" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="false">
+                        <task id="108" uid="b9e32dbc53024d6e8900c645dfbd5b47" name="Creation formulaire de login partenaire" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                        <task id="109" uid="af11af59861c45fea1a4141dfd18590a" name="Creation fonction login" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                        <task id="110" uid="21d33d3bdd4b45c2bbbd6122410023ed" name="Creation table Partenaire" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                        <task id="111" uid="e1b1f25124c74bff9e532556bcf97ff1" name="Dynamisation et Integration" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                    </task>
+                    <task id="58" uid="a81ac8d80c324a50b6c523d319ef4d2e" name="Inscription" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="false">
+                        <task id="112" uid="cf3a3b014cee48ad8d3ca60adc9b0e6e" name="Creation formulaire d'inscription" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                        <task id="113" uid="c1e6cce3de2b4397afadfb82cb94a284" name="Creation fonction s'inscrire" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                        <task id="114" uid="16dcb736573145dd9a08c8db28e71e97" name="Dynamisation et Integration" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                    </task>
+                </task>
+                <task id="61" uid="4cb8921e99e54e4c8df8c71a3e02c3d0" name="Gestion information" meeting="false" start="2024-06-06" duration="6" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="false">
+                    <task id="69" uid="2a193f2cd4e84866846c267f289e4040" name="Hotel" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="false">
+                        <task id="62" uid="b1d5d888a2c64a43855a625df0be3334" name="Insertion Hotel" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true"/>
+                        <task id="63" uid="8309448531cd4c41afe75a4fa6676995" name="Liste Hotel" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true"/>
+                        <task id="64" uid="a010414e8d974f0c942bb35ab2ba7d04" name="Delete Hotel" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true"/>
+                        <task id="65" uid="5a1ce359798c4238b9b8db704e8b6b9f" name="Uptate Hotel" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="false">
+                            <task id="68" uid="6b3961ccfa67409e96fb33bfdb2db995" name="Update information" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true"/>
+                            <task id="66" uid="215da7a4505447e2b3eda5a7b67f87ea" name="Insertion Chambre" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true"/>
+                            <task id="67" uid="bafd18ad295242368bf4dd777ab96d1a" name="Update disponibilite chambre" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true"/>
+                        </task>
+                    </task>
+                    <task id="70" uid="e362b9f26409444b9c18772c88f4996a" name="Transport" meeting="false" start="2024-06-06" duration="2" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="false">
+                        <task id="71" uid="8ca45cff47ee4d708ab61aa384a25686" name="Insertion Transport" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true"/>
+                        <task id="72" uid="9e62f41977ec4284afccc475b5757d59" name="Liste Transport" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true"/>
+                        <task id="73" uid="9adc0d3b1a70462c93f8c18fc784ef69" name="Delete Tranport" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true"/>
+                        <task id="74" uid="631b42cdd0bf46ca9239b1317c4b327e" name="Update transport" meeting="false" start="2024-06-07" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true">
+                            <task id="75" uid="ad09381456ed40809247079d8c3872a3" name="Update information transport" meeting="false" start="2024-06-07" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true"/>
+                            <task id="76" uid="5457539356944b48bdf55dbb9f44850e" name="Update disponibilite" meeting="false" start="2024-06-07" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true"/>
+                        </task>
+                    </task>
+                    <task id="77" uid="3f5db7df890a4849b81929d83cbaac2f" name="Guide" meeting="false" start="2024-06-08" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="false">
+                        <task id="78" uid="e7dab46583284f15aca638db4c278ca2" name="Insertion guide" meeting="false" start="2024-06-08" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                        <task id="79" uid="f5171c81cfc140d0bcb019361f262144" name="Liste guide" meeting="false" start="2024-06-08" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                        <task id="80" uid="21bf4c8803354ee0990076dfb4c857fe" name="Delete guide" meeting="false" start="2024-06-08" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                        <task id="81" uid="24f60b3a68094be28a5424a00e80db61" name="Update guide" meeting="false" start="2024-06-08" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true">
+                            <task id="82" uid="539d3d6b8b7342c881c8d980b129ecf3" name="Update information" meeting="false" start="2024-06-08" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                            <task id="83" uid="fecb10bef9124ec5a27426e4919fb382" name="Update disponibilite" meeting="false" start="2024-06-08" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                        </task>
+                    </task>
+                    <task id="84" uid="2a87c398111a4e53940fde2f9002aea9" name="Details" meeting="false" start="2024-06-10" duration="3" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="false">
+                        <task id="85" uid="a1e9fe07631c4ed6b33d02bc6242a85e" name="Details hotels" meeting="false" start="2024-06-10" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                        <task id="86" uid="182eb900dda741bdabfd1dd3d5dc7f19" name="Details Transport" meeting="false" start="2024-06-11" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                        <task id="87" uid="a6eb6392311f43e9b46347ac912eaa3b" name="Details Guide" meeting="false" start="2024-06-12" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                    </task>
+                </task>
+                <task id="88" uid="a0b522bfc8c04493a1985e7d63b1f8d8" name="Gestion reservation" meeting="false" start="2024-06-13" duration="2" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="false">
+                    <task id="89" uid="d2750ea0e4374fb8819ca0733b59c9e5" name="Liste reservation" meeting="false" start="2024-06-13" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="90" uid="02c9db37ff7449d495fb3ca1580be7f4" name="Details Reservation" meeting="false" start="2024-06-13" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="91" uid="11892895d9334150bf072922348b6a42" name="Decline or Accept une reservation" meeting="false" start="2024-06-14" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="92" uid="6c0c4c74f4134ef29b7f861caa369128" name="Statistique" meeting="false" start="2024-06-15" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="false">
+                    <task id="93" uid="0ef70c478ecc41839526534a9e30aca9" name="Statistique generale" meeting="false" start="2024-06-15" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                </task>
+            </task>
+            <task id="16" uid="d26f21dcc4e64d978c245c18f0af51c7" name="Administrateur" meeting="false" start="2024-06-03" duration="4" complete="0" thirdDate="2024-05-25" thirdDate-constraint="0" expand="false">
+                <task id="59" uid="d764fac8c09b4993a45841ed6dd536c4" name="Authentification" meeting="false" start="2024-06-03" duration="3" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="false">
+                    <depend id="94" type="2" difference="0" hardness="Strong"/>
+                    <task id="60" uid="f08453771d734b058ffe8262df6436bc" name="Login" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-05-28" thirdDate-constraint="0" expand="true"/>
+                    <task id="116" uid="f075bb0090a643f98faa9b41c186c464" name="Creation formulaire de login" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                    <task id="115" uid="66ad3fcb82b24b9fad965fe0c8d38752" name="Creation fonction login" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                    <task id="118" uid="a789827472de4de287d800bfaef24ddc" name="Creation table categorie_utilisateur" meeting="false" start="2024-06-05" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                    <task id="117" uid="0f25ad03f30d4d30a277f8d4ef19312d" name="Dynamisation et Integration" meeting="false" start="2024-06-03" duration="1" complete="0" thirdDate="2024-06-05" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="94" uid="8533b03932c141a68566a88386f779b6" name="Gestion partenaire" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="false">
+                    <task id="95" uid="84f16737e34149f18d4ee5dc3e0eded9" name="Liste des partenaires" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="96" uid="d3a6a7d5039e48bcbb3dd9c6d3ed5614" name="Liste des invitations non-comfirmee" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="97" uid="9325b942ce114ea6bf3eecc95b76556c" name="Details inscription partenaire" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="98" uid="cfd80d5a91364097b441af5dd0abed75" name="Validation inscription partenaire" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="99" uid="6e2a6b56af7746acba38b8fea0b5c98d" name="Details partenaires" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="false">
+                        <task id="100" uid="a5f88fdb4f9049ec8e6a7d6be11b4096" name="Liste des hotels, Transport, Guide d'un partenaire" meeting="false" start="2024-06-06" duration="1" complete="0" thirdDate="2024-05-31" thirdDate-constraint="0" expand="true"/>
+                    </task>
+                </task>
+            </task>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Sanda" function="1" contacts="sandasilakiniaina4@gmail.com" phone="0383403811"/>
+        <resource id="1" name="Mahery" function="2" contacts="" phone=""/>
+        <resource id="2" name="Henintsoa" function="4" contacts="" phone=""/>
+        <resource id="3" name="Tsoa" function="4" contacts="" phone=""/>
+        <resource id="4" name="Erwan" function="3" contacts="" phone=""/>
+        <resource id="5" name="Tantely" function="3" contacts="" phone=""/>
+        <resource id="6" name="Sarobidy" function="3" contacts="" phone=""/>
+        <resource id="7" name="Volatiana" function="3" contacts="" phone=""/>
+        <resource id="8" name="Yohan" function="2" contacts="" phone=""/>
+        <resource id="9" name="Aneliot" function="4" contacts="" phone=""/>
+        <resource id="10" name="Tsiory" function="3" contacts="" phone=""/>
+        <resource id="11" name="Ivo" function="3" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="29" resource-id="0" function="Default:1" responsible="false" load="100.0"/>
+        <allocation task-id="102" resource-id="0" function="1" responsible="false" load="100.0"/>
+        <allocation task-id="114" resource-id="0" function="1" responsible="false" load="100.0"/>
+        <allocation task-id="114" resource-id="0" function="1" responsible="false" load="100.0"/>
+        <allocation task-id="102" resource-id="1" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="101" resource-id="1" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="101" resource-id="1" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="105" resource-id="1" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="105" resource-id="1" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="116" resource-id="1" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="116" resource-id="1" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="107" resource-id="2" function="4" responsible="false" load="100.0"/>
+        <allocation task-id="107" resource-id="2" function="4" responsible="false" load="100.0"/>
+        <allocation task-id="111" resource-id="3" function="4" responsible="false" load="100.0"/>
+        <allocation task-id="111" resource-id="3" function="4" responsible="false" load="100.0"/>
+        <allocation task-id="103" resource-id="4" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="103" resource-id="4" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="110" resource-id="4" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="110" resource-id="4" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="102" resource-id="4" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="102" resource-id="4" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="109" resource-id="4" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="109" resource-id="4" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="115" resource-id="4" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="115" resource-id="4" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="118" resource-id="4" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="118" resource-id="4" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="106" resource-id="6" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="106" resource-id="6" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="113" resource-id="6" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="113" resource-id="6" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="102" resource-id="8" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="102" resource-id="8" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="108" resource-id="8" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="108" resource-id="8" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="112" resource-id="8" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="112" resource-id="8" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="104" resource-id="9" function="4" responsible="false" load="100.0"/>
+        <allocation task-id="104" resource-id="9" function="4" responsible="false" load="100.0"/>
+        <allocation task-id="117" resource-id="11" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="117" resource-id="11" function="3" responsible="false" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles>
+        <role id="1" name="Database Administrator"/>
+        <role id="2" name="FrontEnd"/>
+        <role id="3" name="BackEnd"/>
+        <role id="4" name="Integrator"/>
+    </roles>
+</project>
