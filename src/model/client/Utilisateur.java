@@ -1,6 +1,11 @@
 package model.client;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import model.shared.Database;
 
 public class Utilisateur{
     private int id; 
@@ -69,11 +74,11 @@ public class Utilisateur{
     }
 
     public static void main(String[] argv ){
-        Utilisateur u = new Utilisateur("Sanda","Silakiniaiana","sanda@gmail.com",null,1);
-        if(u != null){
-            System.out.println("Not null");
-        }else{
-            System.out.println("Utilisateur null");
-        }
+        // Utilisateur u = Utilisateur.login("sanda","huhu");
+        // if(u != null){
+        //     System.out.println("Connected successfully");
+        // }else{
+        //     System.out.println("Not connected");
+        // }
     }
 }

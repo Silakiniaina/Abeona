@@ -2,6 +2,8 @@ package model.shared;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 public class Database{
@@ -17,6 +19,34 @@ public class Database{
             e.printStackTrace();
         }
         return c;
+    }
+
+    /* Encodage du mot de passe */
+        public static String encoder(String str){
+        String result = "";
+        Connection c =null; 
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            c = Database.get_connection();
+            st = c.prepareStatement("SELECT digest(?,'sha1') AS encoded");
+            st.setString(1, str);
+            rs = st.executeQuery();
+            while(rs.next()){
+                result += rs.getString("encoded");
+            } 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                if(rs != null) rs.close();
+                if(st != null) st.close();
+                if(c != null) c.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
     public static void main(String[] argv ){
