@@ -10,7 +10,7 @@ public class Database{
 
     /* Fonction pour se connecter au database */
     public static Connection get_connection(){
-       Connection c = null;
+        Connection c = null;
         try{
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection("jdbc:postgresql://localhost/abeona", "sanda", "Sanda120705");

@@ -21,7 +21,7 @@ public class CategorieAttraction {
         this.set_libelle(lib);
     }
 
-        /* Liste des choix pour les preferences */
+    /* Liste des choix pour les preferences */
     public static ArrayList<CategorieAttraction> get_list_categorie_attraction()throws Exception{
         ArrayList<CategorieAttraction> resultat = new ArrayList<CategorieAttraction>();
         Connection c = null; 
