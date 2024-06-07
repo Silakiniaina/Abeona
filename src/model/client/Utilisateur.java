@@ -33,6 +33,28 @@ public class Utilisateur{
         this.set_id_genre(id_g);
     }
 
+        /* Fonction pour se connecter un utilisateur */
+        public static Utilisateur login(String email, String password){
+            Utilisateur resultat = null;
+            Connection c = null;
+            PreparedStatement prsmt = null;
+            ResultSet rs = null;
+            try{
+                c = Database.get_connection();
+                prsmt = c.prepareStatement("SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,email,date_naissance,id_genre FROM utilisateur WHERE email = ? AND mot_de_passe = ? ");
+                prsmt.setString(1,email);
+                prsmt.setString(2, Database.encoder(password));
+                rs = prsmt.executeQuery();
+                if(rs.next()){
+                    resultat = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getInt(6));
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            return resultat;
+        }
+    
+
     /* Setters */
     public void set_id(int n_id){
         this.id = n_id;
@@ -74,11 +96,11 @@ public class Utilisateur{
     }
 
     public static void main(String[] argv ){
-        // Utilisateur u = Utilisateur.login("sanda","huhu");
-        // if(u != null){
-        //     System.out.println("Connected successfully");
-        // }else{
-        //     System.out.println("Not connected");
-        // }
+        Utilisateur u = Utilisateur.login("sandasilakiniaina4@gmail.com","admin");
+        if(u != null){
+            System.out.println("Connected successfully as "+u.get_nom());
+        }else{
+            System.out.println("Not connected");
+        }
     }
 }
