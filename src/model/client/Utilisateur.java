@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Vector;
 
 import model.shared.Database;
 
@@ -84,6 +86,29 @@ public class Utilisateur{
             if(c != null){ c.close(); }
         }
     }
+
+    /* Fonction pour inserer les preferences choisis */
+    public void inserer_preferences(ArrayList<CategorieAttraction>  ls)throws Exception{
+        Connection c = null;
+        PreparedStatement prsmt = null; 
+
+        try{
+            c = Database.get_connection();
+            prsmt = c.prepareStatement("INSERT INTO preference_utilisateur(id_utilisateur, id_categorie_attraction) VALUES (?,?)");
+            prsmt.setInt(1, this.get_id());
+            for(CategorieAttraction categorie : ls){
+                prsmt.setInt(2, categorie.get_id_categorie_attraction());
+                prsmt.executeUpdate();
+            }
+        }catch(Exception e){
+            c.setAutoCommit(false);
+            c.rollback();
+            throw e;
+        }finally{
+            if(prsmt != null){ prsmt.close(); }
+            if(c != null){ c.close(); }
+        }
+    }
     
 
     /* Setters */
@@ -133,11 +158,11 @@ public class Utilisateur{
     }
 
     public static void main(String[] argv ){
-        Utilisateur u = new Utilisateur("Sarobidy", "Onintsoa", "bidy@gmail.com", Date.valueOf(LocalDate.parse("2010-06-12")), 2);
-        u.set_mot_de_passe("elefanta");
-        try{
-            u.inscrire();
-        }catch(Exception e){
+        try {
+            ArrayList<CategorieAttraction> ls = CategorieAttraction.get_list_categorie_attraction();
+            Utilisateur u = Utilisateur.login("sandratra@gmai.com", "noob");
+            u.inserer_preferences(ls);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
