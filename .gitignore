@@ -3,3 +3,4 @@ lib/
 docs/
 
 *.class
+build.sh
