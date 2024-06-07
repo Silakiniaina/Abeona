@@ -33,26 +33,30 @@ public class Utilisateur{
         this.set_id_genre(id_g);
     }
 
-        /* Fonction pour se connecter un utilisateur */
-        public static Utilisateur login(String email, String password){
-            Utilisateur resultat = null;
-            Connection c = null;
-            PreparedStatement prsmt = null;
-            ResultSet rs = null;
-            try{
-                c = Database.get_connection();
-                prsmt = c.prepareStatement("SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,email,date_naissance,id_genre FROM utilisateur WHERE email = ? AND mot_de_passe = ? ");
-                prsmt.setString(1,email);
-                prsmt.setString(2, Database.encoder(password));
-                rs = prsmt.executeQuery();
-                if(rs.next()){
-                    resultat = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getInt(6));
-                }
-            }catch(Exception e){
-                e.printStackTrace();
+    /* Fonction pour se connecter un utilisateur */
+    public static Utilisateur login(String email, String password)throws Exception{
+        Utilisateur resultat = null;
+        Connection c = null;
+        PreparedStatement prsmt = null;
+        ResultSet rs = null;
+        try{
+            c = Database.get_connection();
+            prsmt = c.prepareStatement("SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,email,date_naissance,id_genre FROM utilisateur WHERE email = ? AND mot_de_passe = ? ");
+            prsmt.setString(1,email);
+            prsmt.setString(2, Database.encoder(password));
+            rs = prsmt.executeQuery();
+            if(rs.next()){
+                resultat = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getInt(6));
             }
-            return resultat;
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(c != null){ c.close(); }
         }
+        return resultat;
+    }
     
 
     /* Setters */
