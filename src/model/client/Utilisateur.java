@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 
 import model.shared.Database;
 
@@ -14,6 +15,7 @@ public class Utilisateur{
     private String email;
     private Date date_de_naissance;
     private int id_genre;
+    protected String mot_de_passe;
 
     /* Constructor */
     public Utilisateur(int id, String nom, String prenom, String mail, Date dtn, int id_g){
@@ -57,6 +59,31 @@ public class Utilisateur{
         }
         return resultat;
     }
+
+    /* Fonction pour inscrire un utilisateur */
+    public void inscrire()throws Exception{
+        Connection c = null; 
+        PreparedStatement prsmt = null; 
+        try{
+            c = Database.get_connection();
+            prsmt = c.prepareStatement("INSERT INTO Utilisateur(nom_utilisateur,prenom_utilisateur,email,date_naissance,id_genre,id_categorie_utilisateur,mot_de_passe) VALUES (?,?,?,?,?,?,digest(?,'sha1'))");
+            prsmt.setString(1, this.get_nom());
+            prsmt.setString(2, this.get_prenom());
+            prsmt.setString(3, this.get_email());
+            prsmt.setDate(4, this.get_date_de_naissance());
+            prsmt.setInt(5, this.get_id_genre());
+            prsmt.setInt(6, 1);
+            prsmt.setString(7,this.get_mot_de_passe());
+            prsmt.executeUpdate();
+        }catch(Exception e){
+            c.setAutoCommit(false);
+            c.rollback();
+            throw e;
+        }finally{
+            if(prsmt != null){ prsmt.close(); }
+            if(c != null){ c.close(); }
+        }
+    }
     
 
     /* Setters */
@@ -78,6 +105,9 @@ public class Utilisateur{
     public void set_id_genre(int id){
         this.id_genre = id;
     }
+    public void set_mot_de_passe(String str){
+        this.mot_de_passe = str;
+    }
 
     /* Getters */
     public int get_id(){
@@ -98,13 +128,17 @@ public class Utilisateur{
     public int get_id_genre(){
         return this.id_genre;
     }
+    public String get_mot_de_passe(){
+        return this.mot_de_passe;
+    }
 
     public static void main(String[] argv ){
-        Utilisateur u = Utilisateur.login("sandasilakiniaina4@gmail.com","admin");
-        if(u != null){
-            System.out.println("Connected successfully as "+u.get_nom());
-        }else{
-            System.out.println("Not connected");
+        Utilisateur u = new Utilisateur("Sarobidy", "Onintsoa", "bidy@gmail.com", Date.valueOf(LocalDate.parse("2010-06-12")), 2);
+        u.set_mot_de_passe("elefanta");
+        try{
+            u.inscrire();
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 }
