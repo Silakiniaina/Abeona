@@ -23,3 +23,17 @@ CREATE TABLE Utilisateur(
     FOREIGN KEY(id_genre) REFERENCES genre(id_genre),
     FOREIGN KEY(id_categorie_utilisateur) REFERENCES categorie_utilisateur(id_categorie_utilisateur) 
 );
+
+CREATE TABLE categorie_attraction (
+    id_categorie_attraction SERIAL PRIMARY KEY, 
+    libelle VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE preference_utilisateur(
+    id_preference SERIAL PRIMARY KEY, 
+    id_utilisateur INT NOT NULL, 
+    id_categorie_attraction INT NOT NULL, 
+    FOREIGN KEY(id_utilisateur) REFERENCES utilisateur(id_utilisateur),
+    FOREIGN KEY(id_categorie_attraction) REFERENCES categorie_attraction(id_categorie_attraction),
+    UNIQUE(id_utilisateur,id_categorie_attraction)
+);
