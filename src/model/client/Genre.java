@@ -44,6 +44,38 @@ public class Genre {
         }
         return resultat;
     }
+
+    /* Fonction pour avoir la liste des point d'interets dans une province */
+    public static Genre get_genre_par_id(Connection con, int id)throws Exception{
+        Genre resultat = null;
+        Connection c = null;
+        PreparedStatement prsmt = null; 
+        ResultSet rs = null; 
+        boolean est_nouvelle_connexion = false;
+        try{
+            if(con == null){
+                c = Database.get_connection();
+                est_nouvelle_connexion = true;
+            }else{ c = con; }
+            if(c != null){
+                prsmt = c.prepareStatement("SELECT * FROM genre WHERE id_genre = ?");
+                prsmt.setInt(1, id);
+                rs = prsmt.executeQuery();
+                if (rs.next()) {
+                    resultat = new Genre(rs.getInt(1), rs.getString(2));
+                }
+            }else{
+                throw new Exception("Aucune connexion");
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(est_nouvelle_connexion){ c.close(); }
+        }
+        return resultat;
+    }
     
     /* Getters */
     public int get_id_genre() {
@@ -63,10 +95,8 @@ public class Genre {
 
     public static void main(String[] args) {
         try{
-            ArrayList<Genre> ls = Genre.get_liste_genre();
-            for(Genre g : ls){
-                System.out.println("libelle : "+g.get_libelle());
-            }
+            Genre g  = Genre.get_genre_par_id(null, 2);
+            System.out.println("libelle : "+g.get_libelle());
         }catch(Exception e){
             e.printStackTrace();
         }
