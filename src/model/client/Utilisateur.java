@@ -157,9 +157,12 @@ public class Utilisateur{
 
     public static void main(String[] argv ){
         try {
-            ArrayList<CategorieAttraction> ls = CategorieAttraction.get_list_categorie_attraction();
-            Utilisateur u = Utilisateur.login("sandratra@gmai.com", "noob");
-            u.inserer_preferences(ls);
+            // ArrayList<CategorieAttraction> ls = CategorieAttraction.get_list_categorie_attraction();
+            Utilisateur u = Utilisateur.login("tsoaiangotiana@gmail.com", "123");
+            if(u != null){
+                System.out.println("Connecter en tant que : "+u.get_nom());
+            }
+            // u.inserer_preferences(ls);
         } catch (Exception e) {
             e.printStackTrace();
         }

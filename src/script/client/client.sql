@@ -21,7 +21,7 @@ CREATE TABLE Utilisateur(
     date_naissance DATE NOT NULL,
     id_genre INT NOT NULL, 
     id_categorie_utilisateur INT NOT NULL, 
-    mot_de_passe VARCHAR(256) NOT NULL UNIQUE, 
+    mot_de_passe VARCHAR(256) NOT NULL, 
     adresse VARCHAR(100), 
     date_insertion DATE DEFAULT NOW(),
     FOREIGN KEY(id_genre) REFERENCES genre(id_genre),
