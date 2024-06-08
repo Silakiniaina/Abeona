@@ -10,35 +10,41 @@ CREATE OR REPLACE VIEW v_point_interet_province AS
         ON pip.id_point_interet = pi.id_point_interet
     ;
 
-CREATE OR REPLACE VIEW v_evenement_calendrier AS 
+-- DROP VIEW IF EXISTS v_evenement_calendrier_passe;
+-- DROP VIEW IF EXISTS v_evenement_calendrier_en_cours;
+-- DROP VIEW IF EXISTS v_evenement_calendrier_futur;
+-- DROP VIEW IF EXISTS v_evenement_calendrier;
+CREATE  VIEW v_evenement_calendrier AS 
     SELECT 
         id_evenement, 
         nom_evenement, 
         date_evenement, 
         description_evenement, 
-        id_ville, 
+        v.nom_ville AS ville, 
         COALESCE(CAST(id_hotel AS VARCHAR), 'NULL') AS id_hotel 
-    FROM evenement
+    FROM evenement AS e
+    JOIN ville AS v 
+    ON e.id_ville = v.id_ville
     WHERE id_hotel IS NULL
 ;
 
-CREATE OR REPLACE VIEW v_evenement_calendrier_passe AS 
+CREATE VIEW v_evenement_calendrier_passe AS 
     SELECT 
         * 
     FROM v_evenement_calendrier 
     WHERE date_evenement < NOW()
 ;
 
-CREATE OR REPLACE VIEW v_evenement_calendrier_en_cours AS 
-    SELECT 
-        * 
-    FROM v_evenement_calendrier 
-    WHERE date_evenement = NOW()
-;
-
-CREATE OR REPLACE VIEW v_evenement_calendrier_futur AS 
+CREATE VIEW v_evenement_calendrier_futur AS 
     SELECT 
         * 
     FROM v_evenement_calendrier 
     WHERE date_evenement > NOW()
+;
+
+CREATE VIEW v_evenement_calendrier_en_cours AS 
+    SELECT 
+        * 
+    FROM v_evenement_calendrier 
+    WHERE date_evenement = NOW()
 ;
