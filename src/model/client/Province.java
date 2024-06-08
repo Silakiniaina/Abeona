@@ -47,6 +47,35 @@ public class Province {
         }
         return resultat;
     }
+
+    /* Fonction pour avoir la liste des point d'interets dans une province */
+    public ArrayList<PointInteret> get_point_interets()throws Exception{
+        ArrayList<PointInteret> resultat = new ArrayList<PointInteret>();
+        Connection c = null;
+        PreparedStatement prsmt = null; 
+        ResultSet rs = null; 
+        try{
+            c = Database.get_connection();
+            if(c != null){
+                prsmt = c.prepareStatement("SELECT * FROM point_interet_province WHERE id_province = ?");
+                prsmt.setInt(1, this.get_id_province());
+                rs = prsmt.executeQuery();
+                while (rs.next()) {
+                    PointInteret p = new PointInteret(rs.getInt(1), rs.getString(2));
+                    resultat.add(p);
+                }
+            }else{
+                throw new Exception("Aucune connexion");
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(c != null){ c.close(); }
+        }
+        return resultat;
+    }
     
     /* Getters */
     public int get_id_province() {
@@ -73,6 +102,10 @@ public class Province {
     public static void main(String[] args) {
         try {  
             ArrayList<Province> ls = Province.get_liste_provinces();
+            for(Province p : ls){
+                ArrayList<PointInteret> point = p.get_point_interets();
+                System.out.println("Point interet province : "+p.get_id_province()+" count : "+point.size());
+            }
             System.out.println(ls.size());
         } catch (Exception e) {
             e.printStackTrace();
