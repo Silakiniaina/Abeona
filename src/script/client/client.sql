@@ -56,3 +56,26 @@ CREATE TABLE point_interet_province(
     FOREIGN KEY(id_province) REFERENCES province(id_province),
     FOREIGN KEY(id_point_interet) REFERENCES point_interet(id_point_interet)
 );
+
+CREATE TABLE ville (
+    id_ville SERIAL PRIMARY KEY, 
+    nom_ville VARCHAR(100) NOT NULL, 
+    id_province INT NOT NULL, 
+    FOREIGN KEY(id_province) REFERENCES province(id_province)
+);
+
+CREATE TABLE hotel (
+    id_hotel SERIAL PRIMARY KEY, 
+    nom_hotel VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE evenement (
+    id_evenement SERIAL PRIMARY KEY, 
+    nom_evenement VARCHAR(100) NOT NULL, 
+    date_evenement DATE NOT NULL, 
+    description_evenement VARCHAR(256) NOT NULL, 
+    id_ville INT NOT NULL, 
+    id_hotel INT, 
+    FOREIGN KEY(id_ville) REFERENCES ville(id_ville),
+    FOREIGN KEY(id_hotel) REFERENCES hotel(id_hotel)
+);

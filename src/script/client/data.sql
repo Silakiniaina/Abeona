@@ -68,3 +68,53 @@ INSERT INTO point_interet_province (id_province, id_point_interet) VALUES
     (6, 7),  
     (6, 8)
 ;
+
+INSERT INTO ville (nom_ville, id_province) VALUES
+    ('Antananarivo', 1),  
+    ('Antsirabe', 1),     
+    ('Ambatolampy', 1),   
+    ('Fianarantsoa', 2),   
+    ('Ambalavao', 2),      
+    ('Manakara', 2),       
+    ('Toamasina', 3),      
+    ('Brickaville', 3),    
+    ('Foulpointe', 3),     
+    ('Mahajanga', 4),      
+    ('Marovoay', 4),       
+    ('Ambato-Boeny', 4),   
+    ('Antsiranana', 5),    
+    ('Ambanja', 5),        
+    ('Nosy Be', 5),        
+    ('Toliara', 6),        
+    ('Morondava', 6),      
+    ('Tulear', 6)
+;  
+
+INSERT INTO hotel (nom_hotel) VALUES
+    ('Hotel Colbert'),
+    ('Carlton Hotel'),
+    ('Hotel Tamboho'),
+    ('Hotel Thermes'),
+    ('Hotel Vanilla')
+;
+
+INSERT INTO evenement (nom_evenement, date_evenement, description_evenement, id_ville, id_hotel) VALUES
+    ('Festival de Jazz', '2024-07-10', 'Un festival de jazz annuel avec des musiciens internationaux.', 1, 1),
+    ('Conférence sur le climat', '2024-08-15', 'Conférence internationale sur les changements climatiques.', 2, 2),
+    ('Salon de l automobile', '2024-09-20', 'Présentation des derniers modèles de voitures.', 3, NULL),
+    ('Marathon de Tana', '2024-10-05', 'Un marathon annuel dans la capitale.', 1, 3),
+    ('Festival des arts', '2024-11-12', 'Exposition d arts locaux et internationaux.', 4, NULL),
+    ('Fête nationale', '2024-06-26', 'Célébration de la fête nationale avec des parades et des feux d artifice.', 5, 4),
+    ('Conférence médicale', '2024-07-22', 'Conférence sur les nouvelles avancées médicales.', 6, NULL),
+    ('Festival de la mer', '2024-08-30', 'Célébration des ressources maritimes avec des activités de plage.', 7, 5),
+    ('Salon du livre', '2024-09-15', 'Rencontre avec des auteurs et présentation de nouveaux livres.', 8, NULL),
+    ('Festival du film', '2024-10-25', 'Projection de films internationaux et nationaux.', 9, 1),
+    ('Exposition de photographie', '2024-11-18', 'Exposition de photographies de divers artistes.', 10, 2),
+    ('Conférence technologique', '2024-12-05', 'Présentation des dernières innovations technologiques.', 11, NULL),
+    ('Tournoi de tennis', '2024-06-10', 'Tournoi de tennis avec des joueurs locaux et internationaux.', 12, 3),
+    ('Festival de musique', '2024-07-18', 'Festival de musique avec des artistes de divers genres.', 13, NULL),
+    ('Exposition de voitures anciennes', '2024-08-22', 'Exposition de voitures classiques et anciennes.', 14, 4)
+;
+
+
+
