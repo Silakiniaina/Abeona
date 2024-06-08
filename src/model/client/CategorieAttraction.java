@@ -44,6 +44,30 @@ public class CategorieAttraction {
         }
         return resultat;
     }
+
+    /* Fonction pour avoir une categorie id par son Id */
+    public static CategorieAttraction get_categorie_attraction_par_id(int id)throws Exception{
+        CategorieAttraction resultat = null;
+        Connection c = null; 
+        PreparedStatement prsmt = null; 
+        ResultSet rs = null; 
+        try {
+            c = Database.get_connection();
+            prsmt = c.prepareStatement("SELECT * FROM categorie_attraction WHERE id_categorie_attraction = ? ");
+            prsmt.setInt(1,id);
+            rs = prsmt.executeQuery();
+            if (rs.next()) {
+                resultat = new CategorieAttraction(rs.getInt(1), rs.getString(2));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(c != null){ c.close(); }
+        }
+        return resultat;
+    }
     
     /* Getters */
     public int get_id_categorie_attraction() {
@@ -59,6 +83,16 @@ public class CategorieAttraction {
     }
     public void set_libelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    public static void main(String[] args) {
+        try {
+            CategorieAttraction c = CategorieAttraction.get_categorie_attraction_par_id(2);
+            System.out.println("Nom : "+c.get_libelle());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
     
 }
