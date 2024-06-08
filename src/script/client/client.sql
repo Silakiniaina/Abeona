@@ -1,3 +1,7 @@
+CREATE DATABASE "abeona" WITH OWNER sanda;
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 CREATE TABLE categorie_utilisateur(
     id_categorie_utilisateur SERIAL PRIMARY KEY, 
     libelle VARCHAR(10) NOT NULL UNIQUE
