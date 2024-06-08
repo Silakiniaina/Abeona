@@ -37,3 +37,22 @@ CREATE TABLE preference_utilisateur(
     FOREIGN KEY(id_categorie_attraction) REFERENCES categorie_attraction(id_categorie_attraction),
     UNIQUE(id_utilisateur,id_categorie_attraction)
 );
+
+CREATE TABLE point_interet(
+    id_point_interet SERIAL PRIMARY KEY, 
+    libelle VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE province (
+    id_province SERIAL PRIMARY KEY, 
+    nom_province VARCHAR(100) NOT NULL UNIQUE,
+    description_province VARCHAR(250)
+);
+
+CREATE TABLE point_interet_province(
+    id_interet SERIAL PRIMARY KEY, 
+    id_province INT NOT NULL, 
+    id_point_interet INT NOT NULL, 
+    FOREIGN KEY(id_province) REFERENCES province(id_province),
+    FOREIGN KEY(id_point_interet) REFERENCES point_interet(id_point_interet)
+);
