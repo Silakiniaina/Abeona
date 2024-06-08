@@ -20,12 +20,11 @@ public class Evenement{
     static int EVENEMENT_FUTUR = 1;
 
     /* Constructor */
-    public Evenement(String nom, Date dt, String desc,  String ville, Hotel h){
+    public Evenement(String nom, Date dt, String desc,  String ville){
         this.set_nom_evenement(nom);
         this.set_date_evenement(dt);
         this.set_description(desc);
         this.set_ville(ville);
-        this.set_hotel(h);
     }
 
     /* Fonction pour avoir la liste des evenement du calendrier */
@@ -47,7 +46,7 @@ public class Evenement{
                 }
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    Evenement ev = new Evenement(rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5),null);
+                    Evenement ev = new Evenement(rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5));
                     ev.set_id_evenement(rs.getInt(1));
                     resultat.add(ev);
                 }
@@ -63,7 +62,41 @@ public class Evenement{
         }
         return resultat;
     }
-    
+
+    /* Fonction pour avoir une categorie id par son Id */
+    public static Evenement get_evenement_par_id(Connection con, int id)throws Exception{
+        Evenement resultat = null;
+        Connection c = null; 
+        PreparedStatement prsmt = null; 
+        ResultSet rs = null; 
+        boolean est_nouvelle_connexion = false;
+        try {
+            if(con == null){
+                c = Database.get_connection();
+                est_nouvelle_connexion = true;
+            }else{
+                c = con;
+            }
+            prsmt = c.prepareStatement("SELECT * FROM evenement WHERE id_evenement = ? ");
+            prsmt.setInt(1,id);
+            rs = prsmt.executeQuery();
+            if (rs.next()) {
+                resultat = new Evenement(rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5));
+                if(rs.getInt(6) != 0){
+                    resultat.set_hotel(Hotel.get_hotel_par_id(c,rs.getInt(6)));
+                }
+                resultat.set_id_evenement(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(est_nouvelle_connexion){ c.close(); }
+        }
+        return resultat;
+    }
+
     /* Getters */
     public int get_id_evenement() {
         return id_evenement;

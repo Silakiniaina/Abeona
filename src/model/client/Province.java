@@ -76,6 +76,35 @@ public class Province {
         }
         return resultat;
     }
+
+    /* Fonction pour avoir une categorie id par son Id */
+    public static Province get_province_par_id(Connection con, int id)throws Exception{
+        Province resultat = null;
+        Connection c = null; 
+        PreparedStatement prsmt = null; 
+        ResultSet rs = null; 
+        boolean est_nouvelle_connexion = false;
+        try {
+            if(con == null){    
+                c = Database.get_connection(); 
+                est_nouvelle_connexion = true;
+            }
+            else { c = con; }
+            prsmt = c.prepareStatement("SELECT * FROM province WHERE id_province = ? ");
+            prsmt.setInt(1,id);
+            rs = prsmt.executeQuery();
+            if (rs.next()) {
+                resultat = new Province(rs.getInt(1), rs.getString(2),rs.getString(3));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(est_nouvelle_connexion){ c.close(); }
+        }
+        return resultat;
+    }
     
     /* Getters */
     public int get_id_province() {
