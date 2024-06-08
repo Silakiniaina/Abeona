@@ -57,11 +57,11 @@ public class Province {
         try{
             c = Database.get_connection();
             if(c != null){
-                prsmt = c.prepareStatement("SELECT * FROM point_interet_province WHERE id_province = ?");
+                prsmt = c.prepareStatement("SELECT * FROM v_point_interet_province WHERE id_province = ?");
                 prsmt.setInt(1, this.get_id_province());
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    PointInteret p = new PointInteret(rs.getInt(1), rs.getString(2));
+                    PointInteret p = new PointInteret(rs.getInt(2), rs.getString(3));
                     resultat.add(p);
                 }
             }else{
@@ -104,7 +104,9 @@ public class Province {
             ArrayList<Province> ls = Province.get_liste_provinces();
             for(Province p : ls){
                 ArrayList<PointInteret> point = p.get_point_interets();
-                System.out.println("Point interet province : "+p.get_id_province()+" count : "+point.size());
+                for(PointInteret pp : point){
+                    System.out.println("Province : "+p.get_nom_province()+ " point : "+pp.get_libelle());
+                }
             }
             System.out.println(ls.size());
         } catch (Exception e) {
