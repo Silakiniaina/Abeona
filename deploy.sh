@@ -12,7 +12,7 @@ fi
 
 find "$src" -type f -name "*.java" -exec cp -r {} "$temp" \;
 javac -d "$bin" -cp "$lib/*" "$temp"/*.java
-rm -R "$temp_dir"
+rm -R "$temp"
 
 src_dir="bin"
 web_dir="web"
