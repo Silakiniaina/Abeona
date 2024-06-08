@@ -61,7 +61,6 @@ public class Evenement{
             if(prsmt != null){ prsmt.close(); }
             if(c != null){ c.close(); }
         }
-
         return resultat;
     }
     
