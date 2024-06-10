@@ -2,5 +2,6 @@ bin/
 lib/
 docs/
 
-*.class
+*.jar
 build.sh
+*.class
