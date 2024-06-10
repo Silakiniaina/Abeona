@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertion transport</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/input.js" defer></script>
+    <script src="assets/js/toggle.js" defer></script>
+</head>
+<body>
+    <header>
+    <nav class="navbar">
+        <a href="" class="logo">
+            LOGO
+        </a>
+        <div class="nav-links">
+                <ul class="list-container">
+                    <li class=""><a href="">
+                        Accueil
+                    </a></li>
+                    <li><a href="">Partenaires</a></li>
+                    <li><a href="">Services</a></li>
+                    <li><a href="">Historique</a></li>
+                    <li class="active"><a href="">A propos</a></li>
+                    <li><a href="">Aide</a></li>
+                </ul>
+                <ul class="list-container">
+                    <li class="dropdown">
+                        <span href="" class="dropdown-toggle btn">
+                            S'inscrire
+                            <img src="assets/Icons/icons8-flèche-développer-50.png" alt="icons-toggle" class="fleche-cons">
+                        </span>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="">Touriste</a>
+                            </li>
+                            <li>
+                                <a href="inscription_partenaire.html">Partenaires</a>
+                            </li>
+                            <li>
+                                <a href="">Entreprises</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <span href="" class="dropdown-toggle btn abeona-custom_2">
+                            Se connecter
+                            <img src="assets/Icons/icons8-flèche-développer-50.png" alt="icons-toggle" class="fleche-cons">
+                        </span>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="">Touriste</a>
+                            </li>
+                            <li>
+                                <a href="">Partenaires</a>
+                            </li>
+                            <li>
+                                <a href="">Entreprises</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+        </div>
+        <img src="assets/Icons/icons8-menu-64.png" alt="menu-icons" class="menu-hamburger">
+    </nav>
+    </header>
+
+    <div class="row">
+        <div class="first_container">
+             <div class="container_forms">
+            <h1>Insertion <span class="yellow">Transport</span></h1>
+            <p class="desc_inscr">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic sit impedit aspernatur nostrum! Consequatur quidem mollitia itaque, eius atque eaque
+            </p>
+            <form action="">
+                <div class="input-section">
+                    <input name="name_transport" id="name_transport" class="input" type="text"/>
+                    <label for="name_transport" class="label-input">Nom</label>
+                </div>
+
+                <div class="input-section">
+                    <select name="categorie" id="categorie" class="options">
+                        <option value="">Hotelerie</option>
+                        <option value="">Transports</option>
+                        <option value="">Restaurants</option>
+                        <option value="">Location</option>
+                    </select>
+                     <label for="categorie" class="label-options">Categorie</label>
+                </div>
+
+                <p class="description">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic sit impedit
+                </p>
+
+                <div class="input-section">
+                    <textarea name="description" id="description" class="input textarea"></textarea>
+                    <label for="description" class="label-input">Description</label>
+                </div>
+
+                <div class="input-section">
+                    <input type="number" id="prix" name="prix" min="1" class="input" >
+                    <label for="prix" class="label-input">Prix</label>
+                </div>
+                <button class="btn abeona-custom_3">Insérer<img src="assets/Icons/icons8-arrow-50.png" alt=""></button>
+            </form>
+        </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
