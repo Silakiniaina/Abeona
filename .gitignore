@@ -1,7 +1,11 @@
 bin/
 lib/
 docs/
+node_modules/
+sass/
 
+package-lock.json
+package.json
 *.jar
 build.sh
 *.class
