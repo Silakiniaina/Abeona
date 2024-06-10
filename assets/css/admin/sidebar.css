@@ -1,0 +1,153 @@
+@font-face {
+  font-family: poppins-black;
+  src: url("/assets/font/Poppins-Black.ttf");
+}
+@font-face {
+  font-family: poppins-bold;
+  src: url("/assets/font/Poppins-Bold.ttf");
+}
+@font-face {
+  font-family: poppins-extrabold;
+  src: url("/assets/font/Poppins-ExtraBold.ttf");
+}
+@font-face {
+  font-family: poppins-extralight;
+  src: url("/assets/font/Poppins-ExtraLight.ttf");
+}
+@font-face {
+  font-family: poppins-light;
+  src: url("/assets/font/Poppins-Light.ttf");
+}
+@font-face {
+  font-family: poppins-medium;
+  src: url("/assets/font/Poppins-Medium.ttf");
+}
+@font-face {
+  font-family: poppins-regular;
+  src: url("/assets/font/Poppins-Regular.ttf");
+}
+@font-face {
+  font-family: poppins-semibold;
+  src: url("/assets/font/Poppins-SemiBold.ttf");
+}
+@font-face {
+  font-family: poppins-thin;
+  src: url("/assets/font/Poppins-Thin.ttf");
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  font-family: poppins-extrabold;
+}
+
+.aside {
+  width: 300px;
+  height: 100%;
+  background-color: #92AA83;
+  position: relative;
+}
+.aside__header {
+  display: flex;
+  padding: 10%;
+  gap: 10px;
+  background-color: #92AA83;
+  align-items: center;
+  justify-content: center;
+}
+.aside__header--logo {
+  color: white;
+}
+.aside__header--brand {
+  color: white;
+}
+.aside__list {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.aside__list__item {
+  display: flex;
+  width: 90%;
+  height: 50px;
+  border: 2px solid #FFFFFF;
+  padding: 10px 20px;
+  gap: 15px;
+  text-decoration: none;
+  color: #FFFFFF;
+  font-family: poppins-medium;
+  font-size: 14px;
+  font-weight: 300;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: left;
+  text-align: center;
+  letter-spacing: -1%;
+  transition: 0.5s ease-out;
+}
+.aside__list__item:hover {
+  background-color: #B0BEA9;
+  border: 2px solid #B0BEA9;
+  color: #FFFFFF;
+}
+.aside__list .active, .aside__list .active:hover {
+  background-color: #363D32;
+  border: 2px solid #363D32;
+  color: #92AA83;
+}
+.aside__profile {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  position: absolute;
+  bottom: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.aside__profile-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  position: relative;
+}
+.aside__profile-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.aside__profile-img span {
+  height: 15px;
+  width: 15px;
+  border: 2px solid #FFFFFF;
+  border-radius: 10px;
+  background-color: #00FF00;
+  position: absolute;
+  top: 82%;
+  left: 85%;
+}
+.aside__profile__label {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.aside__profile__label-name {
+  font-family: poppins-semibold;
+  font-size: 15px;
+  color: #FFFFFF;
+}
+.aside__profile__label-function {
+  font-family: poppins-thin;
+  color: #FFFFFF;
+  font-size: 9px;
+}
+
+/*# sourceMappingURL=sidebar.css.map */
