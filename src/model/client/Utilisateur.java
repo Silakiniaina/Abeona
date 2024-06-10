@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import model.shared.Database;
 
 public class Utilisateur{
-    private int id; 
+    private String id; 
     private String nom;
     private String prenom;
     private String email;
     private Date date_de_naissance;
-    private int id_genre;
+    private String id_genre;
     protected String mot_de_passe;
 
     /* Constructor */
-    public Utilisateur(int id, String nom, String prenom, String mail, Date dtn, int id_g){
+    public Utilisateur(String id, String nom, String prenom, String mail, Date dtn, String id_g){
         this.set_id(id);
         this.set_nom(nom);
         this.set_prenom(prenom);
@@ -27,7 +27,7 @@ public class Utilisateur{
         this.set_id_genre(id_g);
     }
 
-    public Utilisateur(String nom, String prenom, String mail, Date dtn, int id_g){
+    public Utilisateur(String nom, String prenom, String mail, Date dtn, String id_g){
         this.set_nom(nom);
         this.set_prenom(prenom);
         this.set_email(mail);
@@ -48,7 +48,7 @@ public class Utilisateur{
             prsmt.setString(2, Database.encoder(password));
             rs = prsmt.executeQuery();
             if(rs.next()){
-                resultat = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getInt(6));
+                resultat = new Utilisateur(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6));
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -71,8 +71,8 @@ public class Utilisateur{
             prsmt.setString(2, this.get_prenom());
             prsmt.setString(3, this.get_email());
             prsmt.setDate(4, this.get_date_de_naissance());
-            prsmt.setInt(5, this.get_id_genre());
-            prsmt.setInt(6, 1);
+            prsmt.setString(5, this.get_id_genre());
+            prsmt.setString(6, "CTU1");
             prsmt.setString(7,this.get_mot_de_passe());
             prsmt.executeUpdate();
         }catch(Exception e){
@@ -93,9 +93,9 @@ public class Utilisateur{
         try{
             c = Database.get_connection();
             prsmt = c.prepareStatement("INSERT INTO preference_utilisateur(id_utilisateur, id_categorie_attraction) VALUES (?,?)");
-            prsmt.setInt(1, this.get_id());
+            prsmt.setString(1, this.get_id());
             for(CategorieAttraction categorie : ls){
-                prsmt.setInt(2, categorie.get_id_categorie_attraction());
+                prsmt.setString(2, categorie.get_id_categorie_attraction());
                 prsmt.executeUpdate();
             }
         }catch(Exception e){
@@ -110,7 +110,7 @@ public class Utilisateur{
     
 
     /* Setters */
-    public void set_id(int n_id){
+    public void set_id(String n_id){
         this.id = n_id;
     }
     public void set_nom(String str){
@@ -125,7 +125,7 @@ public class Utilisateur{
     public void set_date_de_naissance(Date dt){
         this.date_de_naissance = dt;
     }
-    public void set_id_genre(int id){
+    public void set_id_genre(String id){
         this.id_genre = id;
     }
     public void set_mot_de_passe(String str){
@@ -133,7 +133,7 @@ public class Utilisateur{
     }
 
     /* Getters */
-    public int get_id(){
+    public String get_id(){
         return this.id;
     }
     public String get_nom(){
@@ -148,7 +148,7 @@ public class Utilisateur{
     public Date get_date_de_naissance(){
         return this.date_de_naissance;
     }
-    public int get_id_genre(){
+    public String get_id_genre(){
         return this.id_genre;
     }
     public String get_mot_de_passe(){
@@ -158,9 +158,10 @@ public class Utilisateur{
     public static void main(String[] argv ){
         try {
             // ArrayList<CategorieAttraction> ls = CategorieAttraction.get_list_categorie_attraction();
-            Utilisateur u = Utilisateur.login("tsoaiangotiana@gmail.com", "123");
+            Utilisateur u = Utilisateur.login("sandasilakiniaina4@gmail.com", "admin");
             if(u != null){
                 System.out.println("Connecter en tant que : "+u.get_nom());
+                System.out.println("id : "+u.get_id());
             }
             // u.inserer_preferences(ls);
         } catch (Exception e) {

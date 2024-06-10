@@ -32,7 +32,7 @@ public class provinceController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         try {
-            int id_province = Integer.parseInt(request.getParameter("provinceId"));
+            String id_province = request.getParameter("provinceId");
             Province province = Province.get_province_par_id(null, id_province);
             ArrayList<PointInteret> interets = province.get_point_interets();
             request.setAttribute("listeInteret", interets);

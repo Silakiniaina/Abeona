@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import model.shared.Database;
 
 public class Genre {
-    private int id_genre; 
+    private String id_genre; 
     private String libelle;
 
     /* Constructor */
-    public Genre(int id_genre, String libelle){
+    public Genre(String id_genre, String libelle){
         this.set_id_genre(id_genre);
         this.set_libelle(libelle);
     }
@@ -29,7 +29,7 @@ public class Genre {
                 prsmt = c.prepareStatement("SELECT * FROM genre");
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    Genre g = new Genre(rs.getInt(1), rs.getString(2));
+                    Genre g = new Genre(rs.getString(1), rs.getString(2));
                     resultat.add(g);
                 }
             }else{
@@ -46,7 +46,7 @@ public class Genre {
     }
 
     /* Fonction pour avoir la liste des point d'interets dans une province */
-    public static Genre get_genre_par_id(Connection con, int id)throws Exception{
+    public static Genre get_genre_par_id(Connection con, String id)throws Exception{
         Genre resultat = null;
         Connection c = null;
         PreparedStatement prsmt = null; 
@@ -59,10 +59,10 @@ public class Genre {
             }else{ c = con; }
             if(c != null){
                 prsmt = c.prepareStatement("SELECT * FROM genre WHERE id_genre = ?");
-                prsmt.setInt(1, id);
+                prsmt.setString(1, id);
                 rs = prsmt.executeQuery();
                 if (rs.next()) {
-                    resultat = new Genre(rs.getInt(1), rs.getString(2));
+                    resultat = new Genre(rs.getString(1), rs.getString(2));
                 }
             }else{
                 throw new Exception("Aucune connexion");
@@ -78,7 +78,7 @@ public class Genre {
     }
     
     /* Getters */
-    public int get_id_genre() {
+    public String get_id_genre() {
         return id_genre;
     }
     public String get_libelle() {
@@ -86,7 +86,7 @@ public class Genre {
     }
     
     /* Setters */
-    public void set_id_genre(int id_genre) {
+    public void set_id_genre(String id_genre) {
         this.id_genre = id_genre;
     }
     public void set_libelle(String libelle) {
@@ -95,7 +95,7 @@ public class Genre {
 
     public static void main(String[] args) {
         try{
-            Genre g  = Genre.get_genre_par_id(null, 2);
+            Genre g  = Genre.get_genre_par_id(null, "GEN2");
             System.out.println("libelle : "+g.get_libelle());
         }catch(Exception e){
             e.printStackTrace();

@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import model.shared.Database;
 
 public class Province {
-    private int id_province;
+    private String id_province;
     private String nom_province;
     private String description;
 
     /* Construteurs */
-    public Province(int id, String nom, String desc){
+    public Province(String id, String nom, String desc){
         this.set_id_province(id);
         this.set_nom_province(nom);
         this.set_description(desc);
@@ -31,7 +31,7 @@ public class Province {
                 prsmt = c.prepareStatement("SELECT * FROM province");
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    Province p = new Province(rs.getInt(1), rs.getString(2), rs.getString(3));
+                    Province p = new Province(rs.getString(1), rs.getString(2), rs.getString(3));
                     resultat.add(p);
                 }
             }else{
@@ -58,10 +58,10 @@ public class Province {
             c = Database.get_connection();
             if(c != null){
                 prsmt = c.prepareStatement("SELECT * FROM v_point_interet_province WHERE id_province = ?");
-                prsmt.setInt(1, this.get_id_province());
+                prsmt.setString(1, this.get_id_province());
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    PointInteret p = new PointInteret(rs.getInt(2), rs.getString(3));
+                    PointInteret p = new PointInteret(rs.getString(2), rs.getString(3));
                     resultat.add(p);
                 }
             }else{
@@ -78,7 +78,7 @@ public class Province {
     }
 
     /* Fonction pour avoir une categorie id par son Id */
-    public static Province get_province_par_id(Connection con, int id)throws Exception{
+    public static Province get_province_par_id(Connection con, String id)throws Exception{
         Province resultat = null;
         Connection c = null; 
         PreparedStatement prsmt = null; 
@@ -91,10 +91,10 @@ public class Province {
             }
             else { c = con; }
             prsmt = c.prepareStatement("SELECT * FROM province WHERE id_province = ? ");
-            prsmt.setInt(1,id);
+            prsmt.setString(1,id);
             rs = prsmt.executeQuery();
             if (rs.next()) {
-                resultat = new Province(rs.getInt(1), rs.getString(2),rs.getString(3));
+                resultat = new Province(rs.getString(1), rs.getString(2),rs.getString(3));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,7 +107,7 @@ public class Province {
     }
     
     /* Getters */
-    public int get_id_province() {
+    public String get_id_province() {
         return id_province;
     }
     public String get_nom_province() {
@@ -118,7 +118,7 @@ public class Province {
     }
     
     /* Setters */
-    public void set_id_province(int id_province) {
+    public void set_id_province(String id_province) {
         this.id_province = id_province;
     }
     public void set_nom_province(String nom_province) {

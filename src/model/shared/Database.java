@@ -13,7 +13,7 @@ public class Database{
         Connection c = null;
         try{
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost/abeona", "sanda", "Sanda120705");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost/abeona", "sanda", "huhu2005!!");
         }catch(Exception e){
             System.out.println("Erreur");
             e.printStackTrace();

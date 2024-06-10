@@ -1,0 +1,11 @@
+CREATE SEQUENCE categorie_utilisateur_seq;
+CREATE SEQUENCE genre_seq;
+CREATE SEQUENCE categorie_attraction_seq;
+CREATE SEQUENCE preference_utilisateur_seq;
+CREATE SEQUENCE point_interet_seq;
+CREATE SEQUENCE province_seq;
+CREATE SEQUENCE point_interet_province_seq;
+CREATE SEQUENCE ville_seq;
+CREATE SEQUENCE hotel_seq; 
+CREATE SEQUENCE evenement_seq;
+CREATE SEQUENCE client_seq;

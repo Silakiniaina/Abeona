@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW v_point_interet_province AS 
+CREATE VIEW v_point_interet_province AS 
     SELECT 
         pip.id_province,
         pip.id_point_interet ,
@@ -10,10 +10,6 @@ CREATE OR REPLACE VIEW v_point_interet_province AS
         ON pip.id_point_interet = pi.id_point_interet
     ;
 
--- DROP VIEW IF EXISTS v_evenement_calendrier_passe;
--- DROP VIEW IF EXISTS v_evenement_calendrier_en_cours;
--- DROP VIEW IF EXISTS v_evenement_calendrier_futur;
--- DROP VIEW IF EXISTS v_evenement_calendrier;
 CREATE  VIEW v_evenement_calendrier AS 
     SELECT 
         id_evenement, 

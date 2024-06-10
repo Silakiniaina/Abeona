@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import model.shared.Database;
 
 public class Evenement{
-    private int id_evenement;
+    private String id_evenement;
     private String nom_evenement;
     private Date date_evenement;
     private String description;
@@ -47,7 +47,7 @@ public class Evenement{
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
                     Evenement ev = new Evenement(rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5));
-                    ev.set_id_evenement(rs.getInt(1));
+                    ev.set_id_evenement(rs.getString(1));
                     resultat.add(ev);
                 }
             }else{
@@ -64,7 +64,7 @@ public class Evenement{
     }
 
     /* Fonction pour avoir une categorie id par son Id */
-    public static Evenement get_evenement_par_id(Connection con, int id)throws Exception{
+    public static Evenement get_evenement_par_id(Connection con, String id)throws Exception{
         Evenement resultat = null;
         Connection c = null; 
         PreparedStatement prsmt = null; 
@@ -78,14 +78,14 @@ public class Evenement{
                 c = con;
             }
             prsmt = c.prepareStatement("SELECT * FROM evenement WHERE id_evenement = ? ");
-            prsmt.setInt(1,id);
+            prsmt.setString(1,id);
             rs = prsmt.executeQuery();
             if (rs.next()) {
                 resultat = new Evenement(rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5));
                 if(rs.getInt(6) != 0){
-                    resultat.set_hotel(Hotel.get_hotel_par_id(c,rs.getInt(6)));
+                    resultat.set_hotel(Hotel.get_hotel_par_id(c,rs.getString(6)));
                 }
-                resultat.set_id_evenement(rs.getInt(1));
+                resultat.set_id_evenement(rs.getString(1));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -98,7 +98,7 @@ public class Evenement{
     }
 
     /* Getters */
-    public int get_id_evenement() {
+    public String get_id_evenement() {
         return id_evenement;
     }
     public String get_nom_evenement() {
@@ -118,7 +118,7 @@ public class Evenement{
     }
     
     /* Setters */
-    public void set_id_evenement(int id_evenement) {
+    public void set_id_evenement(String id_evenement) {
         this.id_evenement = id_evenement;
     }
     public void set_nom_evenement(String nom_evenement) {

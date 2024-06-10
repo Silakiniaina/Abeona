@@ -20,32 +20,33 @@ public class inscriptionClientController extends HttpServlet{
         try {
             ArrayList<Genre> genres = Genre.get_liste_genre();
             request.setAttribute("listeGenre",genres);
-       } catch (Exception e) {
-        out.print(e.getMessage());
-        e.printStackTrace();
-       }
-       finally{
-        request.getRequestDispatcher("inscriptionClient.jsp").forward(request, response);  
-       }
+        } catch (Exception e) {
+            out.print(e.getMessage());
+            e.printStackTrace();
+        }
+        finally{
+            request.getRequestDispatcher("inscriptionClient.jsp").forward(request, response);  
+        }
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       PrintWriter out=response.getWriter();
-        try{ String nom= request.getParameter("nom");
-        String prenom = request.getParameter("prenom");
-        String email = request.getParameter("email");
-        Date date_naissance= Date.valueOf(request.getParameter("dtn"));
-        int id_genre = Integer.parseInt(request.getParameter("genre"));
-        String mdp = request.getParameter("password");
-        Utilisateur newuser = new Utilisateur(nom, prenom, email, date_naissance, id_genre);
-        newuser.set_mot_de_passe(mdp);
-        newuser.inscrire();
-        HttpSession session = request.getSession();
-        session.setAttribute("userConnected", newuser);
-        request.getRequestDispatcher("acceuilClient.jsp").forward(request, response);
-    }catch(Exception e){
-        out.print(e.getMessage());
-        e.printStackTrace();
+        PrintWriter out=response.getWriter();
+        try{ 
+            String nom= request.getParameter("nom");
+            String prenom = request.getParameter("prenom");
+            String email = request.getParameter("email");
+            Date date_naissance= Date.valueOf(request.getParameter("dtn"));
+            String id_genre = request.getParameter("genre");
+            String mdp = request.getParameter("password");
+            Utilisateur newuser = new Utilisateur(nom, prenom, email, date_naissance, id_genre);
+            newuser.set_mot_de_passe(mdp);
+            newuser.inscrire();
+            HttpSession session = request.getSession();
+            session.setAttribute("userConnected", newuser);
+            request.getRequestDispatcher("acceuilClient.jsp").forward(request, response);
+        }catch(Exception e){
+            out.print(e.getMessage());
+            e.printStackTrace();
+        }
     }
-}
 }

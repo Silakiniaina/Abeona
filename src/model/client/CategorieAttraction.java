@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import model.shared.Database;
 
 public class CategorieAttraction {
-    private int id_categorie_attraction;
+    private String id_categorie_attraction;
     private String libelle;
 
     /* Constructors */
-    public CategorieAttraction(int id,String lib){
+    public CategorieAttraction(String id,String lib){
         this.set_id_categorie_attraction(id);
         this.set_libelle(lib);
     }
@@ -32,7 +32,7 @@ public class CategorieAttraction {
             prsmt = c.prepareStatement("SELECT * FROM categorie_attraction");
             rs = prsmt.executeQuery();
             while (rs.next()) {
-                CategorieAttraction temp = new CategorieAttraction(rs.getInt(1), rs.getString(2));
+                CategorieAttraction temp = new CategorieAttraction(rs.getString(1), rs.getString(2));
                 resultat.add(temp);
             }
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class CategorieAttraction {
     }
 
     /* Fonction pour avoir une categorie id par son Id */
-    public static CategorieAttraction get_categorie_attraction_par_id(Connection con, int id)throws Exception{
+    public static CategorieAttraction get_categorie_attraction_par_id(Connection con, String id)throws Exception{
         CategorieAttraction resultat = null;
         Connection c = null; 
         PreparedStatement prsmt = null; 
@@ -59,10 +59,10 @@ public class CategorieAttraction {
             }
             else { c = con; }
             prsmt = c.prepareStatement("SELECT * FROM categorie_attraction WHERE id_categorie_attraction = ? ");
-            prsmt.setInt(1,id);
+            prsmt.setString(1,id);
             rs = prsmt.executeQuery();
             if (rs.next()) {
-                resultat = new CategorieAttraction(rs.getInt(1), rs.getString(2));
+                resultat = new CategorieAttraction(rs.getString(1), rs.getString(2));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,7 +75,7 @@ public class CategorieAttraction {
     }
     
     /* Getters */
-    public int get_id_categorie_attraction() {
+    public String get_id_categorie_attraction() {
         return id_categorie_attraction;
     }
     public String get_libelle() {
@@ -83,7 +83,7 @@ public class CategorieAttraction {
     }
     
     /* Setters */
-    public void set_id_categorie_attraction(int id_categorie_attraction) {
+    public void set_id_categorie_attraction(String id_categorie_attraction) {
         this.id_categorie_attraction = id_categorie_attraction;
     }
     public void set_libelle(String libelle) {
@@ -92,7 +92,7 @@ public class CategorieAttraction {
 
     public static void main(String[] args) {
         try {
-            CategorieAttraction c = CategorieAttraction.get_categorie_attraction_par_id(null,2);
+            CategorieAttraction c = CategorieAttraction.get_categorie_attraction_par_id(null,"CTA2");
             System.out.println("Nom : "+c.get_libelle());
         } catch (Exception e) {
             e.printStackTrace();
