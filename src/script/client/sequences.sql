@@ -9,3 +9,4 @@ CREATE SEQUENCE ville_seq;
 CREATE SEQUENCE hotel_seq; 
 CREATE SEQUENCE evenement_seq;
 CREATE SEQUENCE client_seq;
+CREATE SEQUENCE attraction_seq

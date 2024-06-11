@@ -79,3 +79,8 @@ CREATE TABLE evenement (
     FOREIGN KEY(id_ville) REFERENCES ville(id_ville),
     FOREIGN KEY(id_hotel) REFERENCES hotel(id_hotel)
 );
+
+CREATE TABLE attraction(
+    id_attraction TEXT DEFAULT generer_id_attraction() PRIMARY KEY, 
+    nom_attraction VARCHAR(100) NOT NULL
+);

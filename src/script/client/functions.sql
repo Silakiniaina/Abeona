@@ -153,3 +153,16 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION generer_id_attraction()
+RETURNS TEXT AS $$
+DECLARE
+    attraction_seqval TEXT;
+    attraction_id TEXT;
+BEGIN
+    SELECT nextval('attraction_seq') INTO  attraction_seqval;
+    attraction_id := 'ATR' ||  attraction_seqval;
+    RETURN attraction_id;
+END;
+$$
+LANGUAGE plpgsql;
