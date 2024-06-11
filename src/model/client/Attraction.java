@@ -10,6 +10,10 @@ public class Attraction {
         this.set_nom_attraction(name);
     }
     
+    /* Fonction pour rechercher des attraction */
+    public static ArrayList<Attraction> rechercher_attraction(String dest){
+        
+    }
     /* Getters */
     public String get_id_attraction() {
         return id_attraction;

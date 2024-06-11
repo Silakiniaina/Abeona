@@ -115,5 +115,17 @@ INSERT INTO evenement (nom_evenement, date_evenement, description_evenement, id_
     ('Exposition de voitures anciennes', '2024-08-22', 'Exposition de voitures classiques et anciennes.', 'VIL14', 'HOT4')
 ;
 
+INSERT INTO attraction (nom_attraction) VALUES
+    ('Tour Eiffel'),
+    ('Musée du Louvre'),
+    ('Mont Saint-Michel'),
+    ('Cathédrale Notre-Dame de Paris'),
+    ('Château de Versailles'),
+    ('Pont du Gard'),
+    ('Côte  Azur'),
+    ('Château de Chambord'),
+    ('Dune du Pilat'),
+    ('Mont Blanc')
+;
 
 
