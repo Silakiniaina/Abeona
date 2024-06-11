@@ -66,6 +66,7 @@ public class Utilisateur{
         PreparedStatement prsmt = null; 
         try{
             c = Database.get_connection();
+            c.setAutoCommit(false);
             prsmt = c.prepareStatement("INSERT INTO Utilisateur(nom_utilisateur,prenom_utilisateur,email,date_naissance,id_genre,id_categorie_utilisateur,mot_de_passe) VALUES (?,?,?,?,?,?,digest(?,'sha1'))");
             prsmt.setString(1, this.get_nom());
             prsmt.setString(2, this.get_prenom());
@@ -75,8 +76,8 @@ public class Utilisateur{
             prsmt.setString(6, "CTU1");
             prsmt.setString(7,this.get_mot_de_passe());
             prsmt.executeUpdate();
+            c.commit();
         }catch(Exception e){
-            c.setAutoCommit(false);
             c.rollback();
             throw e;
         }finally{
@@ -86,20 +87,21 @@ public class Utilisateur{
     }
 
     /* Fonction pour inserer les preferences choisis */
-    public void inserer_preferences(ArrayList<CategorieAttraction>  ls)throws Exception{
+    public void inserer_preferences(ArrayList<String>  ls)throws Exception{
         Connection c = null;
         PreparedStatement prsmt = null; 
 
         try{
             c = Database.get_connection();
+            c.setAutoCommit(false);
             prsmt = c.prepareStatement("INSERT INTO preference_utilisateur(id_utilisateur, id_categorie_attraction) VALUES (?,?)");
             prsmt.setString(1, this.get_id());
-            for(CategorieAttraction categorie : ls){
-                prsmt.setString(2, categorie.get_id_categorie_attraction());
+            for(String id : ls){
+                prsmt.setString(2,id);
                 prsmt.executeUpdate();
             }
+            c.commit();
         }catch(Exception e){
-            c.setAutoCommit(false);
             c.rollback();
             throw e;
         }finally{
