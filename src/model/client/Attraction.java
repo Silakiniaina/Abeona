@@ -26,8 +26,8 @@ public class Attraction {
         try{
             c = Database.get_connection();
             if(c != null){
-                prsmt = c.prepareStatement("SELECT * FROM attraction WHERE nom_attraction LIKE '%?%'");
-                prsmt.setString(1, dest);
+                prsmt = c.prepareStatement("SELECT * FROM attraction WHERE nom_attraction LIKE ? ");
+                prsmt.setString(1, "%" +dest+ "%");
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
                     Attraction a = new Attraction(rs.getString(1), rs.getString(2));

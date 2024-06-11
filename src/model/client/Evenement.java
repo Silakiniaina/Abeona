@@ -140,9 +140,9 @@ public class Evenement{
     /* Test */
     public static void main(String[] args) {
         try{
-            ArrayList<Evenement> ls = Evenement.get_liste_evenement_calendrier(Evenement.EVENEMENT_FUTUR);
-            for(Evenement ev : ls){
-                System.out.println("nom : "+ev.get_nom_evenement()+" , date : "+ev.get_date_evenement());
+            ArrayList<Attraction> ls = Attraction.rechercher_attraction("u");
+            for(Attraction ev : ls){
+                System.out.println("nom : "+ev.get_nom_attraction());
             }
         }catch(Exception e){
             e.printStackTrace();

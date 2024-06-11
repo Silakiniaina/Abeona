@@ -3,6 +3,7 @@ package model.client;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import model.shared.Database;
 
@@ -46,6 +47,36 @@ public class Hotel {
             if(rs != null){ rs.close(); }
             if(prsmt != null){ prsmt.close(); }
             if(est_nouvelle_connexion){ c.close(); }
+        }
+        return resultat;
+    }
+
+    /* Fonction pour rechercher des hotels */
+    public static ArrayList<Hotel> rechercher_hotel(String dest)throws Exception{
+        ArrayList<Hotel> resultat = new ArrayList<Hotel>();
+        Connection c = null;
+        PreparedStatement prsmt  = null;
+        ResultSet rs = null; 
+
+        try{
+            c = Database.get_connection();
+            if(c != null){
+                prsmt = c.prepareStatement("SELECT * FROM hotel WHERE nom_hotel LIKE ?");
+                prsmt.setString(1, "%" +dest+ "%");
+                rs = prsmt.executeQuery();
+                while (rs.next()) {
+                    Hotel a = new Hotel(rs.getString(1), rs.getString(2));
+                    resultat.add(a);
+                }
+            }else{
+                throw new Exception("Aucune connexion ");
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(c != null){ c.close(); }
         }
         return resultat;
     }
