@@ -1,0 +1,14 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "Abeona-Front",
+  "main": "index.js",
+  "scripts": {
+    "partenaire": "sass --watch html/partenaire/assets/sass/styles.scss html/partenaire/assets/css/styles.css"
+  },
+  "author": "Yoahn",
+  "license": "ISC",
+  "dependencies": {
+    "sass": "^1.77.4"
+  }
+}
