@@ -140,7 +140,7 @@ public class Evenement{
     /* Test */
     public static void main(String[] args) {
         try{
-            ArrayList<Attraction> ls = Attraction.rechercher_attraction("u");
+            ArrayList<Attraction> ls = Attraction.rechercher_attraction("Tour ");
             for(Attraction ev : ls){
                 System.out.println("nom : "+ev.get_nom_attraction());
             }
