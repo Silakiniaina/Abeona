@@ -81,6 +81,35 @@ public class Hotel {
         return resultat;
     }
 
+    /* FOnction pour avoir les tops dans dans un province */
+    public static ArrayList<Hotel> get_top_hotel(Province p)throws Exception {
+        ArrayList<Hotel> resultat = new ArrayList<Hotel>();
+        Connection c = null;
+        PreparedStatement prsmt  = null;
+        ResultSet rs = null; 
+
+        try{
+            c = Database.get_connection();
+            if(c != null){
+                prsmt = c.prepareStatement("SELECT * FROM v_top_hotel_province LIMIT 3");
+                rs = prsmt.executeQuery();
+                while (rs.next()) {
+                    Hotel a = new Hotel(rs.getString(1), rs.getString(2));
+                    resultat.add(a);
+                }
+            }else{
+                throw new Exception("Aucune connexion ");
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(c != null){ c.close(); }
+        }
+        return resultat;
+    }
+
     /* Getters */
     public String get_id_hotel() {
         return id_hotel;

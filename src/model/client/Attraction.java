@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.w3c.dom.Attr;
+
 import model.shared.Database;
 public class Attraction {
     private String id_attraction;
@@ -28,6 +30,35 @@ public class Attraction {
             if(c != null){
                 prsmt = c.prepareStatement("SELECT * FROM attraction WHERE nom_attraction LIKE ? ");
                 prsmt.setString(1, "%" +dest+ "%");
+                rs = prsmt.executeQuery();
+                while (rs.next()) {
+                    Attraction a = new Attraction(rs.getString(1), rs.getString(2));
+                    resultat.add(a);
+                }
+            }else{
+                throw new Exception("Aucune connexion ");
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(c != null){ c.close(); }
+        }
+        return resultat;
+    }
+
+    /* FOnction pour avoir les tops dans dans un province */
+    public static ArrayList<Attraction> get_top_attraction(Province p)throws Exception{
+        ArrayList<Attraction> resultat = new ArrayList<Attraction>();
+        Connection c = null;
+        PreparedStatement prsmt  = null;
+        ResultSet rs = null; 
+
+        try{
+            c = Database.get_connection();
+            if(c != null){
+                prsmt = c.prepareStatement("SELECT * FROM v_top_attraction_province LIMIT 3");
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
                     Attraction a = new Attraction(rs.getString(1), rs.getString(2));

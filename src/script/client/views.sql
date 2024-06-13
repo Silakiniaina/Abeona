@@ -44,3 +44,21 @@ CREATE VIEW v_evenement_calendrier_en_cours AS
     FROM v_evenement_calendrier 
     WHERE date_evenement = NOW()
 ;
+
+CREATE view v_province_ville AS 
+    SELECT v.id_ville,p.id_province 
+        FROM ville AS v 
+        JOIN region AS g 
+        ON v.id_region = g.id_region 
+        JOIN province AS p 
+        ON g.id_province = p.id_province
+;
+
+CREATE VIEW v_top_attraction_province AS 
+    SELECT a.id_attraction,a.nom_attraction, a.evaluation
+        FROM attraction AS a 
+        JOIN v_province_ville AS pv 
+        ON a.id_ville_id_ville = pv.id_ville
+        GROUP BY pv.id_province,a.id_attraction
+        ORDER BY a.evaluation DESC
+;
