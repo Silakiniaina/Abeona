@@ -27,7 +27,7 @@
                 </div>
                 <div class="aside__list__item-label">Statistiques</div>
             </a>
-            <a class="aside__list__item active" href="partenaire.html">
+            <a class="aside__list__item active" href="dashboard-partenaire.html">
                 <div class="aside__list__item-img">
                     <i class="fa fa-hotel"></i>
                 </div>
@@ -100,13 +100,13 @@
         <h2 class="main__title">Liste des partenaires</h2>
         <div class="main__list">
             <div class="main__list__tabs">
-                <div class="main__list__tabs__header">
+                <div class="main__list__tabs__header" id="list_tabs">
                     <button class="main__list__tabs__header__content active" data-tab="hotel">HOTEL</button>
                     <button class="main__list__tabs__header__content" data-tab="transport">TRANSPORT</button>
                     <button class="main__list__tabs__header__content" data-tab="guide">GUIDE</button>
                 </div>
                 <div class="main__list__tabs__filter">
-                    <form action="">
+                    <form action="" id="filter-container">
                         <div class="form-content input_name">
                             <label for="input_nom">Name</label>
                             <input type="text" name="nom" id="input_nom">
@@ -137,20 +137,45 @@
                     </form>
                 </div>
                 <div class="main__list__tabs__body">
-                    <div class="main__list__tabs__body__content active table-container-hotel" id="hotel" ></div>
-                    <div class="main__list__tabs__body__content table-container-transport" id="transport"></div>
-                    <div class="main__list__tabs__body__content table-container-guide" id="guide"></div>
-                </div>
-                <div class="main__list__tabs__body__content__pagination">
-                    <ul class="pagination"></ul>
+                    <div class="main__list__tabs__body__content active">
+                        <div class="table-container-hotel" id="hotel">
+
+                        </div>
+                        <div id="hotel-pagination" class="pagination">
+                            <span class="active">1</span>
+                            <span>2</span>
+                            <span>3</span>
+                        </div>
+                    </div>
+                    <div class="main__list__tabs__body__content">
+                        <div class="table-container-transport" id="transport">
+
+                        </div>
+                        <div id="transport-pagination" class="pagination">
+                            <span class="active">1</span>
+                            <span>2</span>
+                            <span>3</span>
+                        </div>
+                    </div>
+                    <div class="main__list__tabs__body__content">
+                        <div class="table-container-guide" id="guide">
+
+                        </div>
+                        <div id="guide-pagination" class="pagination">
+                            <span class="active">1</span>
+                            <span>2</span>
+                            <span>3</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
     <script src="/assets/icons/fontawesome/js/all.js"></script>
+    <script src="/assets/js/admin/functions.js"></script>
     <script src="/assets/js/admin/sidebar.js"></script>
-    <script src="/assets/js/admin/generator.js"></script>
+    <script src="/assets/js/admin/partenaire.js"></script>
 </body>
 
 </html>

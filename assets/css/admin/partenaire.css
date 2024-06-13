@@ -234,5 +234,30 @@
   background-color: #363D32;
   color: #FFFFFF;
 }
+.main__list__tabs__body__content .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.main__list__tabs__body__content .pagination span {
+  border: 1px solid #92AA83;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  color: #92AA83;
+  background-color: #FFFFFF;
+  font-family: poppins-bold;
+  font-size: 22px;
+  border-radius: 6px;
+}
+.main__list__tabs__body__content .pagination .active {
+  background-color: #92AA83;
+  color: #FFFFFF;
+}
 
 /*# sourceMappingURL=partenaire.css.map */
