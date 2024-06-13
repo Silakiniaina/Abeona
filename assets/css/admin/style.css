@@ -60,6 +60,28 @@
   padding: 10px 2%;
   margin-left: 300px;
 }
+.main .status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 22px;
+  border: 1px solid #363D32;
+  background-color: #D9D9D9;
+}
+.main .status span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00FF00;
+  gap: 10px;
+}
+.main .status span i {
+  font-size: 15px;
+}
+.main .status span p {
+  font-size: 10px;
+}
 .main__number {
   display: flex;
   gap: 10%;
@@ -254,10 +276,11 @@
   font-family: poppins-bold;
   font-size: 22px;
   border-radius: 6px;
+  cursor: pointer;
 }
 .main__list__tabs__body__content .pagination .active {
   background-color: #92AA83;
   color: #FFFFFF;
 }
 
-/*# sourceMappingURL=partenaire.css.map */
+/*# sourceMappingURL=style.css.map */

@@ -62,6 +62,8 @@ function generer_action_buttons(actions){
     return result;
 }
 
+/* Function generer status */
+
 /* Fonction qui permet de generer un tableau a partir d'un json */
 function creer_table_from_json(jsonData) {
     const data = typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData;
@@ -88,7 +90,11 @@ function creer_table_from_json(jsonData) {
         // Remplissage des cellules de données
         Object.entries(item).forEach(([key, value]) => {
             const td = document.createElement('td');
-            td.textContent = value;
+            if(value == 'true' || value == 'false'){
+                td.td.textContent = generer_status(value);
+            }else{
+                td.textContent = value;
+            }
             row.appendChild(td);
         });
         const actionCell = document.createElement('td');
@@ -123,7 +129,7 @@ async function fetch_data(tab, page) {
 }
 
 /* Display data in the table */
-function afficher_table(tab, data, page) {
+function afficher_table(tab, data, page=1) {
     const tableContainer = document.querySelector(`.table-container-${tab}`);
     tableContainer.innerHTML = '';
     const table = creer_table_from_json(data);

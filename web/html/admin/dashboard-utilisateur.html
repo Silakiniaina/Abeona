@@ -27,13 +27,13 @@
                 </div>
                 <div class="aside__list__item-label">Statistiques</div>
             </a>
-            <a class="aside__list__item active" href="dashboard-partenaire.html">
+            <a class="aside__list__item" href="dashboard-partenaire.html">
                 <div class="aside__list__item-img">
                     <i class="fa fa-hotel"></i>
                 </div>
                 <div class="aside__list__item-label">Partenaires</div>
             </a>
-            <a class="aside__list__item" href="dashboard-utilisateur.html">
+            <a class="aside__list__item active" href="dashboard-utilisateur.html">
                 <div class="aside__list__item-img">
                     <i class="fa fa-users"></i>
                 </div>
@@ -66,6 +66,12 @@
 
     <!-- Main content -->
     <div class="main">
+        <div class="status">
+            <span>
+                <i class="fa fa-check"></i>
+                <p>Active</p>
+            </span>
+        </div>
 
         <!-- Nombre -->
         <h2 class="main__title">Nombre de partenaire</h2>
@@ -81,31 +87,29 @@
             </div>
             <div class="main__number__wrapper">
                 <div class="main__number__wrapper__img">
-                    <i class="fa fa-hotel"></i>
+                    <i class="fa fa-user-plus"></i>
                 </div>
                 <div class="main__number__wrapper__content">
                     <div class="main__number__wrapper__content-title">Inscrit cet mois</div>
                     <div class="main__number__wrapper__content-value">20</div>
                 </div>
             </div>
-        </div>
-
-        <!-- Demande d'inscription -->
-        <h2 class="main__title">Nombre de partenaire</h2>
-        <div class="main__inscription">
-            <p href="#" class="main__inscription__more" id="see-more">Voir plus</p>
+            <div class="main__number__wrapper">
+                <div class="main__number__wrapper__img">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="main__number__wrapper__content">
+                    <div class="main__number__wrapper__content-title">Actifs</div>
+                    <div class="main__number__wrapper__content-value">0</div>
+                </div>
+            </div>
         </div>
 
         <!-- List of partenaire -->
-        <h2 class="main__title">Liste des partenaires</h2>
+        <h2 class="main__title">Liste des Utilisateur</h2>
         <div class="main__list">
             <div class="main__list__tabs">
-                <div class="main__list__tabs__header" id="list_tabs">
-                    <button class="main__list__tabs__header__content active" data-tab="hotel">HOTEL</button>
-                    <button class="main__list__tabs__header__content" data-tab="transport">TRANSPORT</button>
-                    <button class="main__list__tabs__header__content" data-tab="guide">GUIDE</button>
-                </div>
-                <div class="main__list__tabs__filter">
+                <!-- <div class="main__list__tabs__filter">
                     <form action="" id="filter-container">
                         <div class="form-content input_name">
                             <label for="input_nom">Name</label>
@@ -135,33 +139,13 @@
                         </div>
                         <button type="submit">Filtrer</button>
                     </form>
-                </div>
+                </div> -->
                 <div class="main__list__tabs__body">
                     <div class="main__list__tabs__body__content active">
-                        <div class="table-container-hotel" id="hotel">
+                        <div class="table-container-utilisateur" id="utilisateur">
 
                         </div>
-                        <div id="hotel-pagination" class="pagination">
-                            <span class="active">1</span>
-                            <span>2</span>
-                            <span>3</span>
-                        </div>
-                    </div>
-                    <div class="main__list__tabs__body__content">
-                        <div class="table-container-transport" id="transport">
-
-                        </div>
-                        <div id="transport-pagination" class="pagination">
-                            <span class="active">1</span>
-                            <span>2</span>
-                            <span>3</span>
-                        </div>
-                    </div>
-                    <div class="main__list__tabs__body__content">
-                        <div class="table-container-guide" id="guide">
-
-                        </div>
-                        <div id="guide-pagination" class="pagination">
+                        <div id="utilisateur-pagination" class="pagination">
                             <span class="active">1</span>
                             <span>2</span>
                             <span>3</span>
@@ -175,7 +159,7 @@
     <script src="/assets/icons/fontawesome/js/all.js"></script>
     <script src="/assets/js/admin/functions.js"></script>
     <script src="/assets/js/admin/sidebar.js"></script>
-    <script src="/assets/js/admin/partenaire.js"></script>
+    <script src="/assets/js/admin/utilisateur.js"></script>
 </body>
 
 </html>
