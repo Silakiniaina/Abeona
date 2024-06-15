@@ -61,14 +61,11 @@ public class Benefice {
      */
     public String getSuiteOfQuery(int annee,int mois){
         String result = "";
-        if (annee!=0 && mois==0) {
+        if (annee!=0) {
             result +=" and annee = "+annee;
         }
-        else if(annee==0 && mois!=0){
+        if(annee==0){
             result +=" and mois = "+mois;
-        }
-        else if(annee!=0 && mois!=0){
-            result += " and annee = "+annee+" and mois = "+mois;
         }
         return result;
     }

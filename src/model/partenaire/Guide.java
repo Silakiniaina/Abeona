@@ -16,6 +16,13 @@ public class Guide {
     int disponibilite;
     Timestamp date_insertion;
     String id_partenaire;
+    float evaluation = 0;
+    public float getEvaluation() {
+        return evaluation;
+    }
+    public void setEvaluation(float evaluation) {
+        this.evaluation = evaluation;
+    }
     public String getId_guide() {
         return id_guide;
     }
@@ -120,6 +127,70 @@ public class Guide {
             while (rs.next()) {
                 Guide type = new Guide(rs.getString(1), rs.getString(2),
                         rs.getString(3), rs.getInt(4), rs.getTimestamp(5), rs.getString(6));
+                allTypes.add(type);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return allTypes;
+    }
+
+    public static String getSuiteOfWhere(String nom , String idVille ,float evaluation, Timestamp dateInsertionDebut,Timestamp dateInsertionFin){
+        String result = "";
+        if(nom!=null && !nom.equals("")){
+            result += " and nom_guide like '%"+nom+"%'";
+        }
+        // if(idVille!=null && !idVille.equals("")){
+        //     result+= " and id_ville = '"+idVille+"'";
+        // }
+        if(evaluation!=0){
+            result+= " and evaluation = "+evaluation;
+        }
+        if(dateInsertionDebut!=null){
+            result+=" and date_insertion >= '"+dateInsertionDebut+"'";
+        }
+        if(dateInsertionFin!=null){
+            result+=" and date_insertion <= '"+dateInsertionFin+"'";
+        }
+        return result;
+    }
+
+    public static ArrayList<Guide> getListGuideByCriteria(String nom , String idVille ,float evaluation, Timestamp dateInsertionDebut,Timestamp dateInsertionFin) throws Exception {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<Guide> allTypes = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM v_guide_evaluation WHERE 1=1"+getSuiteOfWhere(nom, idVille, evaluation, dateInsertionDebut, dateInsertionFin);
+            connection = Connexion.getConnection("postgres", "postgres", "abeona");
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Guide type = new Guide(rs.getString(1), rs.getString(2),
+                        rs.getString(3), rs.getInt(4), rs.getTimestamp(5), rs.getString(6));
+                        type.setEvaluation(rs.getFloat(7));
                 allTypes.add(type);
             }
         } catch (Exception e) {
