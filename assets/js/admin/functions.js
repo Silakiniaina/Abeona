@@ -26,11 +26,12 @@ async function fetch_all_data() {
     const hotelData = await fetch_data('hotel');
     const guideData = await fetch_data('guide');
     const transportData = await fetch_data('transport');
-    return {
-        hotel: hotelData,
-        guide: guideData,
-        transport: transportData
-    };
+    result = {
+        'hotel':hotelData,
+        'transport':transportData,
+        'guide':guideData
+    }
+    return result;
 }
 
 
@@ -51,6 +52,9 @@ function generer_action_buttons(actions){
             if (e.target.classList.contains('delete')) {
                 const row = e.target.closest('tr');
                 row.remove();
+            }else if(e.target.classList.contains('delete-inscription')){
+                const row = e.target.closest('.main__inscription__content');
+                row.remove();
             } else if (e.target.classList.contains('edit')) {
                 console.log('Édition');
             }
@@ -63,6 +67,30 @@ function generer_action_buttons(actions){
 }
 
 /* Function generer status */
+function generer_td_values(td, value){
+    if(value == 'true'){
+        var div = document.createElement("div");
+        div.classList.add('status');
+        var span = document.createElement('span');
+        span.classList.add('active');
+        var txt = document.createElement('p');
+        txt.textContent = 'Active';
+        div.appendChild(span);
+        span.appendChild(txt);
+        td.appendChild(div);
+    }else if(value == 'false'){
+        var div = document.createElement("div");
+        div.classList.add('status');
+        var span = document.createElement('span');
+        var txt = document.createElement('p');
+        txt.textContent = 'Not Active';
+        div.appendChild(span);
+        span.appendChild(txt);
+        td.appendChild(div);
+    }else{
+        td.textContent = value;
+    }
+}
 
 /* Fonction qui permet de generer un tableau a partir d'un json */
 function creer_table_from_json(jsonData) {
@@ -90,11 +118,7 @@ function creer_table_from_json(jsonData) {
         // Remplissage des cellules de données
         Object.entries(item).forEach(([key, value]) => {
             const td = document.createElement('td');
-            if(value == 'true' || value == 'false'){
-                td.td.textContent = generer_status(value);
-            }else{
-                td.textContent = value;
-            }
+            generer_td_values(td, value);
             row.appendChild(td);
         });
         const actionCell = document.createElement('td');
@@ -108,65 +132,131 @@ function creer_table_from_json(jsonData) {
     return table;
 }
 
-/* Fonction pour activer une pagination */
-function active_pagination(list){
-    Array.from(list.children).forEach(pag =>{
-        pag.addEventListener('click', () =>{
-            remove_focus(list);
-            active_onglet(list,pag);
-        })
-    })
-}
-
-const ITEMS_PER_PAGE = 10;
-
-/* Fetch data for a specific tab and page */
-async function fetch_data(tab, page) {
-    // Implémentez ici votre logique pour récupérer les données
-    // Par exemple, en ajoutant des paramètres de pagination à votre requête API
-    // Retourne un objet avec { items: [], totalItems: number }
-    return { items: [], totalItems: 0 };
-}
+const ITEMS_PER_PAGE = 20;
 
 /* Display data in the table */
 function afficher_table(tab, data, page=1) {
     const tableContainer = document.querySelector(`.table-container-${tab}`);
+    console.log(tableContainer);
     tableContainer.innerHTML = '';
     const table = creer_table_from_json(data);
     tableContainer.appendChild(table);
 }
 
-/* Function pour fetcher les datas d'un tab correspondant au pagination */
+/* Function pour fetcher les datas d'un tab correspondant au pagination 
+    ici tu appel des ajax pour les recuperer
+*/
 function fetch_data(tabid,page_num){
-    var result = [
-        {
-            nom:'Sanda',
-            prenom:'Silakiniaina'
-        }
-    ]
+    var result = []
+    if(tabid === 'hotel'){
+        result = [
+            {
+                "id_hotel": "H1",
+                "nom_hotel": "Hotel Sunshine",
+                "description": "A cozy hotel with a beautiful view of the city.",
+                "adresse_hotel": "123 Sunshine St, Pleasantville",
+                "date_insertion": "2024-06-15T10:00:00Z",
+            }
+        ]
 
+    }else if(tabid === 'transport'){
+        result = [
+            {
+                "id_transport": "T1",
+                "nom_transport": "City Bus",
+                "description": "Public bus service within the city.",
+                "tarif": 2.50,
+                "date_insertion": "2024-06-15T10:00:00Z"
+            }
+        ]
+            
+
+    }else if(tabid === 'guide'){
+        result = [
+            {
+                "id_guide": "G1",
+                "nom_guide": "Beloha",
+                "description": "Man with lorem ipsum",
+                "tarif": 2000,
+                "date_insertion": "2024-06-15T10:00:00Z"
+            }
+        ]
+    }
     return result;
+}
+
+/* Revenir a la page 1 de la pagination */
+function reset_pagination(tabId){
+    var element = document.getElementById(`${tabId}-pagination`);
+    var paginations = element.children;
+    console.log(paginations);
+
+    remove_focus(paginations);
+    active_onglet(paginations,paginations[0])
+}
+
+/* Enlever une pagination */
+function clear_pagination(tabId){
+    var existent_pagination = document.getElementById(`${tabId}-pagination`);
+    if(existent_pagination != null){
+        existent_pagination.parentNode.removeChild(existent_pagination);
+    }
+}
+
+/* Fonction pour afficher les paginations : 
+    total : nombre de ligne total
+    to_show : nombre de ligne a afficher
+*/
+function generer_pagination(tabId, total, to_show) {
+    clear_pagination(tabId);
+    const page_number = Math.floor(total / to_show) + 1;
+    var container = document.createElement('div');
+    container.id = `${tabId}-pagination`;
+    container.classList.add('pagination');
+    
+    const fragment = document.createDocumentFragment();
+    for (let i = 1; i <= page_number; i++) {
+        let span = document.createElement('span');
+        if (i === 1) {
+            span.classList.add('active');
+        }
+        span.textContent = i;
+        span.addEventListener('click',() =>{
+            remove_focus(span.parentElement.children);
+            active_onglet(span.parentElement.children, span)
+        });
+        fragment.appendChild(span);
+    }
+    container.appendChild(fragment);
+    return container;
 }
 
 /* Initialize tab switching */
 async function activer_switch_tab(list_tab){
     const tabs = list_tab.children;
-
     const switch_tab = async (button) => {
         remove_focus(tabs);
         button.classList.add('active');
         const tabId = button.getAttribute('data-tab');
-        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        const data = fetch_data(tabId,1);
-        afficher_table(tabId, data,1);
+        let list_container = document.getElementsByClassName('main__list__tabs__body__content');
+        Array.from(list_container).forEach(content => content.classList.remove('active'));
+        document.getElementById(`${tabId}_container`).classList.add('active');
+        try{
+            const data = fetch_data(tabId,1);
+            afficher_table(tabId, data,1);
+            var pagination = generer_pagination(tabId,120,ITEMS_PER_PAGE);
+            var container = document.getElementById(tabId+"_container");
+            container.appendChild(pagination);
+        }catch(error){
+            console.log(error);
+        }
     };
 
     Array.from(tabs).forEach(button => {
         button.addEventListener('click', () => switch_tab(button));
     });
 
-    if (tabs.length > 0) {
-        switch_tab(tabs[0]);
-    }
+    // if (tabs.length > 0) {
+    //     switch_tab(tabs[0]);
+    // }
 }

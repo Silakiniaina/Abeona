@@ -1,10 +1,3 @@
-var active_tab = 'hotel';
-
-/* Paginations */
-var paginations = document.getElementById(`${active_tab}-pagination`);
-active_pagination(paginations);
-
-
 document.addEventListener('DOMContentLoaded', function() {
 
     /* Gestion des listes d'inscription partenaire */
@@ -25,19 +18,41 @@ document.addEventListener('DOMContentLoaded', function() {
     function createElement(data) {
         const div = document.createElement('div');
         div.className = 'main__inscription__content';
-        div.innerHTML = `
-        <span class="main__inscription__content__name">${data.name}</span>
-        <span class="main__inscription__content__email">${data.email}</span>
-            <span class="main__inscription__content__contact">${data.contact}</span>
-            <div class="main__inscription__content__action">
-                <button class="main__inscription__content__action-decline">Decliner</button>
-                <button class="main__inscription__content__action-accept">Accepter</button>
-            </div>
-        `;
+        let name = document.createElement('span');
+        name.classList.add('main__inscription__content__name');
+        name.textContent = data.email;
+
+        let email = document.createElement('span');
+        email.classList.add('main__inscription__content__contact');
+        email.textContent = data.email;
+
+        let contact = document.createElement('span');
+        contact.classList.add('main__inscription__content__contact');
+        contact.textContent = data.contact;
+
+        let action_div = document.createElement('div');
+        action_div.classList.add('main__inscription__content__action');
+
+        let btn_decline = document.createElement('button');
+        btn_decline.classList.add('main__inscription__content__action-decline');
+        btn_decline.classList.add('delete-inscription');
+        btn_decline.textContent = 'Decliner'
+
+        let btn_accept = document.createElement('button');
+        btn_accept.classList.add('main__inscription__content__action-accept');
+        btn_accept.textContent = 'Accepter'
+
+        action_div.appendChild(btn_decline);
+        action_div.appendChild(btn_accept);
+
+        div.appendChild(name);
+        div.appendChild(email);
+        div.appendChild(contact);
+        div.appendChild(action_div);
         return div;
     }
 
-    function displayElements() {
+    function afficher_inscription() {
         /* Commencer au dernier element vu */
         const startIndex = id_dernier_element;
         const endIndex = Math.min(startIndex + ajout, total_elements);
@@ -54,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    function scrollToLastSeenElement() {
+    function scroll_dernier_element_visible() {
         const lastSeenElement = document.querySelector(`.main__inscription__content:nth-child(${id_dernier_element + 1})`);
         if (lastSeenElement) {
             lastSeenElement.scrollIntoView({ behavior: 'smooth' });
@@ -66,11 +81,11 @@ document.addEventListener('DOMContentLoaded', function() {
     voirPlusButton.addEventListener('click', () => {
         /* Memorisation du dernier element vu */
         dernier_element_vu = listElement.getBoundingClientRect().top;
-        displayElements();
-        scrollToLastSeenElement();
+        afficher_inscription();
+        scroll_dernier_element_visible();
     });
 
-    displayElements();
+    afficher_inscription();
 
     /* Gestion des tables et tabs */
     var tabs = document.getElementById('list_tabs');
