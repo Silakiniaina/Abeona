@@ -118,5 +118,17 @@ CREATE OR REPLACE VIEW v_ranking_hotel_province AS
         evaluation DESC
 ;
 
+CREATE OR REPLACE VIEW v_ranking_attraction_province AS 
+    SELECT 
+        ra.*,
+        vp.id_province
+    FROM v_ranking_attraction AS ra
+    JOIN v_ville_province AS vp 
+    ON ra.id_ville = vp.id_ville
+    ORDER BY 
+        id_province ASC,
+        evaluation DESC
+;
+
 
 
