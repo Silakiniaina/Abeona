@@ -42,6 +42,50 @@ CREATE OR REPLACE VIEW v_evaluation_hotel AS
     GROUP BY h.id_hotel
 ;
 
+CREATE OR REPLACE VIEW v_liste_evaluation_hotel AS 
+    SELECT 
+        * 
+        FROM evaluation 
+        WHERE id_categorie_evaluation = 'CEV1'
+;
+
+CREATE OR REPLACE VIEW v_liste_evaluation_pack AS 
+    SELECT 
+        * 
+        FROM evaluation 
+        WHERE id_categorie_evaluation = 'CEV2'
+;
+
+CREATE OR REPLACE VIEW v_liste_evaluation_transport AS 
+    SELECT 
+        * 
+        FROM evaluation 
+        WHERE id_categorie_evaluation = 'CEV3'
+;
+
+CREATE OR REPLACE VIEW v_liste_evaluation_attraction AS 
+    SELECT 
+        * 
+        FROM evaluation 
+        WHERE id_categorie_evaluation = 'CEV4'
+;
+
+CREATE OR REPLACE VIEW v_liste_evaluation_evenement AS 
+    SELECT 
+        * 
+        FROM evaluation 
+        WHERE id_categorie_evaluation = 'CEV5'
+;
+
+CREATE OR REPLACE VIEW v_evaluation_attraction AS   
+        SELECT 
+            a.id_attraction,AVG(evaluation) AS evaluation 
+        FROM v_liste_evaluation_hotel AS e
+        JOIN attraction AS a
+        ON e.id_partenaire=a.id_attraction
+        GROUP BY a.id_attraction
+    ;
+
 CREATE OR REPLACE VIEW v_ranking_hotel AS 
     SELECT 
         h.*,
