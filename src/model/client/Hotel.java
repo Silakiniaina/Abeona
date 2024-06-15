@@ -15,6 +15,7 @@ public class Hotel {
     private String id_partenaire;
     private String id_categorie_hotel;
     private String id_ville;
+    private double evaluation;
 
     /* Constructor */
     public Hotel(String nom,String description,String adress, String id_p, String id_c, String id_v){
@@ -95,11 +96,13 @@ public class Hotel {
         try{
             c = Database.get_connection();
             if(c != null){
-                prsmt = c.prepareStatement("SELECT * FROM v_top_hotel_province LIMIT 3");
+                prsmt = c.prepareStatement("SELECT * FROM v_ranking_hotel_province WHERE id_province = ? LIMIT 3");
+                prsmt.setString(1, p.get_id_province());
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
                     Hotel a =new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
                     a.set_id_hotel(rs.getString(1));
+                    a.set_evaluation(rs.getDouble(9));
                     resultat.add(a);
                 }
             }else{
@@ -137,6 +140,9 @@ public class Hotel {
     public String get_id_ville(){
         return id_ville;
     }
+    public double get_evaluation(){
+        return evaluation;
+    }
 
     /* Setters */
     public void set_id_hotel(String id_hotel) {
@@ -160,17 +166,17 @@ public class Hotel {
     public void set_id_ville(String id){
         this.id_ville = id;
     }
-
+    public void set_evaluation(double d){
+        this.evaluation = d;
+    }
     /* Test */
     public static void main(String[] args) {
         try{
-            Hotel h = Hotel.get_hotel_par_id(null, "HOT1");
-            System.out.println("Nom : "+h.get_nom_hotel());
-            System.out.println("description : "+h.get_description());
-            System.out.println("adress : "+h.get_adress());
-            System.out.println("id_partenaire : "+h.get_id_partenaire());
-            System.out.println("id_categorie_hotel : "+h.get_id_categorie_hotel());
-            System.out.println("id_ville : "+h.get_id_ville());
+            ArrayList<Hotel> ls = Hotel.get_top_hotel(Province.get_province_par_id(null, "PRO1"));
+            for(Hotel l : ls){
+                System.out.println("id : "+l.get_id_hotel());
+                System.out.println("evaluation : "+l.get_evaluation());
+            }
         }catch(Exception e){
             e.printStackTrace();
         }

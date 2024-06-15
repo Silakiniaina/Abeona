@@ -1,4 +1,4 @@
-CREATE VIEW v_ville_province AS 
+CREATE OR REPLACE VIEW v_ville_province AS 
     SELECT 
         v.id_ville,
         v.nom_ville,
@@ -13,7 +13,7 @@ CREATE VIEW v_ville_province AS
     ON reg.id_province = pro.id_province
 ;
 
-CREATE VIEW v_point_interet_ville AS 
+CREATE OR REPLACE VIEW v_point_interet_ville AS 
     SELECT
         piv.id_ville,
         piv.id_point_interet,
@@ -23,7 +23,7 @@ CREATE VIEW v_point_interet_ville AS
     ON piv.id_point_interet = pi.id_point_interet
 ;
 
-CREATE VIEW v_point_interet_province AS 
+CREATE OR REPLACE VIEW v_point_interet_province AS 
     SELECT 
         piv.id_point_interet,
         piv.libelle,
@@ -33,7 +33,7 @@ CREATE VIEW v_point_interet_province AS
     ON piv.id_ville = vp.id_ville
 ;
 
-CREATE VIEW v_evaluation_hotel AS   
+CREATE OR REPLACE VIEW v_evaluation_hotel AS   
     SELECT 
         h.id_hotel,AVG(evaluation) AS evaluation 
     FROM evaluation AS e
@@ -52,7 +52,7 @@ CREATE OR REPLACE VIEW v_ranking_hotel AS
     ORDER BY evaluation DESC
 ;
 
-CREATE VIEW v_ranking_hotel_province AS 
+CREATE OR REPLACE VIEW v_ranking_hotel_province AS 
     SELECT 
         rh.*,
         vp.id_province
