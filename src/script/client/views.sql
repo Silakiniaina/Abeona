@@ -78,13 +78,13 @@ CREATE OR REPLACE VIEW v_liste_evaluation_evenement AS
 ;
 
 CREATE OR REPLACE VIEW v_evaluation_attraction AS   
-        SELECT 
-            a.id_attraction,AVG(evaluation) AS evaluation 
-        FROM v_liste_evaluation_hotel AS e
-        JOIN attraction AS a
-        ON e.id_partenaire=a.id_attraction
-        GROUP BY a.id_attraction
-    ;
+    SELECT 
+        a.id_attraction,AVG(evaluation) AS evaluation 
+    FROM v_liste_evaluation_attraction AS e
+    JOIN attraction AS a
+    ON e.id_partenaire=a.id_attraction
+    GROUP BY a.id_attraction
+;
 
 CREATE OR REPLACE VIEW v_ranking_hotel AS 
     SELECT 
@@ -93,6 +93,16 @@ CREATE OR REPLACE VIEW v_ranking_hotel AS
     FROM v_evaluation_hotel AS eh 
     RIGHT JOIN hotel AS h 
     ON eh.id_hotel = h.id_hotel
+    ORDER BY evaluation DESC
+;
+
+CREATE OR REPLACE VIEW v_ranking_attraction AS 
+    SELECT 
+        a.*,
+        COALESCE(ea.evaluation,0) AS evaluation
+    FROM v_evaluation_attraction AS ea
+    RIGHT JOIN attraction AS a 
+    ON ea.id_attraction = a.id_attraction
     ORDER BY evaluation DESC
 ;
 
