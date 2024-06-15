@@ -148,5 +148,11 @@ CREATE OR REPLACE VIEW v_benefice AS
         id_categorie_reservation, mois, annee;
 
 
+CREATE OR REPLACE VIEW v_hotel_evaluation AS
+    select h.id_hotel,h.nom_hotel,description ,adresse_hotel,h.date_insertion ,h.id_partenaire ,id_categorie_hotel ,id_ville,evaluation from hotel h join evaluation e on h.id_partenaire = e.id_partenaire;
 
+CREATE OR REPLACE VIEW v_transport_evaluation AS
+    select t.id_transport,t.nom_transport ,t.description ,t.tarif ,t.date_insertion , t.id_categorie_tranport , t.id_partenaire,evaluation from transport t join evaluation e on t.id_partenaire = e.id_partenaire;
 
+CREATE OR REPLACE VIEW v_guide_evaluation AS
+    select g.id_guide ,g.nom_guide ,g.description ,g.disponibilite ,g.  date_insertion ,g.id_partenaire , evaluation from guide g join evaluation e on g.id_partenaire = e.id_partenaire;
