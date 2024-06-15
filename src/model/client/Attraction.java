@@ -63,11 +63,12 @@ public class Attraction {
         try{
             c = Database.get_connection();
             if(c != null){
-                prsmt = c.prepareStatement("SELECT * FROM v_top_attraction_province LIMIT 3");
+                prsmt = c.prepareStatement("SELECT * FROM v_ranking_attraction_province LIMIT 3");
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    Attraction a = new Attraction(rs.getString(2), rs.getString(3),rs.getString(4),rs.getString(5));
+                    Attraction a = new Attraction(rs.getString(2), rs.getString(3),rs.getString(5),rs.getString(6));
                     a.set_id_attraction(rs.getString(1));
+                    a.set_evaluation(rs.getDouble(7));
                     resultat.add(a);
                 }
             }else{
@@ -125,8 +126,12 @@ public class Attraction {
     /* Test */
     public static void main(String[] args) {
         try {
-            ArrayList<Attraction> ls = Attraction.rechercher_attraction("test 1");
+            ArrayList<Attraction> ls = Attraction.get_top_attraction(Province.get_province_par_id(null, "PRO1"));
             System.out.println(ls.size());
+            for(Attraction a : ls ){
+                System.out.println("id : "+a.get_id_attraction());
+                System.out.println("evaluation : "+a.get_evaluation());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
