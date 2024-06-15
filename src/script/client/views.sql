@@ -33,5 +33,13 @@ CREATE VIEW v_point_interet_province AS
     ON piv.id_ville = vp.id_ville
 ;
 
+CREATE VIEW v_evaluation_hotel AS   
+    SELECT 
+        h.id_hotel,AVG(evaluation) AS evaluation 
+    FROM evaluation AS e
+    JOIN hotel AS h
+    ON e.id_partenaire=h.id_hotel
+    GROUP BY h.id_hotel
+;
 
 

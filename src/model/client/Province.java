@@ -61,7 +61,7 @@ public class Province {
                 prsmt.setString(1, this.get_id_province());
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    PointInteret p = new PointInteret(rs.getString(2), rs.getString(3));
+                    PointInteret p = new PointInteret(rs.getString(1), rs.getString(2));
                     resultat.add(p);
                 }
             }else{
@@ -130,14 +130,15 @@ public class Province {
 
     public static void main(String[] args) {
         try {  
-            ArrayList<Province> ls = Province.get_liste_provinces();
+            // Province p = Province.get_province_par_id(null,"PRO1");
+            // ArrayList<PointInteret> point = p.get_point_interets();
+            // for(PointInteret pp : point){
+            //     System.out.println("Province : "+p.get_nom_province()+ " point : "+pp.get_libelle());
+            // }
+            ArrayList<Province> ls = get_liste_provinces();
             for(Province p : ls){
-                ArrayList<PointInteret> point = p.get_point_interets();
-                for(PointInteret pp : point){
-                    System.out.println("Province : "+p.get_nom_province()+ " point : "+pp.get_libelle());
-                }
+                System.out.println(p.get_nom_province());
             }
-            System.out.println(ls.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
