@@ -9,12 +9,13 @@
     <script src="assets/js/input.js" defer></script>
     <script src="assets/js/slider.js" defer></script>
     <script src="assets/js/evaluation.js" defer></script>
+    <script src="assets/js/pagination.js" defer></script>
 </head>
 <body>
     <header>
         <nav class="navbar">
         <a href="" class="logo">
-            LOGO
+            <img src="assets/Icons/etoiles_black.svg" alt="">
         </a>
         <div class="nav-links">
                 <ul class="list-container">
@@ -45,7 +46,7 @@
         <img src="assets/Icons/icons8-menu-64.png" alt="menu-icons" class="menu-hamburger">
     </nav>
     </header>
-    <section class="descr_1">
+    <section class="descr_1" id="section-1">
         <div class="image">
             <div class="img-slider">
             </div>
@@ -74,7 +75,7 @@
             </div>
         </div>
     </section>
-    <section class="descr_2">
+    <section class="descr_2" id="section-2">
         <div class="row description">
             <h2>Description</h2>
             <div class="container_desc">
@@ -84,14 +85,14 @@
                </p>
             </div>
         </div>
-        <div class="row tableau">
+        <div class="row tableau"  id="tableaux">
             <h2>Chambres</h2>
             <div class="container-tableau">
                 <div class="header">
                     <p class="resultat">
                         120 Chambres
                     </p>
-                    <a class="btn abeona-custom_6">
+                    <a class="btn abeona-custom_6" href="#">
                         Nouveau chambre
                     </a>
                 </div>
@@ -157,24 +158,33 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="pagination">
+                <div class="pagination">    
                     <ul>
-                        <li class="active">1</li>
-                        <li>2</li>
-                        <li>...</li>
-                        <li>8</li>
+                        <li>
+                            <a href="#tableaux">1</a>
+                        </li>
+                        <li>
+                            <a href="">2</a>
+                        </li>
+                        <li>
+                            <a href="">...</a>
+                        </li>
+                        <li>
+                            <a href="">8</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
-    <section class="descr_3">
+    <section class="descr_3" id="section-3">
         <h2>
             Avis Et Evaluation
         </h2>
         <div class="evaluation row">
             <p>
                 <span class="note">4,30</span>
+                <!-- Mettez le nombre de reviews dans le data-target  -->
                 <span class="num_eval" data-target="854">0</span>
                 Reviews
             </p>
@@ -284,9 +294,89 @@
                     </p>
                 </div>
             </div>
+            <div class="avis_perso">
+                <div class="profil_container">
+                    <div class="profil">
+                        <img src="assets/image_videos/demitra kalogeras.jpg" alt="">
+                    </div>
+                    <div class="info_avis">
+                        <div class="stars" data-target="4" data-max="5"></div>
+                        <p class="nom">Demitra Kalogeras</p>
+                        <p class="date">2 October 2012</p>
+                    </div>
+                </div>
+                <div class="avis_inside">
+                    <p class="avis_real">
+                        Good Tour,Really Well Organised
+                    </p>
+                    <p class="descr_avis">
+                        The tour was very well organised. One minus is that you get completely bombarded with information. You also have to stand up for too long at the private entrance to the Tower of London, which leads to a lack of time later. Lunch was the same, too stress, the quality was great but you couldn't enjoy it. I'd like to ask the organisers: please
+                    </p>
+                </div>
+            </div>
+            <div class="avis_perso">
+                <div class="profil_container">
+                    <div class="profil">
+                        <img src="assets/image_videos/demitra kalogeras.jpg" alt="">
+                    </div>
+                    <div class="info_avis">
+                        <div class="stars" data-target="4" data-max="5"></div>
+                        <p class="nom">Demitra Kalogeras</p>
+                        <p class="date">2 October 2012</p>
+                    </div>
+                </div>
+                <div class="avis_inside">
+                    <p class="avis_real">
+                        Good Tour,Really Well Organised
+                    </p>
+                    <p class="descr_avis">
+                        The tour was very well organised. One minus is that you get completely bombarded with information. You also have to stand up for too long at the private entrance to the Tower of London, which leads to a lack of time later. Lunch was the same, too stress, the quality was great but you couldn't enjoy it. I'd like to ask the organisers: please
+                    </p>
+                </div>
+            </div>
+            <div class="avis_perso">
+                <div class="profil_container">
+                    <div class="profil">
+                        <img src="assets/image_videos/demitra kalogeras.jpg" alt="">
+                    </div>
+                    <div class="info_avis">
+                        <div class="stars" data-target="4" data-max="5"></div>
+                        <p class="nom">Demitra Kalogeras</p>
+                        <p class="date">2 October 2012</p>
+                    </div>
+                </div>
+                <div class="avis_inside">
+                    <p class="avis_real">
+                        Good Tour,Really Well Organised
+                    </p>
+                    <p class="descr_avis">
+                        The tour was very well organised. One minus is that you get completely bombarded with information. You also have to stand up for too long at the private entrance to the Tower of London, which leads to a lack of time later. Lunch was the same, too stress, the quality was great but you couldn't enjoy it. I'd like to ask the organisers: please
+                    </p>
+                </div>
+            </div>
+            <div class="avis_perso">
+                <div class="profil_container">
+                    <div class="profil">
+                        <img src="assets/image_videos/demitra kalogeras.jpg" alt="">
+                    </div>
+                    <div class="info_avis">
+                        <div class="stars" data-target="4" data-max="5"></div>
+                        <p class="nom">Demitra Kalogeras</p>
+                        <p class="date">2 October 2012</p>
+                    </div>
+                </div>
+                <div class="avis_inside">
+                    <p class="avis_real">
+                        Good Tour,Really Well Organised
+                    </p>
+                    <p class="descr_avis">
+                        The tour was very well organised. One minus is that you get completely bombarded with information. You also have to stand up for too long at the private entrance to the Tower of London, which leads to a lack of time later. Lunch was the same, too stress, the quality was great but you couldn't enjoy it. I'd like to ask the organisers: please
+                    </p>
+                </div>
+            </div>
         </div>
         <div class="voir">
-            <a href="">Voir plus</a>
+            <p class="voir-plus">Voir plus</p>
         </div>
     </section>
 </body>

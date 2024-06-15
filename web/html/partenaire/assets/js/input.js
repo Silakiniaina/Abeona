@@ -21,11 +21,13 @@ input_container.forEach((input) => {
 const button = document.querySelectorAll('.abeona-custom_3')
 
 button.forEach(element =>{
-    element.addEventListener('mouseenter',()=>{
-        element.querySelector('img').src='assets/Icons/second_arrow.png'
-    })
+  if(element.querySelector('img')){
+      element.addEventListener('mouseenter',()=>{
+          element.querySelector('img').src='assets/Icons/second_arrow.png'
+      })
 
-    element.addEventListener('mouseleave',()=>{
-        element.querySelector('img').src='assets/Icons/icons8-arrow-50.png'
-    })
+      element.addEventListener('mouseleave',()=>{
+          element.querySelector('img').src='assets/Icons/icons8-arrow-50.png'
+      })
+  }
 })

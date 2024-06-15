@@ -61,3 +61,15 @@ profil.forEach((element)=>{
     checked.alt='checked'
     element.appendChild(checked)
 })
+
+// Gestion de la longueur des avis
+
+const button_voir = document.querySelector('.voir-plus')
+const container_3 = document.querySelector('.descr_3')
+const avis_container = container_3.querySelector('.avis')
+
+button_voir.addEventListener('click',()=>{
+    avis_container.scrollTop = 0
+    container_3.classList.toggle('active')
+    button_voir.innerText = container_3.classList.contains('active') ? "Voir moins" : "Voir plus"
+})

@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="assets/js/input.js" defer></script>
     <script src="assets/js/toggle.js" defer></script>
+    <script src="assets/js/form_controll.js" defer></script>
 </head>
 <body>
+    <!-- Veuillez changer le for='...' des labels correspondants et l'id des inputs si vous changez leurs name MERCI -->
+    <!-- id == name -->
     <header>
         <nav class="navbar">
         <a href="" class="logo">
@@ -45,7 +48,7 @@
             <p class="desc_inscr">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic sit impedit aspernatur nostrum! Consequatur quidem mollitia itaque, eius atque eaque
             </p>
-            <form action="">
+            <form action="" id="form_chambre">
                 <div class="input-section">
                     <select name="hotel" id="hotel" class="options">
                         <option value="">Hotelerie</option>
@@ -67,17 +70,17 @@
                 </div>
 
                 <div class="input-section">
-                    <input type="number" id="capacite" name="capacite" min="1" class="input" >
+                    <input type="number" id="capacite" name="capacite" min="1" class="input capacite" >
                      <label for="capacite" class="label-input">Capacité</label>
                 </div>
 
                 <div class="input-section">
-                    <input type="number" id="prix" name="prix" min="1" class="input" >
+                    <input type="number" id="prix" name="prix" min="1" class="input prix" >
                      <label for="prix" class="label-input">Prix</label>
                 </div>
 
                 <div class="input-section">
-                    <input type="number" id="nombres" name="nombres" min="0" class="input" >
+                    <input type="number" id="nombres" name="nombres" min="0" class="input nombres" >
                      <label for="nombres" class="label-input">Nombres</label>
                 </div>
 

@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="assets/js/input.js" defer></script>
     <script src="assets/js/toggle.js" defer></script>
+    <script src="assets/js/form_controll.js" defer></script>
 </head>
 <body>
+    <!-- Veuillez changer le for='...' des labels correspondants et l'id des inputs si vous changez leurs name MERCI -->
+    <!-- id == name -->
     <header>
         <nav class="navbar">
         <a href="" class="logo">
@@ -46,9 +49,9 @@
             <p class="desc_inscr">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic sit impedit aspernatur nostrum! Consequatur quidem mollitia itaque, eius atque eaque
             </p>
-            <form action="">
+            <form action="" id="form_guide">
                 <div class="input-section">
-                    <input name="name_partenaire" id="name_partenaire" class="input" type="text"/>
+                    <input name="name_partenaire" id="name_partenaire" class="input nom_guide" type="text"/>
                     <label for="name_partenaire" class="label-input">Nom</label>
                 </div>
 
@@ -57,7 +60,7 @@
                 </p>
 
                 <div class="input-section" style="margin-bottom: 150px;">
-                    <textarea name="description" rows="10" id="description" class="input textarea" ></textarea>
+                    <textarea name="description" rows="10" id="description" class="input textarea description" ></textarea>
                     <label for="description" class="label-input">Description</label>
                 </div>
 

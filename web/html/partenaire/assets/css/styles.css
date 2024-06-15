@@ -332,13 +332,18 @@ header {
   background-color: rgba(255, 4, 4, 0.7);
 }
 .btn.abeona-custom_1 {
+  transition: background-color 0.5s ease-in-out;
   background-color: #363D32;
   width: 40vw;
   height: 10vh;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #F1F7EE;
   border: none;
 }
 .btn.abeona-custom_1:hover {
-  transition: 0.5s ease-in-out;
   background-color: #92AA83;
 }
 .btn.abeona-custom_2 {
@@ -368,27 +373,22 @@ header {
   cursor: pointer;
   background-color: #B0BEA9;
 }
-.btn.abeona-custom_4 {
+.btn.abeona-custom_6 {
   transition: background-color 0.5s ease-in-out;
   width: 20%;
   margin: 0;
-  height: 70px;
+  height: 40px;
   display: flex;
   justify-content: center;
-  font-size: 38px;
-  color: #363D32;
+  font-size: 20px;
+  color: #F1F7EE;
   align-items: center;
   border: none;
-  backdrop-filter: blur(5px);
+  background-color: #92AA83;
 }
-.btn.abeona-custom_4.active {
-  background-color: #363D32;
-  color: white;
-}
-.btn.abeona-custom_4:hover {
-  color: white;
+.btn.abeona-custom_6:hover {
   cursor: pointer;
-  background-color: #B0BEA9;
+  background-color: #363D32;
 }
 .btn.abeona-custom_5 {
   transition: background-color 0.5s ease-in-out;
@@ -1100,11 +1100,17 @@ header {
   font-weight: bold;
   border-radius: 5px;
 }
+.pagination ul li a {
+  color: #363D32;
+}
 .pagination ul li:hover, .pagination ul li.active {
   background-color: #92AA83;
   color: white;
   font-weight: bolder;
   cursor: pointer;
+}
+.pagination ul li:hover a, .pagination ul li.active a {
+  color: white;
 }
 
 footer {
@@ -1373,6 +1379,21 @@ footer .copyright {
   height: 200vh;
   display: flex;
   flex-direction: column;
+  transition: height 0.5s ease-in-out;
+}
+.descr_3.active {
+  height: 300vh;
+}
+.descr_3.active .evaluation {
+  height: 10%;
+}
+.descr_3.active .avis {
+  height: 80%;
+  overflow-y: scroll;
+}
+.descr_3.active .avis .avis_perso {
+  height: 6.5%;
+  width: 70%;
 }
 .descr_3 .stars {
   display: flex;
@@ -1387,7 +1408,7 @@ footer .copyright {
   color: #363D32;
 }
 .descr_3 .avis {
-  height: 60%;
+  height: 65%;
   margin: auto;
   margin-top: 0;
   margin-bottom: 50px;
@@ -1487,10 +1508,15 @@ footer .copyright {
   height: 5%;
   border-top: solid 1px #363D32;
 }
-.descr_3 .voir a {
+.descr_3 .voir .voir-plus {
   font-size: large;
   font-weight: bolder;
   font-size: 20px;
+}
+.descr_3 .voir .voir-plus:hover {
+  transition: 0.5s ease-in-out;
+  color: blue;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=styles.css.map */
