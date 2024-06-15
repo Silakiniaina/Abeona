@@ -42,13 +42,27 @@ CREATE VIEW v_evaluation_hotel AS
     GROUP BY h.id_hotel
 ;
 
-CREATE VIEW v_ranking_hotel AS 
+CREATE OR REPLACE VIEW v_ranking_hotel AS 
     SELECT 
-        h.*,eh.evaluation
+        h.*,
+        COALESCE(eh.evaluation,0) AS evaluation
     FROM v_evaluation_hotel AS eh 
-    JOIN hotel AS h 
+    RIGHT JOIN hotel AS h 
     ON eh.id_hotel = h.id_hotel
     ORDER BY evaluation DESC
 ;
+
+CREATE VIEW v_ranking_hotel_province AS 
+    SELECT 
+        rh.*,
+        vp.id_province
+    FROM v_ranking_hotel AS rh 
+    JOIN v_ville_province AS vp 
+    ON rh.id_ville = vp.id_ville
+    ORDER BY 
+        id_province ASC,
+        evaluation DESC
+;
+
 
 
