@@ -42,4 +42,13 @@ CREATE VIEW v_evaluation_hotel AS
     GROUP BY h.id_hotel
 ;
 
+CREATE VIEW v_ranking_hotel AS 
+    SELECT 
+        h.*,eh.evaluation
+    FROM v_evaluation_hotel AS eh 
+    JOIN hotel AS h 
+    ON eh.id_hotel = h.id_hotel
+    ORDER BY evaluation DESC
+;
+
 
