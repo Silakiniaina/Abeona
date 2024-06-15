@@ -23,5 +23,15 @@ CREATE VIEW v_point_interet_ville AS
     ON piv.id_point_interet = pi.id_point_interet
 ;
 
+CREATE VIEW v_point_interet_province AS 
+    SELECT 
+        piv.id_point_interet,
+        piv.libelle,
+        vp.id_province
+    FROM v_point_interet_ville AS piv 
+    JOIN v_ville_province AS vp 
+    ON piv.id_ville = vp.id_ville
+;
+
 
 
