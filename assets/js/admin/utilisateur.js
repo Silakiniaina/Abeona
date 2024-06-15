@@ -1,39 +1,6 @@
 document.addEventListener('DOMContentLoaded', () =>{
-    const data = [
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'true'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'true'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'true'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'true'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'true'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'true'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'true'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'true'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'true'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'true'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'true'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'true'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005', status:'false'},
-        {nom:'Sanda',prenom:'Silakiniaina',date:'12-07-2005',status:'true'}
-    ]
+
+    let data = fetch_data('utilisateur',1);
 
     afficher_table('utilisateur',data)
 });

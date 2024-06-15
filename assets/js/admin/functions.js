@@ -46,19 +46,6 @@ function generer_action_buttons(actions){
         icon.classList.add('fa');
         icon.classList.add(`fa-${actions[key]}`);
         btn.appendChild(icon);
-
-        /* Écouter les clics sur les boutons de suppression et d'édition */
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('delete')) {
-                const row = e.target.closest('tr');
-                row.remove();
-            }else if(e.target.classList.contains('delete-inscription')){
-                const row = e.target.closest('.main__inscription__content');
-                row.remove();
-            } else if (e.target.classList.contains('edit')) {
-                console.log('Édition');
-            }
-        });
         result.appendChild(btn);
 
     });
@@ -179,6 +166,17 @@ function fetch_data(tabid,page_num){
                 "description": "Man with lorem ipsum",
                 "tarif": 2000,
                 "date_insertion": "2024-06-15T10:00:00Z"
+            }
+        ]
+    }else if(tabid === 'utilisateur'){
+        result = [
+            {
+                "id_user":"USR1",
+                "nom":"Sanda",
+                "email":"sandasilakiniaina4@gmail.com",
+                "date_de_naissance":"12-07-2005",
+                "date_insertion":"11-06-2024",
+                "status":"false",
             }
         ]
     }

@@ -85,6 +85,19 @@ document.addEventListener('DOMContentLoaded', function() {
         scroll_dernier_element_visible();
     });
 
+    /* Écouter les clics sur les boutons de suppression et d'édition */
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('delete')) {
+            const row = e.target.closest('tr');
+            row.remove();
+        }else if(e.target.classList.contains('delete-inscription')){
+            const row = e.target.closest('.main__inscription__content');
+            row.remove();
+        } else if (e.target.classList.contains('edit')) {
+            console.log('Édition');
+        }
+    });
+    
     afficher_inscription();
 
     /* Gestion des tables et tabs */

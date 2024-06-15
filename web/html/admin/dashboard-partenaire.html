@@ -100,25 +100,11 @@
         <h2 class="main__title">Liste des partenaires</h2>
         <div class="main__list">
             <div class="main__list__tabs">
-                <div class="main__list__tabs__header" id="list_tabs">
-                    <button class="main__list__tabs__header__content active" data-tab="hotel">HOTEL</button>
-                    <button class="main__list__tabs__header__content" data-tab="transport">TRANSPORT</button>
-                    <button class="main__list__tabs__header__content" data-tab="guide">GUIDE</button>
-                </div>
                 <div class="main__list__tabs__filter">
                     <form action="" id="filter-container">
                         <div class="form-content input_name">
-                            <label for="input_nom">Name</label>
+                            <label for="input_nom">Nom</label>
                             <input type="text" name="nom" id="input_nom">
-                        </div>
-                        <div class="form-content input_category">
-                            <label for="input_categorie">Categorie</label>
-                            <select name="categorie" id="input_category">
-                                <option value="">Tous</option>
-                                <option value="">Categorie 1</option>
-                                <option value="">Categorie 2</option>
-                                <option value="">Categorie 3</option>
-                            </select>
                         </div>
                         <div class="form-content input_city">
                             <label for="input_ville">Ville</label>
@@ -133,8 +119,21 @@
                             <label for="input_evaluation">Evaluation</label>
                             <input type="number" name="evaluation" id="input_evaluation">
                         </div>
-                        <button type="submit">Filtrer</button>
+                        <div class="form-content input_date_insertion_debut">
+                            <label for="input_date_i_d">Date insertion debut</label>
+                            <input type="date" name="" id="input_date_i_d">
+                        </div>
+                        <div class="form-content input_date_insertion_fin">
+                            <label for="input_i_f">Date insertion fin</label>
+                            <input type="date" name="" id="input_i_f">
+                        </div>
+                        <button type="submit">Rechercher</button>
                     </form>
+                </div>
+                <div class="main__list__tabs__header" id="list_tabs">
+                    <button class="main__list__tabs__header__content active" data-tab="hotel">HOTEL</button>
+                    <button class="main__list__tabs__header__content" data-tab="transport">TRANSPORT</button>
+                    <button class="main__list__tabs__header__content" data-tab="guide">GUIDE</button>
                 </div>
                 <div class="main__list__tabs__body">
                     <div id="hotel_container" class="main__list__tabs__body__content">
