@@ -130,11 +130,6 @@ public class Province {
 
     public static void main(String[] args) {
         try {  
-            // Province p = Province.get_province_par_id(null,"PRO1");
-            // ArrayList<PointInteret> point = p.get_point_interets();
-            // for(PointInteret pp : point){
-            //     System.out.println("Province : "+p.get_nom_province()+ " point : "+pp.get_libelle());
-            // }
             ArrayList<Province> ls = get_liste_provinces();
             for(Province p : ls){
                 System.out.println(p.get_nom_province());

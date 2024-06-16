@@ -1,29 +1,22 @@
 package model.client;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.print.attribute.standard.Destination;
-
 import model.shared.Database;
 
-public class Hotel {
-    private String id_hotel; 
-    private String nom_hotel;
-    private String description; 
+public class Hotel extends Partenaire{ 
     private String adress;
-    private String id_partenaire;
     private String id_categorie_hotel;
     private String id_ville;
     private double evaluation;
 
     /* Constructor */
     public Hotel(String nom,String description,String adress, String id_p, String id_c, String id_v){
-        this.set_nom_hotel(nom);
+        this.set_nom(nom);
         this.set_description(description);
         this.set_adress(adress);
         this.set_id_partenaire(id_p);
@@ -49,7 +42,7 @@ public class Hotel {
             rs = prsmt.executeQuery();
             if (rs.next()) {
                 resultat = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
-                resultat.set_id_hotel(rs.getString(1));
+                resultat.set_id(rs.getString(1));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,7 +68,7 @@ public class Hotel {
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
                     Hotel a = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
-                    a.set_id_hotel(rs.getString(1));
+                    a.set_id(rs.getString(1));
                     resultat.add(a);
                 }
             }else{
@@ -105,7 +98,7 @@ public class Hotel {
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
                     Hotel a = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
-                    a.set_id_hotel(rs.getString(1));
+                    a.set_id(rs.getString(1));
                     a.set_evaluation(rs.getDouble(9));
                     resultat.add(a);
                 }
@@ -157,7 +150,7 @@ public class Hotel {
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 Hotel a  = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
-                a.set_id_hotel(rs.getString(1));
+                a.set_id(rs.getString(1));
                 a.set_evaluation(rs.getDouble(9));
                 results.add(a);
             }
@@ -217,12 +210,6 @@ public class Hotel {
     }
 
     /* Getters */
-    public String get_id_hotel() {
-        return id_hotel;
-    }
-    public String get_nom_hotel() {
-        return nom_hotel;
-    }
     public String get_description(){
         return description;
     }
@@ -243,12 +230,6 @@ public class Hotel {
     }
 
     /* Setters */
-    public void set_id_hotel(String id_hotel) {
-        this.id_hotel = id_hotel;
-    }
-    public void set_nom_hotel(String nom_hotel) {
-        this.nom_hotel = nom_hotel;
-    }
     public void set_description(String desc){
         this.description = desc;
     }
@@ -267,6 +248,18 @@ public class Hotel {
     public void set_evaluation(double d){
         this.evaluation = d;
     }
+
+    /* Surdefinition des fonctions get_categorie_avis et get_categorie_evaluation */
+    @Override
+    public String get_categorie_avis() {
+        return "CAV1";
+    }
+    
+    @Override
+    public String get_categorie_evaluation() {
+        return "CEV1";
+    }
+
     /* Test */
     public static void main(String[] args) {
         try{
@@ -285,7 +278,7 @@ public class Hotel {
             ArrayList<Hotel> results = filtrer_hotel(null,null, null ,null);
 
             for (Hotel dest : results) {
-                System.out.println(dest.get_nom_hotel() + " - " + dest.get_evaluation());
+                System.out.println("id : "+dest.get_id()+" - "+dest.get_nom() + " - " + dest.get_evaluation());
             }
         }catch(Exception e){
             e.printStackTrace();
