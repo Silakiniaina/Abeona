@@ -12,7 +12,6 @@ public class Hotel extends Partenaire{
     private String adress;
     private String id_categorie_hotel;
     private String id_ville;
-    private double evaluation;
 
     /* Constructor */
     public Hotel(String nom,String description,String adress, String id_p, String id_c, String id_v){
@@ -129,7 +128,6 @@ public class Hotel extends Partenaire{
                 while (rs.next()) {
                     Hotel a = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
                     a.set_id(rs.getString(1));
-                    a.set_evaluation(rs.getDouble(9));
                     resultat.add(a);
                 }
             }else{
@@ -181,7 +179,6 @@ public class Hotel extends Partenaire{
             while (rs.next()) {
                 Hotel a  = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
                 a.set_id(rs.getString(1));
-                a.set_evaluation(rs.getDouble(9));
                 results.add(a);
             }
         } catch (SQLException e) {
@@ -255,9 +252,6 @@ public class Hotel extends Partenaire{
     public String get_id_ville(){
         return id_ville;
     }
-    public double get_evaluation(){
-        return evaluation;
-    }
 
     /* Setters */
     public void set_description(String desc){
@@ -275,9 +269,6 @@ public class Hotel extends Partenaire{
     public void set_id_ville(String id){
         this.id_ville = id;
     }
-    public void set_evaluation(double d){
-        this.evaluation = d;
-    }
 
     /* Surdefinition des fonctions get_categorie_avis et get_categorie_evaluation */
     @Override
@@ -290,14 +281,37 @@ public class Hotel extends Partenaire{
         return "CEV1";
     }
 
+    @Override
+    public double get_evaluation()throws Exception{
+        double resultat = 0;
+        Connection c = null;
+        PreparedStatement prstm = null;
+        ResultSet rs = null;
+        try{
+            c = Database.get_connection();
+            prstm = c.prepareStatement("SELECT * FROM v_evaluation_hotel WHERE id_hotel = ?");
+            prstm.setString(1, this.get_id());
+            rs = prstm.executeQuery();
+            if(rs.next()){
+                resultat = rs.getDouble(2);
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prstm != null){ prstm.close(); }
+            if(c != null){ c.close(); }
+        }
+        return resultat;
+    }
+
+
     /* Test */
     public static void main(String[] args) {
         try{
             Hotel a = Hotel.get_hotel_par_id(null, "HOT1");
-            ArrayList<Evaluation> ls = a.get_liste_evaluation();
-            for(Evaluation e : ls){
-                System.out.println("Nom : "+e.get_utilisateur().get_nom()+" - evaluation : "+e.get_evaluation() +" date : "+e.get_date_insertion());
-            }
+            double eval = a.get_evaluation();
+            System.out.println(eval);
         }catch(Exception e){
             e.printStackTrace();
         }

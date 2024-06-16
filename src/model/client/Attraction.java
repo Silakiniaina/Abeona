@@ -9,7 +9,6 @@ import model.shared.Database;
 public class Attraction extends Partenaire{
     private String id_categorie_attraction;
     private String id_ville; 
-    private double evaluation; 
 
     /* Constructor */
     public Attraction(String name,String desc, String id_a, String id_v){
@@ -65,7 +64,6 @@ public class Attraction extends Partenaire{
                 while (rs.next()) {
                     Attraction a = new Attraction(rs.getString(2), rs.getString(3),rs.getString(5),rs.getString(6));
                     a.set_id(rs.getString(1));
-                    a.set_evaluation(rs.getDouble(7));
                     resultat.add(a);
                 }
             }else{
@@ -151,9 +149,6 @@ public class Attraction extends Partenaire{
     public String get_id_ville(){
         return id_ville;
     }
-    public double get_evaluation(){
-        return evaluation;
-    }
 
     /* Setters */
     public void set_description(String str){
@@ -164,9 +159,6 @@ public class Attraction extends Partenaire{
     }
     public void set_id_ville(String str){
         this.id_ville = str;
-    }
-    public void set_evaluation(double d){
-        this.evaluation = d;
     }
 
     @Override
@@ -179,14 +171,36 @@ public class Attraction extends Partenaire{
         return "CEV4";
     }
 
+    @Override
+    public double get_evaluation()throws Exception{
+        double resultat = 0;
+        Connection c = null;
+        PreparedStatement prstm = null;
+        ResultSet rs = null;
+        try{
+            c = Database.get_connection();
+            prstm = c.prepareStatement("SELECT * FROM v_evaluation_attraction WHERE id_attraction = ?");
+            prstm.setString(1, this.get_id());
+            rs = prstm.executeQuery();
+            if(rs.next()){
+                resultat = rs.getDouble(2);
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prstm != null){ prstm.close(); }
+            if(c != null){ c.close(); }
+        }
+        return resultat;
+    }
+
     /* Test */
     public static void main(String[] args) {
         try {
             Attraction a = Attraction.get_attraction_par_id(null, "ATT1");
-            ArrayList<Avis> ls = a.get_liste_avis();
-            for(Avis avis : ls){
-                System.out.println("Nom : "+avis.get_utilisateur().get_nom()+" - avis : "+avis.get_avis_utilisateur());
-            }
+            double eval = a.get_evaluation();
+            System.out.println("Evaluation : "+eval);
         } catch (Exception e) {
             e.printStackTrace();
         }
