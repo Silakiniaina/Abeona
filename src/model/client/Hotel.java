@@ -236,6 +236,30 @@ public class Hotel extends Partenaire{
         return sql.toString();
     }
 
+    /* Fonction pour avoir la liste des commodites de l'hotel */
+    public ArrayList<Commodite> get_liste_commodite()throws Exception{
+        ArrayList<Commodite> result = new ArrayList<Commodite>();
+        Connection c = null;
+        PreparedStatement prstm = null;
+        ResultSet rs = null;
+        try {
+            c = Database.get_connection();
+            prstm = c.prepareStatement("SELECT * FROM v_commodite_hotel WHERE id_hotel = ?");
+            prstm.setString(1, this.get_id());
+            rs = prstm.executeQuery();
+            while(rs.next()){
+                Commodite com = new Commodite(rs.getString(3));
+                result.add(com);
+            }
+        } catch (Exception e) {
+            throw e;
+        }finally{
+            if(rs != null ) rs.close();
+            if(prstm != null) prstm.close();
+            if(c != null) c.close();
+        }
+        return result;
+    }
     /* Getters */
     public String get_description(){
         return description;
@@ -313,9 +337,8 @@ public class Hotel extends Partenaire{
     /* Test */
     public static void main(String[] args) {
         try{
-            Hotel a = Hotel.get_hotel_par_id(null, "HOT1");
-            double eval = a.get_evaluation();
-            System.out.println(eval);
+            ArrayList<Commodite> ls = Hotel.get_hotel_par_id(null, "HOT1").get_liste_commodite();
+            System.out.println(ls.size());
         }catch(Exception e){
             e.printStackTrace();
         }
