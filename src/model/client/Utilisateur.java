@@ -128,6 +128,33 @@ public class Utilisateur{
         }
     }
 
+    /* Fonction pour donner une evaluation a une partenaire */
+    public void donner_evaluation(Partenaire p, double evaluation)throws Exception{
+        Connection c = null;
+        PreparedStatement prsmt = null; 
+        try{
+            if(evaluation < 0 || evaluation > 5){
+                throw new Exception("Valeur evaluation invalide");
+            }
+            c = Database.get_connection();
+            c.setAutoCommit(false);
+            prsmt = c.prepareStatement("INSERT INTO evaluation(id_utilisateur,evaluation,id_categorie_evaluation,id_partenaire) VALUES (?,?,?,?)");
+            prsmt.setString(1, this.get_id());
+            prsmt.setDouble(2, evaluation);
+            prsmt.setString(3, p.get_categorie_evaluation());
+            prsmt.setString(4, p.get_id());
+            prsmt.executeUpdate();
+            c.commit();
+            System.out.println("Don evaluation fait :)");
+        }catch(Exception e){
+            c.rollback();
+            throw e;
+        }finally{
+            if(prsmt != null){ prsmt.close(); }
+            if(c != null){ c.close(); }
+        }
+    }
+
     /* Setters */
     public void set_id(String n_id){
         this.id = n_id;
@@ -180,7 +207,7 @@ public class Utilisateur{
             Utilisateur u = Utilisateur.login("pierre.martin1@example.com", "12345");
             if(u != null){
                 Hotel h = Hotel.get_hotel_par_id(null, "HOT1");
-                u.donner_avis(h, "Cet hotel est un des meilleurs que j\' ai visité");
+                u.donner_evaluation(h, 4.0);
             }
             // u.inserer_preferences(ls);
         } catch (Exception e) {
