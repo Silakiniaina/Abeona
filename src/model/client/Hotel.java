@@ -1,10 +1,13 @@
 package model.client;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.print.attribute.standard.Destination;
 
 import model.shared.Database;
 
@@ -101,7 +104,7 @@ public class Hotel {
                 prsmt.setString(1, p.get_id_province());
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    Hotel a =new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
+                    Hotel a = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
                     a.set_id_hotel(rs.getString(1));
                     a.set_evaluation(rs.getDouble(9));
                     resultat.add(a);
@@ -117,6 +120,100 @@ public class Hotel {
             if(c != null){ c.close(); }
         }
         return resultat;
+    }
+
+    /* Fonction pour filtrer les recherches en fonction des id recuperer */
+    public static ArrayList<Hotel> filtrer_hotel(String dest,ArrayList<String> id_commodite, ArrayList<String> id_ville, ArrayList<String> evaluation) {
+        ArrayList<Hotel> results = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            connection = Database.get_connection();
+            String sql = filter_query(dest,id_commodite, id_ville, evaluation);
+            preparedStatement = connection.prepareStatement(sql);
+            int paramIndex = 0;
+            if(dest != null){
+                preparedStatement.setString(paramIndex++, dest.toLowerCase());
+            }
+            if (id_commodite != null && !id_commodite.isEmpty()) {
+                for (String commodite : id_commodite) {
+                    preparedStatement.setString(paramIndex++, commodite);
+                }
+            }
+            if (evaluation != null && !evaluation.isEmpty()) {
+                for (String range : evaluation) {
+                    String[] limits = range.split("-");
+                    preparedStatement.setDouble(paramIndex++, Double.parseDouble(limits[0])); // min evaluation
+                    preparedStatement.setDouble(paramIndex++, Double.parseDouble(limits[1])); // max evaluation
+                }
+            }
+            if (id_ville != null && !id_ville.isEmpty()) {
+                for (String ville : id_ville) {
+                    preparedStatement.setString(paramIndex++, ville);
+                }
+            }
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Hotel a  = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
+                a.set_id_hotel(rs.getString(1));
+                a.set_evaluation(rs.getDouble(9));
+                results.add(a);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return results;
+    }
+
+    /* Function pour construire dynamiquement le requete de filtre */
+    public static String filter_query(String dest,ArrayList<String> id_commodite, ArrayList<String> id_ville, ArrayList<String> evaluation) {
+        StringBuilder sql = new StringBuilder("SELECT h.*, COALESCE(eh.evaluation, 0) AS evaluation FROM hotel AS h ");
+        sql.append("LEFT JOIN v_evaluation_hotel AS eh ON h.id_hotel = eh.id_hotel WHERE 1=1 ");
+        if(dest != null){
+            sql.append(" AND LOWER(nom_hotel) LIKE ? ");
+        }
+        if (id_commodite != null && !id_commodite.isEmpty()) {
+            sql.append("AND h.id_hotel IN (SELECT id_hotel FROM v_info_commodite_hotel WHERE id_commodite IN (");
+            for (int i = 0; i < id_commodite.size(); i++) {
+                sql.append("?");
+                if (i < id_commodite.size() - 1) {
+                    sql.append(",");
+                }
+            }
+            sql.append(") GROUP BY id_hotel)");
+        }
+        if (evaluation != null && !evaluation.isEmpty()) {
+            sql.append(" AND (");
+            for (int i = 0; i < evaluation.size(); i++) {
+                if (i > 0) {
+                    sql.append(" OR ");
+                }
+                sql.append("evaluation BETWEEN ? AND ?");
+            }
+            sql.append(") ");
+        }
+        if (id_ville != null && !id_ville.isEmpty()) {
+            sql.append("AND (");
+            for (int i = 0; i < id_ville.size(); i++) {
+                sql.append("id_ville = ?");
+                if (i < id_ville.size() - 1) {
+                    sql.append(" OR ");
+                }
+            }
+            sql.append(")");
+        }
+        System.out.println(sql);
+        return sql.toString();
     }
 
     /* Getters */
@@ -173,10 +270,22 @@ public class Hotel {
     /* Test */
     public static void main(String[] args) {
         try{
-            ArrayList<Hotel> ls = Hotel.get_top_hotel(Province.get_province_par_id(null, "PRO1"));
-            for(Hotel l : ls){
-                System.out.println("id : "+l.get_id_hotel());
-                System.out.println("evaluation : "+l.get_evaluation());
+            ArrayList<String> id_commodite = new ArrayList<>();
+            id_commodite.add("COM1");
+            id_commodite.add("COM2");
+
+            ArrayList<String> id_ville = new ArrayList<>();
+            id_ville.add("VIL1");
+            id_ville.add("VIL2");
+
+            ArrayList<String> evaluation = new ArrayList<>();
+            evaluation.add("0-2");
+            evaluation.add("4-5");
+
+            ArrayList<Hotel> results = filtrer_hotel(null,null, null ,null);
+
+            for (Hotel dest : results) {
+                System.out.println(dest.get_nom_hotel() + " - " + dest.get_evaluation());
             }
         }catch(Exception e){
             e.printStackTrace();
