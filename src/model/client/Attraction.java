@@ -6,17 +6,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.shared.Database;
-public class Attraction {
-    private String id_attraction;
-    private String nom_attraction;
-    private String description;
+public class Attraction extends Partenaire{
     private String id_categorie_attraction;
     private String id_ville; 
     private double evaluation; 
 
     /* Constructor */
     public Attraction(String name,String desc, String id_a, String id_v){
-        this.set_nom_attraction(name);
+        this.set_nom(name);
         this.set_description(desc);
         this.set_id_categorie_attraction(id_a);
         this.set_id_ville(id_v);
@@ -37,7 +34,7 @@ public class Attraction {
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
                     Attraction a = new Attraction(rs.getString(2), rs.getString(3),rs.getString(4),rs.getString(5));
-                    a.set_id_attraction(rs.getString(1));
+                    a.set_id(rs.getString(1));
                     resultat.add(a);
                 }
             }else{
@@ -67,7 +64,7 @@ public class Attraction {
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
                     Attraction a = new Attraction(rs.getString(2), rs.getString(3),rs.getString(5),rs.getString(6));
-                    a.set_id_attraction(rs.getString(1));
+                    a.set_id(rs.getString(1));
                     a.set_evaluation(rs.getDouble(7));
                     resultat.add(a);
                 }
@@ -85,12 +82,6 @@ public class Attraction {
     }
     
     /* Getters */
-    public String get_id_attraction() {
-        return id_attraction;
-    }
-    public String get_nom_attraction() {
-        return nom_attraction;
-    }
     public String get_description(){
         return description;
     }
@@ -105,12 +96,6 @@ public class Attraction {
     }
 
     /* Setters */
-    public void set_id_attraction(String id_attraction) {
-        this.id_attraction = id_attraction;
-    }
-    public void set_nom_attraction(String nom_attraction) {
-        this.nom_attraction = nom_attraction;
-    }
     public void set_description(String str){
         this.description = str;
     }
@@ -124,13 +109,23 @@ public class Attraction {
         this.evaluation = d;
     }
 
+    @Override
+    public String get_categorie_avis() {
+        return "CAV4";
+    }
+
+    @Override
+    public String get_categorie_evaluation() {
+        return "CEV4";
+    }
+
     /* Test */
     public static void main(String[] args) {
         try {
             ArrayList<Attraction> ls = Attraction.get_top_attraction(Province.get_province_par_id(null, "PRO1"));
             System.out.println(ls.size());
             for(Attraction a : ls ){
-                System.out.println("id : "+a.get_id_attraction());
+                System.out.println("id : "+a.get_id());
                 System.out.println("evaluation : "+a.get_evaluation());
             }
         } catch (Exception e) {
