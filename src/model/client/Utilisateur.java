@@ -18,15 +18,6 @@ public class Utilisateur{
     protected String mot_de_passe;
 
     /* Constructor */
-    public Utilisateur(String id, String nom, String prenom, String mail, Date dtn, String id_g){
-        this.set_id(id);
-        this.set_nom(nom);
-        this.set_prenom(prenom);
-        this.set_email(mail);
-        this.set_date_de_naissance(dtn);
-        this.set_id_genre(id_g);
-    }
-
     public Utilisateur(String nom, String prenom, String mail, Date dtn, String id_g){
         this.set_nom(nom);
         this.set_prenom(prenom);
@@ -43,12 +34,13 @@ public class Utilisateur{
         ResultSet rs = null;
         try{
             c = Database.get_connection();
-            prsmt = c.prepareStatement("SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,email,date_naissance,id_genre FROM utilisateur WHERE email = ? AND mot_de_passe = ? ");
+            prsmt = c.prepareStatement("SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,email,date_de_naissance,id_genre FROM utilisateur WHERE email = ? AND mot_de_passe = ? ");
             prsmt.setString(1,email);
             prsmt.setString(2, Database.encoder(password));
             rs = prsmt.executeQuery();
             if(rs.next()){
-                resultat = new Utilisateur(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6));
+                resultat = new Utilisateur(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6));
+                resultat.set_id(rs.getString(1));
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -90,7 +82,6 @@ public class Utilisateur{
     public void inserer_preferences(ArrayList<String>  ls)throws Exception{
         Connection c = null;
         PreparedStatement prsmt = null; 
-
         try{
             c = Database.get_connection();
             c.setAutoCommit(false);
@@ -110,6 +101,32 @@ public class Utilisateur{
         }
     }
     
+    /* Fonction pour donner un avis a propos d'une partenaire */
+    public void donner_avis(Partenaire p, String avis)throws Exception{
+        Connection c = null;
+        PreparedStatement prsmt = null; 
+        try{
+            if(avis == null){
+                throw new Exception("Avis null");
+            }
+            c = Database.get_connection();
+            c.setAutoCommit(false);
+            prsmt = c.prepareStatement("INSERT INTO avis(id_utilisateur,avis_utilisateur,id_categorie_avis,id_partenaire) VALUES (?,?,?,?)");
+            prsmt.setString(1, this.get_id());
+            prsmt.setString(2, avis);
+            prsmt.setString(3, p.get_categorie_avis());
+            prsmt.setString(4, p.get_id());
+            prsmt.executeUpdate();
+            c.commit();
+            System.out.println("Don avis fait :)");
+        }catch(Exception e){
+            c.rollback();
+            throw e;
+        }finally{
+            if(prsmt != null){ prsmt.close(); }
+            if(c != null){ c.close(); }
+        }
+    }
 
     /* Setters */
     public void set_id(String n_id){
@@ -160,10 +177,10 @@ public class Utilisateur{
     public static void main(String[] argv ){
         try {
             // ArrayList<CategorieAttraction> ls = CategorieAttraction.get_list_categorie_attraction();
-            Utilisateur u = Utilisateur.login("sandasilakiniaina4@gmail.com", "admin");
+            Utilisateur u = Utilisateur.login("pierre.martin1@example.com", "12345");
             if(u != null){
-                System.out.println("Connecter en tant que : "+u.get_nom());
-                System.out.println("id : "+u.get_id());
+                Hotel h = Hotel.get_hotel_par_id(null, "HOT1");
+                u.donner_avis(h, "Cet hotel est un des meilleurs que j\' ai visité");
             }
             // u.inserer_preferences(ls);
         } catch (Exception e) {
