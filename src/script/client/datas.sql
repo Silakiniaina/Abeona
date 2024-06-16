@@ -177,6 +177,10 @@ INSERT INTO Hotel ( nom_hotel, description, adresse_hotel, id_partenaire, id_cat
 ('Résidence Hôtelière Betsileo', 'Résidence hôtelière au centre-ville', 'Fianarantsoa Centre', 'PAR1', 'CHO4', 'VIL4'),
 ('Hôtel Plage Tsimelahy', 'Hôtel près de la plage de Tsimelahy', 'Plage Tsimelahy', 'PAR2', 'CHO5', 'VIL5');
 
+INSERT INTO Hotel ( nom_hotel, description, adresse_hotel, id_partenaire, id_categorie_hotel, id_ville) VALUES
+('Hotel pain compz', 'Pain compz', 'Andoharanofotsy', 'PAR1', 'CHO1', 'VIL1')
+;
+
 -- Insertion des données pour la table chambre
 INSERT INTO chambre ( capacite, tarif, id_categorie_chambre, id_hotel) VALUES
 (2, 200.00, 'CCH1', 'HOT1'),
@@ -203,11 +207,17 @@ INSERT INTO Avis (avis_utilisateur, id_partenaire, id_utilisateur, id_categorie_
 
 -- Insertion des données pour la table Evaluation
 INSERT INTO Evaluation (id_utilisateur,evaluation, id_partenaire, id_categorie_evaluation) VALUES
-('USR1',4.5, 'PAR1', 'CEV1'),
-('USR2',3.8, 'PAR2', 'CEV2'),
-('USR3',3.0, 'PAR3', 'CEV3'),
-('USR4',2.5, 'PAR4', 'CEV4'),
-('USR1',4.4, 'PAR5', 'CEV5');
+('USR1',4.5, 'HOT1', 'CEV1'),
+('USR2',4.5, 'HOT1', 'CEV1'),
+('USR3',3.0, 'HOT2', 'CEV1'),
+('USR4',2.5, 'HOT2', 'CEV1'),
+('USR1',4.4, 'HOT3', 'CEV1');
+
+INSERT INTO Evaluation (id_utilisateur,evaluation, id_partenaire, id_categorie_evaluation) VALUES
+('USR2',5, 'ATT1', 'CEV4'),
+('USR3',1, 'ATT1', 'CEV4'),
+('USR4',3, 'ATT1', 'CEV4')
+;
 
 INSERT INTO pack(nom_pack,id_categorie_pack,id_transport,id_attraction,id_hotel) VALUES 
 ('Pack Explorer','CPK1','TRN1','ATT2','HOT1'),
@@ -237,6 +247,13 @@ INSERT INTO Evenement (description, lieu_evenement, titre_evenement, id_hotel, i
 ('Festival de été', 'Parc Festival', 'Festival Été 2023', 'HOT3', 'VIL3', 'CEV3'),
 ('Match de Hockey', 'Centre Sportif A', 'Hockey sur Glace', 'HOT4', 'VIL4', 'CEV4'),
 ('Exposition  Art Moderne', 'Musée des Beaux-Arts', 'Expo Art Moderne','HOT5', 'VIL5', 'CEV5');
+
+INSERT INTO Evenement (description, lieu_evenement, titre_evenement, id_ville, id_categorie_evenement,date_debut_evenement,date_fin_evenement) VALUES
+('Fete des enfants', 'Salle 1', 'en_fete','VIL1', 'CEV1','2022-06-23','2022-06-24'),
+('Manalazy milay', 'Plage', 'revirevy', 'VIL2', 'CEV2','2023-01-23','2023-01-24'),
+('Sport pour tous', 'Terrain', 'let it go', 'VIL3', 'CEV3','2024-01-12','2024-01-23'),
+('Concours de boisson', 'Cafeterie', 'buvons ', 'VIL4', 'CEV4','2024-04-24','2024-04-25'),
+('Exposition  huhu', 'Huhu', 'huhu', 'VIL5', 'CEV5','2024-05-01','2024-05-30');
 
 -- Insertion des données pour la table Preference_utilisateur
 INSERT INTO Preference_utilisateur (id_utilisateur, id_categorie_attraction) VALUES
