@@ -252,11 +252,11 @@ CREATE TABLE Reservation(
     date_debut_reservation DATE NOT NULL,
     date_fin_reservation DATE NOT NULL,
     nombre_personne SMALLINT NOT NULL,
-    prix NUMERIC(18,2) NOT NULL,
     date_insertion TIMESTAMP DEFAULT NOW(),
     date_validation DATE,
     id_utilisateur TEXT,
     id_categorie_reservation TEXT,
+    id_partenaire TEXT NOT NULL,
     PRIMARY KEY(id_reservation),
     FOREIGN KEY(id_utilisateur) REFERENCES Utilisateur(id_utilisateur),
     FOREIGN KEY(id_categorie_reservation) REFERENCES categorie_reservation(id_categorie_reservation)

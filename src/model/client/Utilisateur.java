@@ -185,6 +185,31 @@ public class Utilisateur{
         }
     }
 
+    /* Fonction pour reserver  */
+    public void reserver(Partenaire p,Date dtb, Date dtf, int nb_pers)throws Exception{
+        Connection c = null;
+        PreparedStatement prstm = null;
+        try {
+            c = Database.get_connection();
+            c.setAutoCommit(false);
+            prstm = c.prepareStatement("INSERT INTO reservation(date_debut_reservation,date_fin_reservation,nombre_personne,id_utilisateur,id_categorie_reservation,id_partenaire) VALUES (?, ?, ?, ?, ?, ?)");
+            prstm.setDate(1, dtb);
+            prstm.setDate(2, dtf);
+            prstm.setInt(3, nb_pers);
+            prstm.setString(4,this.get_id());
+            prstm.setString(5, p.get_categorie_reservation());
+            prstm.setString(6, p.get_id());
+            prstm.executeUpdate();
+            c.commit();
+            System.out.println("Rerervation fait");
+        } catch (Exception e) {
+            c.rollback();
+            throw e;
+        }finally{
+            if(prstm != null){ prstm.close(); }
+            if(c != null){ c.close(); }
+        }
+    }
     /* Setters */
     public void set_id(String n_id){
         this.id = n_id;
@@ -233,13 +258,13 @@ public class Utilisateur{
 
     public static void main(String[] argv ){
         try {
-            // ArrayList<CategorieAttraction> ls = CategorieAttraction.get_list_categorie_attraction();
             Utilisateur u = Utilisateur.login("pierre.martin1@example.com", "12345");
             if(u != null){
-                Hotel h = Hotel.get_hotel_par_id(null, "HOT1");
-                u.donner_evaluation(h, 4.0);
+                Attraction a = Attraction.get_attraction_par_id(null, "ATT1");
+                u.reserver(a, Date.valueOf("2023-06-12"), Date.valueOf("2023-06-24"), 5);
+            }else{
+                System.out.println("User null");
             }
-            // u.inserer_preferences(ls);
         } catch (Exception e) {
             e.printStackTrace();
         }
