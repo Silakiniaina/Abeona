@@ -140,7 +140,7 @@ public class Attraction extends Partenaire{
         }
         return resultat;
     }
-    
+
     /* Getters */
     public String get_description(){
         return description;
@@ -179,11 +179,39 @@ public class Attraction extends Partenaire{
         return "CEV4";
     }
 
+    @Override
+    public ArrayList<Avis> get_liste_avis() throws Exception {
+        ArrayList<Avis> resultat = new ArrayList<Avis>();
+        Connection c = null;
+        PreparedStatement prstm = null;
+        ResultSet rs = null;
+        try{
+            c = Database.get_connection();
+            prstm = c.prepareStatement("SELECT * FROM avis WHERE id_categorie_avis = ? ");
+            prstm.setString(1, this.get_categorie_avis());
+            rs = prstm.executeQuery();
+            while(rs.next()){
+                Avis a = new Avis(rs.getString(5), rs.getString(2), rs.getTimestamp(4));
+                resultat.add(a);
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prstm != null){ prstm.close(); }
+            if(c != null){ c.close(); }
+        }
+        return resultat;
+    }
+
     /* Test */
     public static void main(String[] args) {
         try {
-            ArrayList<Attraction> ls = Attraction.get_liste_attraction();
-            System.out.println(ls.size());;
+            Attraction a = Attraction.get_attraction_par_id(null, "ATT1");
+            ArrayList<Avis> ls = a.get_liste_avis();
+            for(Avis avis : ls){
+                System.out.println("Nom : "+avis.get_utilisateur().get_nom()+" - avis : "+avis.get_avis_utilisateur());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,5 +1,7 @@
 package model.client;
 
+import java.util.ArrayList;
+
 public abstract class Partenaire {
     String id;
     String nom;
@@ -8,6 +10,9 @@ public abstract class Partenaire {
 
     public abstract String get_categorie_avis();
     public abstract String get_categorie_evaluation();
+
+    /* Fonction permettant d'avoir la liste des avis sur une partenaire specifique */
+    public abstract ArrayList<Avis> get_liste_avis() throws Exception;
 
     /* Getters */
     public String get_id() {

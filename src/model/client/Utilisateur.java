@@ -40,6 +40,7 @@ public class Utilisateur{
             }
             else { c = con; }
             prsmt = c.prepareStatement("SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,email,date_de_naissance,id_genre FROM utilisateur WHERE id_utilisateur = ? ");
+            prsmt.setString(1, id);
             rs = prsmt.executeQuery();
             if(rs.next()){
                 resultat = new Utilisateur(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6));
@@ -54,7 +55,7 @@ public class Utilisateur{
         }
         return resultat;
     }
-    
+
     /* Fonction pour se connecter un utilisateur */
     public static Utilisateur login(String email, String password)throws Exception{
         Utilisateur resultat = null;

@@ -290,7 +290,14 @@ public class Hotel extends Partenaire{
         return "CEV1";
     }
 
-    /* Test */
+    
+    @Override
+    public ArrayList<Avis> get_liste_avis() throws Exception {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+ /* Test */
     public static void main(String[] args) {
         try{
             ArrayList<String> id_commodite = new ArrayList<>();
