@@ -26,6 +26,35 @@ public class Utilisateur{
         this.set_id_genre(id_g);
     }
 
+    /* Fonction pour avoir un utilisateur via son id */
+    public static Utilisateur get_utilisateur_par_id(Connection con, String id)throws Exception{
+        Utilisateur resultat = null;
+        Connection c = null;
+        PreparedStatement prsmt = null;
+        ResultSet rs = null;
+        boolean est_nouvelle_connexion = false;
+        try{
+            if(con == null){    
+                c = Database.get_connection(); 
+                est_nouvelle_connexion = true;
+            }
+            else { c = con; }
+            prsmt = c.prepareStatement("SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,email,date_de_naissance,id_genre FROM utilisateur WHERE id_utilisateur = ? ");
+            rs = prsmt.executeQuery();
+            if(rs.next()){
+                resultat = new Utilisateur(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6));
+                resultat.set_id(rs.getString(1));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(est_nouvelle_connexion){ c.close(); }
+        }
+        return resultat;
+    }
+    
     /* Fonction pour se connecter un utilisateur */
     public static Utilisateur login(String email, String password)throws Exception{
         Utilisateur resultat = null;
