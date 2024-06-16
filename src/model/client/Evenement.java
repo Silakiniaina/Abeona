@@ -21,6 +21,8 @@ public class Evenement{
 
     static int EVENEMENT_PASSE = 0;
     static int EVENEMENT_FUTUR = 1;
+    static int EVENEMENT_ENCOURS = 2;
+    static int EVENEMENT_ALL = -1;
 
     /* Constructor */
     public Evenement(String titre, String desc, String lieu, Date date_debut, Date date_fin, String id_hotel, String id_categ, String id_ville){
@@ -49,7 +51,9 @@ public class Evenement{
                     prsmt = c.prepareStatement("SELECT * FROM v_evenement_calendrier_passe");
                 }else if( type == 1){
                     prsmt = c.prepareStatement("SELECT * FROM v_evenement_calendrier_futur");
-                }else{
+                }else if(type == 2){
+                    prsmt = c.prepareStatement("SELECT * FROM v_evenement_calendrier_en_cours");
+                }else if(type == -1){
                     prsmt = c.prepareStatement("SELECT * FROM v_evenement_calendrier");
                 }
                 rs = prsmt.executeQuery();
@@ -163,9 +167,11 @@ public class Evenement{
     /* Test */
     public static void main(String[] args) {
         try{
-            Evenement e = Evenement.get_evenement_par_id(null, "EVT1");
-            System.out.println("id : "+e.get_id_evenement());
-            System.out.println("Titre : "+e.get_nom_evenement());
+            ArrayList<Evenement> ls = Evenement.get_liste_evenement_calendrier(EVENEMENT_ALL);
+            for(Evenement e : ls){
+                System.out.println("id : "+e.get_id_evenement());
+                System.out.println("Titre : "+e.get_nom_evenement());
+            }
         }catch(Exception e){
             e.printStackTrace();
         }

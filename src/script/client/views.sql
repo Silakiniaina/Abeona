@@ -159,7 +159,7 @@ CREATE VIEW v_evenement_calendrier_futur AS
     WHERE date_debut_evenement > NOW()
 ;
 
-CREATE VIEW v_evenement_calendrie_en_cours AS 
+CREATE VIEW v_evenement_calendrier_en_cours AS 
     SELECT 
         * 
     FROM v_evenement_calendrier 
