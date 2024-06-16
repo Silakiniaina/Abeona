@@ -15,6 +15,7 @@ public abstract class Partenaire {
 
     public abstract String get_categorie_avis();
     public abstract String get_categorie_evaluation();
+    public abstract String get_categorie_reservation();
     public abstract double get_evaluation()throws Exception;
 
     /* Fonction permettant d'avoir la liste des avis sur une partenaire specifique */

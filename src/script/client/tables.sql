@@ -189,6 +189,7 @@ CREATE TABLE Attraction(
     nom_attraction VARCHAR(150) NOT NULL,
     description TEXT NOT NULL,
     date_insertion TIMESTAMP DEFAULT NOW(),
+    prix NUMERIC(18,2) NOT NULL,
     id_categorie_attraction TEXT,
     id_ville TEXT NOT NULL,
     PRIMARY KEY(id_attraction),

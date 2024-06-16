@@ -165,15 +165,15 @@ INSERT INTO Ville (nom_ville, id_region) VALUES
 ('Toliara', 'REG5');
 
 --Insertion des donnees pour la table attraction
-INSERT INTO attraction(nom_attraction,description,id_categorie_attraction,id_ville) VALUES 
-('Test 1','lahflfdhfdhfal','CAT1','VIL1'),
-('Test 2','lahflfdhfdhfal','CAT1','VIL2'),
-('Test 3','lahflfdhfdhfal','CAT2','VIL3'),
-('Test 4','lahflfdhfdhfal','CAT4','VIL3'),
-('Test 5','lahflfdhfdhfal','CAT3','VIL3'),
-('Test 6','lahflfdhfdhfal','CAT5','VIL3'),
-('Test 7','lahflfdhfdhfal','CAT5','VIL4'),
-('Test 8','lahflfdhfdhfal','CAT3','VIL5')
+INSERT INTO attraction(nom_attraction,description,prix,id_categorie_attraction,id_ville) VALUES 
+('Test 1','lahflfdhfdhfal',10000.00,'CAT1','VIL1'),
+('Test 2','lahflfdhfdhfal',10000.00,'CAT1','VIL2'),
+('Test 3','lahflfdhfdhfal',23000.00,'CAT2','VIL3'),
+('Test 4','lahflfdhfdhfal',21000.00,'CAT4','VIL3'),
+('Test 5','lahflfdhfdhfal',45000.00,'CAT3','VIL3'),
+('Test 6','lahflfdhfdhfal',123000.00,'CAT5','VIL3'),
+('Test 7','lahflfdhfdhfal',31000.00,'CAT5','VIL4'),
+('Test 8','lahflfdhfdhfal',89000.00,'CAT3','VIL5')
 ;
 
 -- Insertion des données pour la table Hotel

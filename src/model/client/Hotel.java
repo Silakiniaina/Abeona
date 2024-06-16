@@ -305,6 +305,10 @@ public class Hotel extends Partenaire{
         return resultat;
     }
 
+    @Override
+    public String get_categorie_reservation(){
+        return "CRS4";
+    }
 
     /* Test */
     public static void main(String[] args) {
