@@ -293,30 +293,36 @@ public class Hotel extends Partenaire{
     
     @Override
     public ArrayList<Avis> get_liste_avis() throws Exception {
-        // TODO Auto-generated method stub
-        return null;
+        ArrayList<Avis> resultat = new ArrayList<Avis>();
+        Connection c = null;
+        PreparedStatement prstm = null;
+        ResultSet rs = null;
+        try{
+            c = Database.get_connection();
+            prstm = c.prepareStatement("SELECT * FROM avis WHERE id_categorie_avis = ? ");
+            prstm.setString(1, this.get_categorie_avis());
+            rs = prstm.executeQuery();
+            while(rs.next()){
+                Avis a = new Avis(rs.getString(5), rs.getString(2), rs.getTimestamp(4));
+                resultat.add(a);
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prstm != null){ prstm.close(); }
+            if(c != null){ c.close(); }
+        }
+        return resultat;
     }
 
  /* Test */
     public static void main(String[] args) {
         try{
-            ArrayList<String> id_commodite = new ArrayList<>();
-            id_commodite.add("COM1");
-            id_commodite.add("COM2");
-
-            ArrayList<String> id_ville = new ArrayList<>();
-            id_ville.add("VIL1");
-            id_ville.add("VIL2");
-
-            ArrayList<String> evaluation = new ArrayList<>();
-            evaluation.add("0-2");
-            evaluation.add("4-5");
-
-            // ArrayList<Hotel> results = filtrer_hotel(null,null, null ,null);
-            ArrayList<Hotel> results = get_liste_hotel();
-
-            for (Hotel dest : results) {
-                System.out.println("id : "+dest.get_id()+" - "+dest.get_nom() + " - " + dest.get_evaluation());
+            Hotel a = Hotel.get_hotel_par_id(null, "HOT1");
+            ArrayList<Avis> ls = a.get_liste_avis();
+            for(Avis avis : ls){
+                System.out.println("Nom : "+avis.get_utilisateur().get_nom()+" - avis : "+avis.get_avis_utilisateur() +" date : "+avis.get_date_insertion());
             }
         }catch(Exception e){
             e.printStackTrace();
