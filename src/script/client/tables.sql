@@ -261,15 +261,17 @@ CREATE TABLE Reservation(
     FOREIGN KEY(id_categorie_reservation) REFERENCES categorie_reservation(id_categorie_reservation)
 );
 
-CREATE TABLE Evenement(
+CREATE TABLE evenement(
     id_evenement TEXT DEFAULT generer_id_evenement(),
+    titre_evenement VARCHAR(150) NOT NULL,
     description TEXT NOT NULL,
     lieu_evenement VARCHAR(150) NOT NULL,
-    date_insertion TIMESTAMP DEFAULT NOW(),
-    titre_evenement VARCHAR(150) NOT NULL,
+    date_debut_evenement DATE DEFAULT NOW(),
+    date_fin_evenement DATE DEFAULT NOW(),
     id_hotel TEXT,
     id_ville TEXT,
     id_categorie_evenement TEXT,
+    date_insertion TIMESTAMP DEFAULT NOW(),
     PRIMARY KEY(id_evenement),
     FOREIGN KEY(id_hotel) REFERENCES Hotel(id_hotel),
     FOREIGN KEY(id_ville) REFERENCES Ville(id_ville),

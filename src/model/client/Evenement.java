@@ -11,21 +11,29 @@ import model.shared.Database;
 public class Evenement{
     private String id_evenement;
     private String nom_evenement;
-    private Date date_evenement;
+    private Date date_debut_evenement;
+    private Date date_fin_evenement;
+    private String lieu_evenement;
     private String description;
     private String ville; 
-    private Hotel hotel;
+    private String id_hotel;
+    private String id_categorie_evenement;
 
     static int EVENEMENT_PASSE = 0;
     static int EVENEMENT_FUTUR = 1;
 
     /* Constructor */
-    public Evenement(String nom, Date dt, String desc,  String ville){
-        this.set_nom_evenement(nom);
-        this.set_date_evenement(dt);
+    public Evenement(String titre, String desc, String lieu, Date date_debut, Date date_fin, String id_hotel, String id_categ, String id_ville){
+        this.set_nom_evenement(titre);
         this.set_description(desc);
-        this.set_ville(ville);
+        this.set_lieu_evenement(lieu);
+        this.set_date_debut_evenement(date_debut);
+        this.set_date_fin_evenement(date_fin);
+        this.set_id_hotel(id_hotel);
+        this.set_id_categorie_evenement(id_categ);
+        this.set_id_ville(id_ville);
     }
+
 
     /* Fonction pour avoir la liste des evenement du calendrier */
     public static ArrayList<Evenement> get_liste_evenement_calendrier(int type)throws Exception{
@@ -46,7 +54,7 @@ public class Evenement{
                 }
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    Evenement ev = new Evenement(rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5));
+                    Evenement ev = new Evenement(rs.getString(5), rs.getString(2), rs.getString(3), rs.getDate(9), rs.getDate(10), rs.getString(6), rs.getString(8), rs.getString(7));
                     ev.set_id_evenement(rs.getString(1));
                     resultat.add(ev);
                 }
@@ -63,7 +71,7 @@ public class Evenement{
         return resultat;
     }
 
-    /* Fonction pour avoir une categorie id par son Id */
+    /* Fonction pour avoir une categorie evenement par son Id */
     public static Evenement get_evenement_par_id(Connection con, String id)throws Exception{
         Evenement resultat = null;
         Connection c = null; 
@@ -81,10 +89,7 @@ public class Evenement{
             prsmt.setString(1,id);
             rs = prsmt.executeQuery();
             if (rs.next()) {
-                resultat = new Evenement(rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5));
-                if(rs.getInt(6) != 0){
-                    resultat.set_hotel(Hotel.get_hotel_par_id(c,rs.getString(6)));
-                }
+                resultat = new Evenement(rs.getString(5), rs.getString(2), rs.getString(3), rs.getDate(9), rs.getDate(10), rs.getString(6), rs.getString(8), rs.getString(7));
                 resultat.set_id_evenement(rs.getString(1));
             }
         } catch (Exception e) {
@@ -104,17 +109,26 @@ public class Evenement{
     public String get_nom_evenement() {
         return nom_evenement;
     }
-    public Date get_date_evenement() {
-        return date_evenement;
+    public Date get_date_debut_evenement() {
+        return date_debut_evenement;
+    }
+    public Date get_date_fin_evenement(){
+        return date_fin_evenement;
     }
     public String get_description() {
         return description;
     }
-    public String get_ville() {
+    public String get_id_ville() {
         return ville;
     }
-    public Hotel get_hotel() {
-        return hotel;
+    public String get_id_hotel(){
+        return id_hotel;
+    }
+    public String get_lieu_evenement(){
+        return lieu_evenement;
+    }
+    public String get_id_categorie_evenement(){
+        return this.id_categorie_evenement;
     }
     
     /* Setters */
@@ -124,26 +138,34 @@ public class Evenement{
     public void set_nom_evenement(String nom_evenement) {
         this.nom_evenement = nom_evenement;
     }
-    public void set_date_evenement(Date date_evenement) {
-        this.date_evenement = date_evenement;
+    public void set_date_debut_evenement(Date date_evenement) {
+        this.date_debut_evenement = date_evenement;
+    }
+    public void set_date_fin_evenement(Date dt){
+        this.date_fin_evenement = dt;
     }
     public void set_description(String description) {
         this.description = description;
     }
-    public void set_ville(String ville) {
+    public void set_id_ville(String ville) {
         this.ville = ville;
     }
-    public void set_hotel(Hotel hotel) {
-        this.hotel = hotel;
+    public void set_id_hotel(String hotel) {
+        this.id_hotel = hotel;
+    }
+    public void set_id_categorie_evenement(String id){
+        this.id_categorie_evenement = id;
+    }
+    public void set_lieu_evenement(String l){
+        this.lieu_evenement = l;
     }
 
     /* Test */
     public static void main(String[] args) {
         try{
-            ArrayList<Attraction> ls = Attraction.rechercher_attraction("Tour ");
-            for(Attraction ev : ls){
-                System.out.println("nom : "+ev.get_nom_attraction());
-            }
+            Evenement e = Evenement.get_evenement_par_id(null, "EVT1");
+            System.out.println("id : "+e.get_id_evenement());
+            System.out.println("Titre : "+e.get_nom_evenement());
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -83,6 +83,7 @@ public class Attraction {
         }
         return resultat;
     }
+    
     /* Getters */
     public String get_id_attraction() {
         return id_attraction;

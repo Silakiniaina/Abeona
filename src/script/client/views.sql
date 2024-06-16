@@ -1,3 +1,4 @@
+-- VILLE --
 CREATE OR REPLACE VIEW v_ville_province AS 
     SELECT 
         v.id_ville,
@@ -13,6 +14,7 @@ CREATE OR REPLACE VIEW v_ville_province AS
     ON reg.id_province = pro.id_province
 ;
 
+-- POIN INTERET --
 CREATE OR REPLACE VIEW v_point_interet_ville AS 
     SELECT
         piv.id_ville,
@@ -33,6 +35,8 @@ CREATE OR REPLACE VIEW v_point_interet_province AS
     ON piv.id_ville = vp.id_ville
 ;
 
+
+-- EVALUTATION --
 CREATE OR REPLACE VIEW v_evaluation_hotel AS   
     SELECT 
         h.id_hotel,AVG(evaluation) AS evaluation 
@@ -86,6 +90,8 @@ CREATE OR REPLACE VIEW v_evaluation_attraction AS
     GROUP BY a.id_attraction
 ;
 
+
+-- RANKING --
 CREATE OR REPLACE VIEW v_ranking_hotel AS 
     SELECT 
         h.*,
@@ -106,6 +112,7 @@ CREATE OR REPLACE VIEW v_ranking_attraction AS
     ORDER BY evaluation DESC
 ;
 
+-- RANKING PAR PROVINCE --
 CREATE OR REPLACE VIEW v_ranking_hotel_province AS 
     SELECT 
         rh.*,
@@ -128,6 +135,14 @@ CREATE OR REPLACE VIEW v_ranking_attraction_province AS
     ORDER BY 
         id_province ASC,
         evaluation DESC
+;
+
+-- EVENEMENT --
+CREATE VIEW v_evenement_calendrier AS 
+    SELECT 
+            * 
+        FROM evenement 
+        WHERE id_hotel IS NULL
 ;
 
 
