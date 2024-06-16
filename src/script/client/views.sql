@@ -62,6 +62,15 @@ CREATE OR REPLACE VIEW v_evaluation_attraction AS
     GROUP BY a.id_attraction
 ;
 
+CREATE OR REPLACE VIEW v_evaluation_transport AS   
+    SELECT 
+        t.id_transport,AVG(evaluation) AS evaluation 
+    FROM evaluation AS e
+    JOIN transport AS t
+    ON e.id_partenaire=t.id_transport
+    GROUP BY t.id_transport
+;
+
 -- RANKING --
 CREATE OR REPLACE VIEW v_ranking_hotel AS 
     SELECT 
