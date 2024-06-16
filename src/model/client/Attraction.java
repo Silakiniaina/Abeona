@@ -179,37 +179,6 @@ public class Attraction extends Partenaire{
         return "CEV4";
     }
 
-    @Override
-    public ArrayList<Avis> get_liste_avis() throws Exception {
-        ArrayList<Avis> resultat = new ArrayList<Avis>();
-        Connection c = null;
-        PreparedStatement prstm = null;
-        ResultSet rs = null;
-        try{
-            c = Database.get_connection();
-            prstm = c.prepareStatement("SELECT * FROM avis WHERE id_categorie_avis = ? ");
-            prstm.setString(1, this.get_categorie_avis());
-            rs = prstm.executeQuery();
-            while(rs.next()){
-                Avis a = new Avis(rs.getString(5), rs.getString(2), rs.getTimestamp(4));
-                resultat.add(a);
-            }
-        }catch(Exception e){
-            throw e;
-        }finally{
-            if(rs != null){ rs.close(); }
-            if(prstm != null){ prstm.close(); }
-            if(c != null){ c.close(); }
-        }
-        return resultat;
-    }
-
-    @Override
-    public ArrayList<Evaluation> get_liste_evaluation() throws Exception {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
     /* Test */
     public static void main(String[] args) {
         try {

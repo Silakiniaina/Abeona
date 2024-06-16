@@ -290,46 +290,13 @@ public class Hotel extends Partenaire{
         return "CEV1";
     }
 
-    
-    @Override
-    public ArrayList<Avis> get_liste_avis() throws Exception {
-        ArrayList<Avis> resultat = new ArrayList<Avis>();
-        Connection c = null;
-        PreparedStatement prstm = null;
-        ResultSet rs = null;
-        try{
-            c = Database.get_connection();
-            prstm = c.prepareStatement("SELECT * FROM avis WHERE id_categorie_avis = ? ");
-            prstm.setString(1, this.get_categorie_avis());
-            rs = prstm.executeQuery();
-            while(rs.next()){
-                Avis a = new Avis(rs.getString(5), rs.getString(2), rs.getTimestamp(4));
-                resultat.add(a);
-            }
-        }catch(Exception e){
-            throw e;
-        }finally{
-            if(rs != null){ rs.close(); }
-            if(prstm != null){ prstm.close(); }
-            if(c != null){ c.close(); }
-        }
-        return resultat;
-    }
-
-    
-    @Override
-    public ArrayList<Evaluation> get_liste_evaluation() throws Exception {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
     /* Test */
     public static void main(String[] args) {
         try{
             Hotel a = Hotel.get_hotel_par_id(null, "HOT1");
-            ArrayList<Avis> ls = a.get_liste_avis();
-            for(Avis avis : ls){
-                System.out.println("Nom : "+avis.get_utilisateur().get_nom()+" - avis : "+avis.get_avis_utilisateur() +" date : "+avis.get_date_insertion());
+            ArrayList<Evaluation> ls = a.get_liste_evaluation();
+            for(Evaluation e : ls){
+                System.out.println("Nom : "+e.get_utilisateur().get_nom()+" - evaluation : "+e.get_evaluation() +" date : "+e.get_date_insertion());
             }
         }catch(Exception e){
             e.printStackTrace();
