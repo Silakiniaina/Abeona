@@ -316,7 +316,14 @@ public class Hotel extends Partenaire{
         return resultat;
     }
 
- /* Test */
+    
+ @Override
+    public ArrayList<Evaluation> get_liste_evaluation() throws Exception {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /* Test */
     public static void main(String[] args) {
         try{
             Hotel a = Hotel.get_hotel_par_id(null, "HOT1");

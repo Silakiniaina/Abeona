@@ -1,5 +1,6 @@
 package model.client;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class Partenaire {
@@ -13,6 +14,9 @@ public abstract class Partenaire {
 
     /* Fonction permettant d'avoir la liste des avis sur une partenaire specifique */
     public abstract ArrayList<Avis> get_liste_avis() throws Exception;
+
+    /* Fonction permettant d'avoir la liste des evaluations sur une partenaire specifique */
+    public abstract ArrayList<Evaluation> get_liste_evaluation() throws Exception;
 
     /* Getters */
     public String get_id() {

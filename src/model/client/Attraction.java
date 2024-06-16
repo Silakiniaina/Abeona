@@ -204,6 +204,12 @@ public class Attraction extends Partenaire{
         return resultat;
     }
 
+    @Override
+    public ArrayList<Evaluation> get_liste_evaluation() throws Exception {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     /* Test */
     public static void main(String[] args) {
         try {
@@ -217,4 +223,5 @@ public class Attraction extends Partenaire{
         }
 
     }
+
 }
