@@ -257,9 +257,11 @@ CREATE TABLE Reservation(
     id_utilisateur TEXT,
     id_categorie_reservation TEXT,
     id_partenaire TEXT NOT NULL,
+    id_chambre TEXT,
     PRIMARY KEY(id_reservation),
     FOREIGN KEY(id_utilisateur) REFERENCES Utilisateur(id_utilisateur),
-    FOREIGN KEY(id_categorie_reservation) REFERENCES categorie_reservation(id_categorie_reservation)
+    FOREIGN KEY(id_categorie_reservation) REFERENCES categorie_reservation(id_categorie_reservation),
+    FOREIGN KEY(id_chambre) REFERENCES Chambre(id_chambre)
 );
 
 CREATE TABLE evenement(

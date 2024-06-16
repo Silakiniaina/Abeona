@@ -135,7 +135,7 @@ INSERT INTO categorie_evaluation ( libelle) VALUES
 
 -- Insertion des données pour la table categorie_reservation
 INSERT INTO categorie_reservation (libelle) VALUES
-('Hôtel'),
+('Chambre'),
 ('Pack'),
 ('Transport'),
 ('Attraction'),
