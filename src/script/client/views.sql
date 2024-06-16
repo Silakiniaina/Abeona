@@ -140,10 +140,29 @@ CREATE OR REPLACE VIEW v_ranking_attraction_province AS
 -- EVENEMENT --
 CREATE VIEW v_evenement_calendrier AS 
     SELECT 
-            * 
-        FROM evenement 
-        WHERE id_hotel IS NULL
+        * 
+    FROM evenement 
+    WHERE id_hotel IS NULL
 ;
 
+CREATE VIEW v_evenement_calendrier_passe AS
+    SELECT 
+        * 
+    FROM v_evenement_calendrier 
+    WHERE date_fin_evenement < NOW()
+;
 
+CREATE VIEW v_evenement_calendrier_futur AS
+    SELECT 
+        * 
+    FROM v_evenement_calendrier 
+    WHERE date_debut_evenement > NOW()
+;
 
+CREATE VIEW v_evenement_calendrie_en_cours AS 
+    SELECT 
+        * 
+    FROM v_evenement_calendrier 
+    WHERE date_debut_evenement <= NOW() 
+    AND date_fin_evenement >= NOW()
+;
