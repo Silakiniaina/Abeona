@@ -174,3 +174,23 @@ CREATE VIEW v_info_commodite_hotel AS
     JOIN commodite  AS c
     ON ch.id_commodite = c.id_commodite
 ;
+
+SELECT 
+    h.*,
+    COALESCE(eh.evaluation,0) as evaluation
+FROM hotel AS h 
+LEFT JOIN v_evaluation_hotel AS eh 
+ON h.id_hotel = eh.id_hotel
+WHERE
+h.id_hotel IN (
+        SELECT 
+            id_hotel
+        FROM v_info_commodite_hotel AS ich 
+        WHERE id_commodite = 'COM1'
+        OR id_commodite = 'COM2'
+        GROUP BY id_hotel
+    )
+AND evaluation BETWEEN 0 AND 4
+AND id_ville = 'VIL1'
+OR id_ville = 'VIL2'
+;
