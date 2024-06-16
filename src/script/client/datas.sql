@@ -149,6 +149,13 @@ INSERT INTO Utilisateur (nom_utilisateur, prenom_utilisateur, date_de_naissance,
 ('Lefevre', 'Emma', '1995-03-25', 'emma.lefevre@example.com','12345', 'GEN2', 'CTU4'),
 ('Leroy', 'Luc', '1998-07-30', 'luc.leroy@example.com','12345', 'GEN1', 'CTU5');
 
+INSERT INTO Utilisateur (nom_utilisateur, prenom_utilisateur, date_de_naissance, email, mot_de_passe, id_genre, id_categorie_utilisateur) VALUES
+('Dupont', 'Jean', '1990-05-15', 'jean.dupont1@example.com',digest('12345','sha1'), 'GEN1', 'CTU1'),
+('Durand', 'Sophie', '1985-08-20', 'sophie.durand1@example.com',digest('12345','sha1'), 'GEN2', 'CTU2'),
+('Martin', 'Pierre', '1982-10-10', 'pierre.martin1@example.com',digest('12345','sha1'), 'GEN1', 'CTU3'),
+('Lefevre', 'Emma', '1995-03-25', 'emma.lefevre1@example.com',digest('12345','sha1'), 'GEN2', 'CTU4'),
+('Leroy', 'Luc', '1998-07-30', 'luc.leroy1@example.com',digest('12345','sha1'),'GEN2', 'CTU5');
+
 -- Insertion des données pour la table Ville
 INSERT INTO Ville (nom_ville, id_region) VALUES
 ('Antananarivo', 'REG1'),

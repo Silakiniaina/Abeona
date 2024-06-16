@@ -317,7 +317,7 @@ public class Hotel extends Partenaire{
     }
 
     
- @Override
+    @Override
     public ArrayList<Evaluation> get_liste_evaluation() throws Exception {
         // TODO Auto-generated method stub
         return null;

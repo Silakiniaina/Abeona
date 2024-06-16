@@ -46,6 +46,13 @@ CREATE OR REPLACE VIEW v_evaluation_hotel AS
     GROUP BY h.id_hotel
 ;
 
+CREATE OR REPLACE VIEW v_liste_evaluation_attraction AS 
+    SELECT 
+        * 
+        FROM evaluation 
+        WHERE id_categorie_evaluation = 'CEV4'
+;
+
 CREATE OR REPLACE VIEW v_evaluation_attraction AS   
     SELECT 
         a.id_attraction,AVG(evaluation) AS evaluation 
