@@ -81,6 +81,66 @@ public class Attraction extends Partenaire{
         return resultat;
     }
     
+    /* Fonction pour avoir tous les attractions */
+    public static ArrayList<Attraction> get_liste_attraction()throws Exception{
+        ArrayList<Attraction> resultat = new ArrayList<Attraction>();
+        Connection c = null;
+        PreparedStatement prsmt  = null;
+        ResultSet rs = null; 
+
+        try{
+            c = Database.get_connection();
+            if(c != null){
+                prsmt = c.prepareStatement("SELECT * FROM attraction");
+                rs = prsmt.executeQuery();
+                while (rs.next()) {
+                    Attraction a = new Attraction(rs.getString(2), rs.getString(3),rs.getString(5),rs.getString(6));
+                    a.set_id(rs.getString(1));
+                    resultat.add(a);
+                }
+            }else{
+                throw new Exception("Aucune connexion ");
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(c != null){ c.close(); }
+        }
+        return resultat;
+    }
+    
+    /* Fonction pour avoir une categorie id par son Id */
+    public static Attraction get_attraction_par_id(Connection con , String id)throws Exception{
+        Attraction resultat = null;
+        Connection c = null; 
+        PreparedStatement prsmt = null; 
+        ResultSet rs = null; 
+        boolean est_nouvelle_connexion = false;
+        try {
+            if(con == null){    
+                c = Database.get_connection(); 
+                est_nouvelle_connexion = true;
+            }
+            else { c = con; }
+            prsmt = c.prepareStatement("SELECT * FROM attraction WHERE id_attraction = ? ");
+            prsmt.setString(1,id);
+            rs = prsmt.executeQuery();
+            if (rs.next()) {
+                resultat = new Attraction(rs.getString(2), rs.getString(3),rs.getString(5),rs.getString(6));
+                resultat.set_id(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(est_nouvelle_connexion){ c.close(); }
+        }
+        return resultat;
+    }
+    
     /* Getters */
     public String get_description(){
         return description;
@@ -122,12 +182,8 @@ public class Attraction extends Partenaire{
     /* Test */
     public static void main(String[] args) {
         try {
-            ArrayList<Attraction> ls = Attraction.get_top_attraction(Province.get_province_par_id(null, "PRO1"));
-            System.out.println(ls.size());
-            for(Attraction a : ls ){
-                System.out.println("id : "+a.get_id());
-                System.out.println("evaluation : "+a.get_evaluation());
-            }
+            ArrayList<Attraction> ls = Attraction.get_liste_attraction();
+            System.out.println(ls.size());;
         } catch (Exception e) {
             e.printStackTrace();
         }

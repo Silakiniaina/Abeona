@@ -24,6 +24,36 @@ public class Hotel extends Partenaire{
         this.set_id_ville(id_v);
     }
 
+    /* Fonction pour avoir tous les hotels */
+    public static ArrayList<Hotel> get_liste_hotel()throws Exception{
+        ArrayList<Hotel> resultat = new ArrayList<Hotel>();
+        Connection c = null;
+        PreparedStatement prsmt  = null;
+        ResultSet rs = null; 
+
+        try{
+            c = Database.get_connection();
+            if(c != null){
+                prsmt = c.prepareStatement("SELECT * FROM hotel");
+                rs = prsmt.executeQuery();
+                while (rs.next()) {
+                    Hotel a = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
+                    a.set_id(rs.getString(1));
+                    resultat.add(a);
+                }
+            }else{
+                throw new Exception("Aucune connexion ");
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(c != null){ c.close(); }
+        }
+        return resultat;
+    }
+
     /* Fonction pour avoir une categorie id par son Id */
     public static Hotel get_hotel_par_id(Connection con , String id)throws Exception{
         Hotel resultat = null;
@@ -275,7 +305,8 @@ public class Hotel extends Partenaire{
             evaluation.add("0-2");
             evaluation.add("4-5");
 
-            ArrayList<Hotel> results = filtrer_hotel(null,null, null ,null);
+            // ArrayList<Hotel> results = filtrer_hotel(null,null, null ,null);
+            ArrayList<Hotel> results = get_liste_hotel();
 
             for (Hotel dest : results) {
                 System.out.println("id : "+dest.get_id()+" - "+dest.get_nom() + " - " + dest.get_evaluation());
