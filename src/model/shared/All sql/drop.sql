@@ -1,0 +1,106 @@
+drop table Genre cascade;
+drop table Categorie_utilisateur cascade;
+drop table Categorie_attraction cascade;
+drop table Province cascade;
+drop table Point_interet cascade;
+drop table categorie_evenement cascade;
+drop table categorie_hotel cascade;
+drop table partenaire cascade;
+drop table commodite cascade;
+drop table categorie_chambre cascade;
+drop table categorie_transport cascade;
+drop table region cascade;
+drop table Guide cascade;
+drop table categorie_pack cascade;
+drop table language_ cascade;
+drop table categorie_avis cascade;
+drop table categorie_evaluation cascade;
+drop table categorie_reservation cascade;
+drop table Utilisateur cascade;
+drop table Ville cascade;
+drop table Hotel cascade;
+drop table chambre cascade;
+drop table Transport cascade;
+drop table Attraction cascade;
+drop table pack cascade;
+drop table avis cascade;
+drop table evaluation cascade;
+drop table achat_pack cascade;
+drop table Reservation cascade;
+drop table Evenement cascade;
+drop table preference_utilisateur cascade;
+drop table commodite_hotel cascade;
+drop table point_interet_ville cascade;
+drop table language_guide cascade;
+drop table benefice;
+
+
+
+
+drop sequence genre_seq cascade;
+drop sequence categorie_utilisateur_seq cascade;
+drop sequence categorie_attraction_seq cascade;
+drop sequence province_seq cascade;
+drop sequence point_interet_seq cascade;
+drop sequence categorie_evenement_seq cascade;
+drop sequence categorie_hotel_seq cascade;
+drop sequence partenaire_seq cascade;
+drop sequence commodite_seq cascade;
+drop sequence categorie_chambre_seq cascade;
+drop sequence categorie_transport_seq cascade;
+drop sequence region_seq cascade;
+drop sequence guide_seq cascade;
+drop sequence categorie_pack_seq cascade;
+drop sequence language_seq cascade;
+drop sequence categorie_avis_seq cascade;
+drop sequence categorie_evaluation_seq cascade;
+drop sequence categorie_reservation_seq cascade;
+drop sequence utilisateur_seq cascade;
+drop sequence ville_seq cascade;
+drop sequence hotel_seq cascade;
+drop sequence chambre_seq cascade;
+drop sequence transport_seq cascade;
+drop sequence attraction_seq cascade;
+drop sequence pack_seq cascade;
+drop sequence avis_seq cascade;
+drop sequence evaluation_seq cascade;
+drop sequence achat_pack_seq cascade;
+drop sequence reservation_seq cascade;
+drop sequence evenement_seq cascade;
+drop sequence benefice_seq;
+
+
+
+
+
+drop function generer_id_genre cascade;
+drop function generer_id_categorie_utilisateur cascade;
+drop function generer_id_categorie_attraction cascade;
+drop function generer_id_province cascade;
+drop function generer_id_point_interet cascade;
+drop function generer_id_categorie_evenement cascade;
+drop function generer_id_categorie_hotel cascade;
+drop function generer_id_partenaire cascade;
+drop function generer_id_commodite cascade;
+drop function generer_id_categorie_chambre cascade;
+drop function generer_id_categorie_transport cascade;
+drop function generer_id_region cascade;
+drop function generer_id_guide cascade;
+drop function generer_id_categorie_pack cascade;
+drop function generer_id_language cascade;
+drop function generer_id_categorie_avis cascade;
+drop function generer_id_categorie_evaluation cascade;
+drop function generer_id_categorie_reservation cascade;
+drop function generer_id_utilisateur cascade;
+drop function generer_id_ville cascade;
+drop function generer_id_hotel cascade;
+drop function generer_id_chambre cascade;
+drop function generer_id_transport cascade;
+drop function generer_id_attraction cascade;
+drop function generer_id_pack cascade;
+drop function generer_id_avis cascade;
+drop function generer_id_evaluation cascade;
+drop function generer_id_achat_pack cascade;
+drop function generer_id_reservation cascade;
+drop function generer_id_evenement cascade;
+drop function generer_id_benefice;

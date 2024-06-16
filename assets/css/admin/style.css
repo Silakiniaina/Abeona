@@ -1,0 +1,290 @@
+@font-face {
+  font-family: poppins-black;
+  src: url("/assets/font/Poppins-Black.ttf");
+}
+@font-face {
+  font-family: poppins-bold;
+  src: url("/assets/font/Poppins-Bold.ttf");
+}
+@font-face {
+  font-family: poppins-extrabold;
+  src: url("/assets/font/Poppins-ExtraBold.ttf");
+}
+@font-face {
+  font-family: poppins-extralight;
+  src: url("/assets/font/Poppins-ExtraLight.ttf");
+}
+@font-face {
+  font-family: poppins-light;
+  src: url("/assets/font/Poppins-Light.ttf");
+}
+@font-face {
+  font-family: poppins-medium;
+  src: url("/assets/font/Poppins-Medium.ttf");
+}
+@font-face {
+  font-family: poppins-regular;
+  src: url("/assets/font/Poppins-Regular.ttf");
+}
+@font-face {
+  font-family: poppins-semibold;
+  src: url("/assets/font/Poppins-SemiBold.ttf");
+}
+@font-face {
+  font-family: poppins-thin;
+  src: url("/assets/font/Poppins-Thin.ttf");
+}
+.main__title {
+  font-family: poppins-semibold;
+  font-size: 36;
+  letter-spacing: -1;
+}
+
+.main__inscription__content__email, .main__inscription__content__contact {
+  font-family: poppins-light;
+  font-size: 12px;
+}
+
+.main__list__tabs__filter form button, .main__list__tabs__filter form .form-content input, .main__list__tabs__filter form .form-content select {
+  width: 170px;
+  height: 40px;
+  border: 1px solid #363D32;
+  border-radius: 12px;
+  background-color: #FFFFFF;
+}
+
+.main {
+  width: calc(100% - 300px);
+  height: 100vh;
+  background-color: #FFFFFF;
+  padding: 10px 2%;
+  margin-left: 300px;
+}
+.main .status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 22px;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+}
+.main .status span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #e4370c;
+}
+.main .status span i {
+  font-size: 15px;
+}
+.main .status span p {
+  font-size: 12px;
+}
+.main .status .active {
+  color: #00FF00;
+}
+.main__number {
+  display: flex;
+  gap: 10%;
+  padding: 2% 5%;
+  font-family: poppins-semibold;
+}
+.main__number__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 25px;
+  padding: 10px;
+}
+.main__number__wrapper__img {
+  color: #92AA83;
+  font-size: 54px;
+}
+.main__number__wrapper__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+.main__number__wrapper__content-title {
+  font-size: 14px;
+  letter-spacing: -1;
+  color: #303030;
+}
+.main__number__wrapper__content-value {
+  font-size: 32px;
+}
+.main__inscription {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  gap: 10px;
+  padding: 10px;
+}
+.main__inscription__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid #92AA83;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
+}
+.main__inscription__content__name {
+  font-size: 15;
+  letter-spacing: -1;
+}
+.main__inscription__content__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.main__inscription__content__action button {
+  width: 110px;
+  height: 35px;
+  border-radius: 6px;
+  color: #363D32;
+  cursor: pointer;
+}
+.main__inscription__content__action-decline {
+  border: 1px solid #363D32;
+  background-color: #FFFFFF;
+}
+.main__inscription__content__action-accept {
+  border: 1px solid #E1FF45;
+  background-color: #E1FF45;
+}
+.main__inscription__more {
+  text-decoration: none;
+  color: #004E92;
+  text-align: center;
+  font-size: 14px;
+  padding: 10px;
+  cursor: pointer;
+}
+.main__list__tabs__header {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+}
+.main__list__tabs__header__content {
+  width: 250px;
+  height: 69px;
+  padding: 10px;
+  background: #FFFFFF;
+  color: #92AA83;
+  border: 2px solid #92AA83;
+  border-radius: 18px;
+  cursor: pointer;
+  font-family: poppins-bold;
+  font-size: 20px;
+}
+.main__list__tabs__header__content.active {
+  background: #363D32;
+}
+.main__list__tabs__filter {
+  width: 100%;
+  padding: 10px;
+}
+.main__list__tabs__filter form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+}
+.main__list__tabs__filter form .form-content {
+  display: flex;
+  flex-direction: column;
+  gap: -1;
+}
+.main__list__tabs__filter form .form-content label {
+  font-family: poppins-bold;
+  font-size: 12px;
+  margin-left: 10px;
+}
+.main__list__tabs__filter form button {
+  margin-top: 18.8px;
+  background-color: #92AA83;
+  font-family: poppins-extrabold;
+  color: #FFFFFF;
+  border: none;
+}
+.main__list__tabs__body__content {
+  display: none;
+  align-items: center;
+  padding: 20px;
+}
+.main__list__tabs__body__content.active {
+  display: block;
+}
+.main__list__tabs__body__content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-left: 5%;
+}
+.main__list__tabs__body__content table th, .main__list__tabs__body__content table td {
+  text-align: left;
+  font-size: 14px;
+}
+.main__list__tabs__body__content table th {
+  font-family: poppins-bold;
+}
+.main__list__tabs__body__content table td {
+  font-family: poppins-regular;
+  padding: 10px 0px;
+}
+.main__list__tabs__body__content table td .actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 150px;
+}
+.main__list__tabs__body__content table td .actions button {
+  width: 60px;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.main__list__tabs__body__content table td .actions .delete {
+  border: 2px solid #363D32;
+  background-color: #FFFFFF;
+}
+.main__list__tabs__body__content table td .actions .edit {
+  border: 2px solid #363D32;
+  background-color: #363D32;
+  color: #FFFFFF;
+}
+.main__list__tabs__body__content .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.main__list__tabs__body__content .pagination span {
+  border: 1px solid #92AA83;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  color: #92AA83;
+  background-color: #FFFFFF;
+  font-family: poppins-bold;
+  font-size: 22px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.main__list__tabs__body__content .pagination .active {
+  background-color: #92AA83;
+  color: #FFFFFF;
+}
+
+/*# sourceMappingURL=style.css.map */
