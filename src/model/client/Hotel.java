@@ -1,5 +1,6 @@
 package model.client;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -58,7 +59,7 @@ public class Hotel {
     }
 
     /* Fonction pour rechercher des hotels */
-    public static ArrayList<Hotel> rechercher_hotel(String dest)throws Exception{
+    public static ArrayList<Hotel> rechercher_hotel(String dest, ArrayList<String> ville, ArrayList<String> categ,ArrayList<String> evaluation_id, ArrayList<String> commodite)throws Exception{
         ArrayList<Hotel> resultat = new ArrayList<Hotel>();
         Connection c = null;
         PreparedStatement prsmt  = null;
@@ -66,8 +67,8 @@ public class Hotel {
         try{
             c = Database.get_connection();
             if(c != null){
-                prsmt = c.prepareStatement("SELECT * FROM hotel WHERE nom_hotel LIKE ?");
-                prsmt.setString(1, "%" +dest+ "%");
+                prsmt = c.prepareStatement("SELECT * FROM hotel WHERE LOWER(nom_hotel) LIKE ?");
+                prsmt.setString(1, "%" +dest.toLowerCase()+ "%");
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
                     Hotel a = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));

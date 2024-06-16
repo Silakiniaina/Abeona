@@ -166,3 +166,11 @@ CREATE VIEW v_evenement_calendrier_en_cours AS
     WHERE date_debut_evenement <= NOW() 
     AND date_fin_evenement >= NOW()
 ;
+
+CREATE VIEW v_info_commodite_hotel AS 
+    SELECT 
+        ch.id_hotel,c.id_commodite,c.libelle
+    FROM commodite_hotel AS ch
+    JOIN commodite  AS c
+    ON ch.id_commodite = c.id_commodite
+;
