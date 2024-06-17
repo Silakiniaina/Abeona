@@ -1,6 +1,10 @@
 bin/
 lib/
 docs/
+web/node_modules/
 
+
+*.json
+*.scss
 *.class
 build.sh
