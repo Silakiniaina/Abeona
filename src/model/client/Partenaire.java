@@ -1,6 +1,7 @@
 package model.client;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -95,6 +96,35 @@ public abstract class Partenaire {
             if(c != null){ c.close(); }
         }
         return resultat;
+    }
+
+    /* Fonction pour voir si le partenaire est disponible entre deux dates */
+    public boolean chech_disponibilite(Date debut, Date fin)throws Exception{
+        boolean result = true;
+        Connection c = null;
+        PreparedStatement prstm = null;
+        ResultSet rs = null;
+        try{
+            c = Database.get_connection();
+            prstm = c.prepareStatement("SELECT * FROM reservation WHERE id_categorie_reservation = ? AND id_partenaire = ? AND ((date_debut_reservation BETWEEN ? AND ?) OR (date_fin_reservation BETWEEN ? AND ? ))");
+            prstm.setString(1, this.get_categorie_reservation());
+            prstm.setString(2, this.get_id());
+            prstm.setDate(3, debut);
+            prstm.setDate(4, fin);
+            prstm.setDate(5, debut);
+            prstm.setDate(6, fin);
+            rs = prstm.executeQuery();
+            if(rs.next()){
+                result = false;
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null) rs.close();
+            if(prstm != null) prstm.close();
+            if(c != null) c.close();
+        }
+        return result;
     }
 
     /* Getters */

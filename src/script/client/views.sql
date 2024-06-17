@@ -184,3 +184,17 @@ AND evaluation BETWEEN 0 AND 4
 AND id_ville = 'VIL1'
 OR id_ville = 'VIL2'
 ;
+
+SELECT 
+    * 
+FROM reservation 
+WHERE id_categorie_reservation = 'CRS3' 
+AND id_partenaire = 'TRN1' 
+AND (
+        (
+            date_debut_reservation BETWEEN '2024-06-06' AND '2024-06-21'
+        ) OR 
+        (
+            date_fin_reservation BETWEEN '2024-06-12' AND '2024-06-24' 
+        )
+);

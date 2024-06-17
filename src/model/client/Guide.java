@@ -1,6 +1,7 @@
 package model.client;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -86,7 +87,6 @@ public class Guide extends Partenaire{
     }
 
     /* Surdefinition des fonctions en tant que partenaire */
-
     @Override
     public String get_categorie_avis() {
         return "CAV6";
@@ -130,7 +130,8 @@ public class Guide extends Partenaire{
     public static void main(String[] args) {
         try {
             Guide g = Guide.get_guide_par_id(null, "GUI4");
-            System.out.println(g.get_evaluation());
+            boolean disp = g.chech_disponibilite(Date.valueOf("2024-12-12"), Date.valueOf("2024-12-20"));
+            System.out.println("Disponibilite : "+disp);
         } catch (Exception e) {
             e.printStackTrace();
         }
