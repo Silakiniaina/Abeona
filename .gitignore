@@ -8,3 +8,5 @@ sass/
 package-lock.json
 package.json
 *.jar
+
+build.sh
