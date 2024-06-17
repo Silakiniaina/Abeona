@@ -46,6 +46,15 @@ CREATE OR REPLACE VIEW v_evaluation_hotel AS
     GROUP BY h.id_hotel
 ;
 
+CREATE VIEW v_hotel_with_evaluation AS 
+    SELECT 
+        h.*, 
+        COALESCE(v.evaluation,0) as evaluation 
+    FROM hotel AS h
+    LEFT JOIN v_evaluation_hotel AS v
+    ON h.id_hotel = v.id_hotel
+;
+
 CREATE OR REPLACE VIEW v_liste_evaluation_attraction AS 
     SELECT 
         * 
@@ -62,6 +71,15 @@ CREATE OR REPLACE VIEW v_evaluation_attraction AS
     GROUP BY a.id_attraction
 ;
 
+CREATE VIEW v_attraction_with_evaluation AS 
+    SELECT 
+        a.*, 
+        COALESCE(v.evaluation,0) as evaluation 
+    FROM attraction AS a
+    LEFT JOIN v_evaluation_attraction AS v
+    ON a.id_attraction = v.id_attraction
+;
+
 CREATE OR REPLACE VIEW v_evaluation_transport AS   
     SELECT 
         t.id_transport,AVG(evaluation) AS evaluation 
@@ -69,6 +87,15 @@ CREATE OR REPLACE VIEW v_evaluation_transport AS
     JOIN transport AS t
     ON e.id_partenaire=t.id_transport
     GROUP BY t.id_transport
+;
+
+CREATE VIEW v_transport_with_evaluation AS 
+    SELECT 
+        t.*, 
+        COALESCE(v.evaluation,0) as evaluation 
+    FROM transport AS t
+    LEFT JOIN v_evaluation_transport AS v
+    ON t.id_transport = v.id_transport
 ;
 
 CREATE OR REPLACE VIEW v_evaluation_guide AS   
@@ -79,6 +106,17 @@ CREATE OR REPLACE VIEW v_evaluation_guide AS
     ON e.id_partenaire=g.id_guide
     GROUP BY g.id_guide
 ;
+
+CREATE VIEW v_guide_with_evaluation AS 
+    SELECT 
+        g.*, 
+        COALESCE(v.evaluation,0) as evaluation 
+    FROM guide AS g
+    LEFT JOIN v_evaluation_guide AS v
+    ON g.id_guide = v.id_guide
+;
+
+
 
 -- RANKING --
 CREATE OR REPLACE VIEW v_ranking_hotel AS 

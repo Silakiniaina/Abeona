@@ -13,11 +13,11 @@ public abstract class Partenaire {
     String nom;
     String id_partenaire;
     String description;
+    double evaluation;
 
     public abstract String get_categorie_avis();
     public abstract String get_categorie_evaluation();
     public abstract String get_categorie_reservation();
-    public abstract double get_evaluation()throws Exception;
 
     /* Fonction permettant d'avoir la liste des avis sur une partenaire specifique */
     public ArrayList<Avis> get_liste_avis() throws Exception {
@@ -140,6 +140,9 @@ public abstract class Partenaire {
     public String get_description() {
         return description;
     }
+    public double get_evaluation(){
+        return this.evaluation;
+    }
 
     /* Setters */
     public void set_id(String id) {
@@ -153,6 +156,9 @@ public abstract class Partenaire {
     }
     public void set_description(String description) {
         this.description = description;
+    }
+    public void set_evaluation(double ev){
+        this.evaluation = ev;
     }
 
 }

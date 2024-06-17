@@ -12,12 +12,13 @@ public class Transport extends Partenaire{
     private String id_categorie_transport;
 
     /* Constructor */
-    public Transport(String name, String desc, double tartif, String id_c,String id_p){
+    public Transport(String name, String desc, double tartif, String id_c,String id_p,double ev){
         this.set_nom(name);
         this.set_description(desc);
         this.set_tarif(tartif);
         this.set_id_categorie_transport(id_c);
         this.set_id_partenaire(id_p);
+        this.set_evaluation(ev);
     }
 
     /* Fonction pour avoir toutes les transports */
@@ -28,10 +29,10 @@ public class Transport extends Partenaire{
         ResultSet rs = null;
         try{
             c = Database.get_connection();
-            prstm = c.prepareStatement("SELECT * FROM transport");
+            prstm = c.prepareStatement("SELECT * FROM v_transport_with_evaluation");
             rs = prstm.executeQuery();
             while(rs.next()){
-                Transport t = new Transport(rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(6), rs.getString(7));
+                Transport t = new Transport(rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(6), rs.getString(7),rs.getDouble(8));
                 t.set_id(rs.getString(1));
                 result.add(t);
             }
@@ -59,11 +60,11 @@ public class Transport extends Partenaire{
             }else{
                 c = con;
             }
-            prstm = c.prepareStatement("SELECT * FROM transport WHERE id_transport = ?");
+            prstm = c.prepareStatement("SELECT * FROM v_transport_with_evaluation WHERE id_transport = ?");
             prstm.setString(1, id);
             rs = prstm.executeQuery();
             if(rs.next()){
-                resultat = new Transport(rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(6), rs.getString(7));
+                resultat = new Transport(rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(6), rs.getString(7),rs.getDouble(8));
                 resultat.set_id(rs.getString(1));
             }
         }catch(Exception e){
@@ -106,30 +107,6 @@ public class Transport extends Partenaire{
     @Override
     public String get_categorie_reservation() {
         return "CRS3";
-    }
-
-    @Override
-    public double get_evaluation()throws Exception{
-        double resultat = 0;
-        Connection c = null;
-        PreparedStatement prstm = null;
-        ResultSet rs = null;
-        try{
-            c = Database.get_connection();
-            prstm = c.prepareStatement("SELECT * FROM v_evaluation_transport WHERE id_transport = ?");
-            prstm.setString(1, this.get_id());
-            rs = prstm.executeQuery();
-            if(rs.next()){
-                resultat = rs.getDouble(2);
-            }
-        }catch(Exception e){
-            throw e;
-        }finally{
-            if(rs != null){ rs.close(); }
-            if(prstm != null){ prstm.close(); }
-            if(c != null){ c.close(); }
-        }
-        return resultat;
     }
 
     /* Test */

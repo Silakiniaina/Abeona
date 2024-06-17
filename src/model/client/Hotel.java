@@ -14,42 +14,20 @@ public class Hotel extends Partenaire{
     private String id_ville;
 
     /* Constructor */
-    public Hotel(String nom,String description,String adress, String id_p, String id_c, String id_v){
+    public Hotel(String nom,String description,String adress, String id_p, String id_c, String id_v,double ev){
         this.set_nom(nom);
         this.set_description(description);
         this.set_adress(adress);
         this.set_id_partenaire(id_p);
         this.set_id_categorie_hotel(id_c);
         this.set_id_ville(id_v);
+        this.set_evaluation(ev);
     }
 
     /* Fonction pour avoir tous les hotels */
     public static ArrayList<Hotel> get_liste_hotel()throws Exception{
         ArrayList<Hotel> resultat = new ArrayList<Hotel>();
-        Connection c = null;
-        PreparedStatement prsmt  = null;
-        ResultSet rs = null; 
-
-        try{
-            c = Database.get_connection();
-            if(c != null){
-                prsmt = c.prepareStatement("SELECT * FROM hotel");
-                rs = prsmt.executeQuery();
-                while (rs.next()) {
-                    Hotel a = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
-                    a.set_id(rs.getString(1));
-                    resultat.add(a);
-                }
-            }else{
-                throw new Exception("Aucune connexion ");
-            }
-        }catch(Exception e){
-            throw e;
-        }finally{
-            if(rs != null){ rs.close(); }
-            if(prsmt != null){ prsmt.close(); }
-            if(c != null){ c.close(); }
-        }
+        resultat = Hotel.filtrer_hotel(null, null, null, null);
         return resultat;
     }
 
@@ -66,11 +44,11 @@ public class Hotel extends Partenaire{
                 est_nouvelle_connexion = true;
             }
             else { c = con; }
-            prsmt = c.prepareStatement("SELECT * FROM hotel WHERE id_hotel = ? ");
+            prsmt = c.prepareStatement("SELECT * FROM v_hotel_with_evaluation WHERE id_hotel = ? ");
             prsmt.setString(1,id);
             rs = prsmt.executeQuery();
             if (rs.next()) {
-                resultat = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
+                resultat = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8),rs.getDouble(9));
                 resultat.set_id(rs.getString(1));
             }
         } catch (Exception e) {
@@ -83,37 +61,7 @@ public class Hotel extends Partenaire{
         return resultat;
     }
 
-    /* Fonction pour rechercher des hotels */
-    public static ArrayList<Hotel> rechercher_hotel(String dest, ArrayList<String> ville, ArrayList<String> categ,ArrayList<String> evaluation_id, ArrayList<String> commodite)throws Exception{
-        ArrayList<Hotel> resultat = new ArrayList<Hotel>();
-        Connection c = null;
-        PreparedStatement prsmt  = null;
-        ResultSet rs = null; 
-        try{
-            c = Database.get_connection();
-            if(c != null){
-                prsmt = c.prepareStatement("SELECT * FROM hotel WHERE LOWER(nom_hotel) LIKE ?");
-                prsmt.setString(1, "%" +dest.toLowerCase()+ "%");
-                rs = prsmt.executeQuery();
-                while (rs.next()) {
-                    Hotel a = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
-                    a.set_id(rs.getString(1));
-                    resultat.add(a);
-                }
-            }else{
-                throw new Exception("Aucune connexion ");
-            }
-        }catch(Exception e){
-            throw e;
-        }finally{
-            if(rs != null){ rs.close(); }
-            if(prsmt != null){ prsmt.close(); }
-            if(c != null){ c.close(); }
-        }
-        return resultat;
-    }
-
-    /* FOnction pour avoir les tops dans dans un province */
+    /* Fonction pour avoir les tops dans dans un province */
     public static ArrayList<Hotel> get_top_hotel(Province p)throws Exception {
         ArrayList<Hotel> resultat = new ArrayList<Hotel>();
         Connection c = null;
@@ -126,7 +74,7 @@ public class Hotel extends Partenaire{
                 prsmt.setString(1, p.get_id_province());
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    Hotel a = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
+                    Hotel a = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8),rs.getDouble(9));
                     a.set_id(rs.getString(1));
                     resultat.add(a);
                 }
@@ -144,8 +92,8 @@ public class Hotel extends Partenaire{
     }
 
     /* Fonction pour filtrer les recherches en fonction des id recuperer */
-    public static ArrayList<Hotel> filtrer_hotel(String dest,ArrayList<String> id_commodite, ArrayList<String> id_ville, ArrayList<String> evaluation) {
-        ArrayList<Hotel> results = new ArrayList<>();
+    public static ArrayList<Hotel> filtrer_hotel(String dest,ArrayList<String> id_commodite, ArrayList<String> id_ville, ArrayList<String> evaluation) throws Exception{
+        ArrayList<Hotel> results = new ArrayList<Hotel>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -177,28 +125,23 @@ public class Hotel extends Partenaire{
             }
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Hotel a  = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8));
+                Hotel a  = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8),rs.getDouble(9));
                 a.set_id(rs.getString(1));
                 results.add(a);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (rs != null) rs.close();
-                if (preparedStatement != null) preparedStatement.close();
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            if (rs != null) rs.close();
+            if (preparedStatement != null) preparedStatement.close();
+            if (connection != null) connection.close();
         }
         return results;
     }
 
     /* Function pour construire dynamiquement le requete de filtre */
     public static String filter_query(String dest,ArrayList<String> id_commodite, ArrayList<String> id_ville, ArrayList<String> evaluation) {
-        StringBuilder sql = new StringBuilder("SELECT h.*, COALESCE(eh.evaluation, 0) AS evaluation FROM hotel AS h ");
-        sql.append("LEFT JOIN v_evaluation_hotel AS eh ON h.id_hotel = eh.id_hotel WHERE 1=1 ");
+        StringBuilder sql = new StringBuilder("SELECT * FROM v_hotel_with_evaluation WHERE 1=1");
         if(dest != null){
             sql.append(" AND LOWER(nom_hotel) LIKE ? ");
         }
@@ -232,7 +175,6 @@ public class Hotel extends Partenaire{
             }
             sql.append(")");
         }
-        System.out.println(sql);
         return sql.toString();
     }
 
@@ -260,6 +202,7 @@ public class Hotel extends Partenaire{
         }
         return result;
     }
+    
     /* Getters */
     public String get_description(){
         return description;
@@ -306,30 +249,6 @@ public class Hotel extends Partenaire{
     }
 
     @Override
-    public double get_evaluation()throws Exception{
-        double resultat = 0;
-        Connection c = null;
-        PreparedStatement prstm = null;
-        ResultSet rs = null;
-        try{
-            c = Database.get_connection();
-            prstm = c.prepareStatement("SELECT * FROM v_evaluation_hotel WHERE id_hotel = ?");
-            prstm.setString(1, this.get_id());
-            rs = prstm.executeQuery();
-            if(rs.next()){
-                resultat = rs.getDouble(2);
-            }
-        }catch(Exception e){
-            throw e;
-        }finally{
-            if(rs != null){ rs.close(); }
-            if(prstm != null){ prstm.close(); }
-            if(c != null){ c.close(); }
-        }
-        return resultat;
-    }
-
-    @Override
     public String get_categorie_reservation(){
         return "CRS1";
     }
@@ -337,8 +256,7 @@ public class Hotel extends Partenaire{
     /* Test */
     public static void main(String[] args) {
         try{
-            Hotel h = Hotel.get_hotel_par_id(null, "HOT1");
-            ArrayList<Reservation> ls = h.get_liste_reservation();
+            ArrayList<Hotel> ls = Hotel.get_liste_hotel();
             System.out.println(ls.size());
         }catch(Exception e){
             e.printStackTrace();

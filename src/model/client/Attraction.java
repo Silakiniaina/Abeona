@@ -8,14 +8,17 @@ import java.util.ArrayList;
 import model.shared.Database;
 public class Attraction extends Partenaire{
     private String id_categorie_attraction;
-    private String id_ville; 
+    private String id_ville;
+    private double tarif; 
 
     /* Constructor */
-    public Attraction(String name,String desc, String id_a, String id_v){
+    public Attraction(String name,String desc, double tarif,String id_a, String id_v,double ev){
         this.set_nom(name);
         this.set_description(desc);
+        this.set_tarif(tarif);
         this.set_id_categorie_attraction(id_a);
         this.set_id_ville(id_v);
+        this.set_evaluation(ev);
     }
     
     /* Fonction pour rechercher des attraction */
@@ -28,11 +31,11 @@ public class Attraction extends Partenaire{
         try{
             c = Database.get_connection();
             if(c != null){
-                prsmt = c.prepareStatement("SELECT * FROM attraction WHERE lower(nom_attraction) LIKE ? ");
+                prsmt = c.prepareStatement("SELECT * FROM v_attraction_with_evaluation WHERE lower(nom_attraction) LIKE ? ");
                 prsmt.setString(1, "%" +dest.toLowerCase()+ "%");
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    Attraction a = new Attraction(rs.getString(2), rs.getString(3),rs.getString(4),rs.getString(5));
+                    Attraction a = new Attraction(rs.getString(2), rs.getString(3),rs.getDouble(5),rs.getString(6),rs.getString(7),rs.getDouble(8));
                     a.set_id(rs.getString(1));
                     resultat.add(a);
                 }
@@ -62,7 +65,7 @@ public class Attraction extends Partenaire{
                 prsmt = c.prepareStatement("SELECT * FROM v_ranking_attraction_province LIMIT 3");
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    Attraction a = new Attraction(rs.getString(2), rs.getString(3),rs.getString(5),rs.getString(6));
+                    Attraction a = new Attraction(rs.getString(2), rs.getString(3),rs.getDouble(5),rs.getString(6),rs.getString(7),rs.getDouble(8));
                     a.set_id(rs.getString(1));
                     resultat.add(a);
                 }
@@ -89,10 +92,10 @@ public class Attraction extends Partenaire{
         try{
             c = Database.get_connection();
             if(c != null){
-                prsmt = c.prepareStatement("SELECT * FROM attraction");
+                prsmt = c.prepareStatement("SELECT * FROM v_attraction_with_evaluation");
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    Attraction a = new Attraction(rs.getString(2), rs.getString(3),rs.getString(5),rs.getString(6));
+                    Attraction a = new Attraction(rs.getString(2), rs.getString(3),rs.getDouble(5),rs.getString(6),rs.getString(7),rs.getDouble(8));
                     a.set_id(rs.getString(1));
                     resultat.add(a);
                 }
@@ -122,11 +125,11 @@ public class Attraction extends Partenaire{
                 est_nouvelle_connexion = true;
             }
             else { c = con; }
-            prsmt = c.prepareStatement("SELECT * FROM attraction WHERE id_attraction = ? ");
+            prsmt = c.prepareStatement("SELECT * FROM v_attraction_with_evaluation WHERE id_attraction = ? ");
             prsmt.setString(1,id);
             rs = prsmt.executeQuery();
             if (rs.next()) {
-                resultat = new Attraction(rs.getString(2), rs.getString(3),rs.getString(5),rs.getString(6));
+                resultat = new Attraction(rs.getString(2), rs.getString(3),rs.getDouble(5),rs.getString(6),rs.getString(7),rs.getDouble(8));
                 resultat.set_id(rs.getString(1));
             }
         } catch (Exception e) {
@@ -149,6 +152,9 @@ public class Attraction extends Partenaire{
     public String get_id_ville(){
         return id_ville;
     }
+    public double get_tarif(){
+        return this.tarif;
+    }
 
     /* Setters */
     public void set_description(String str){
@@ -160,6 +166,9 @@ public class Attraction extends Partenaire{
     public void set_id_ville(String str){
         this.id_ville = str;
     }
+    public void set_tarif(double d){
+        this.tarif = d;
+    }
 
     @Override
     public String get_categorie_avis() {
@@ -169,30 +178,6 @@ public class Attraction extends Partenaire{
     @Override
     public String get_categorie_evaluation() {
         return "CEV4";
-    }
-
-    @Override
-    public double get_evaluation()throws Exception{
-        double resultat = 0;
-        Connection c = null;
-        PreparedStatement prstm = null;
-        ResultSet rs = null;
-        try{
-            c = Database.get_connection();
-            prstm = c.prepareStatement("SELECT * FROM v_evaluation_attraction WHERE id_attraction = ?");
-            prstm.setString(1, this.get_id());
-            rs = prstm.executeQuery();
-            if(rs.next()){
-                resultat = rs.getDouble(2);
-            }
-        }catch(Exception e){
-            throw e;
-        }finally{
-            if(rs != null){ rs.close(); }
-            if(prstm != null){ prstm.close(); }
-            if(c != null){ c.close(); }
-        }
-        return resultat;
     }
 
     @Override
