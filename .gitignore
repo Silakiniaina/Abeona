@@ -1,10 +1,10 @@
 bin/
 lib/
 docs/
-web/node_modules/
+web/node_modules
 
 
-*.json
+package-lock.json
 *.scss
 *.class
 build.sh

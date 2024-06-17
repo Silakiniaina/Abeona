@@ -1,0 +1,15 @@
+{
+  "name": "partenaire",
+  "version": "1.0.0",
+  "description": "Abeona partenaire",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yoahn",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^4.4.3",
+    "chartjs-plugin-datalabels": "^2.2.0"
+  }
+}
