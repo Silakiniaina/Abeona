@@ -260,8 +260,8 @@ public class Utilisateur{
         try {
             Utilisateur u = Utilisateur.login("pierre.martin1@example.com", "12345");
             if(u != null){
-                Attraction a = Attraction.get_attraction_par_id(null, "ATT1");
-                u.reserver(a, Date.valueOf("2023-06-12"), Date.valueOf("2023-06-24"), 5);
+                Transport a = Transport.get_transport_par_id(null, "TRN1");
+                u.reserver(a, Date.valueOf("2024-06-12"), Date.valueOf("2024-06-24"), 1);
             }else{
                 System.out.println("User null");
             }
