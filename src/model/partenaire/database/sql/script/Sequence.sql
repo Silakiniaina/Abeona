@@ -14,3 +14,7 @@ CREATE SEQUENCE evenement_sequence;
 CREATE SEQUENCE transport_sequence;
 CREATE SEQUENCE attractions_sequence;
 CREATE SEQUENCE guide_sequence;
+
+CREATE SEQUENCE reservation_chambres_sequence;
+CREATE SEQUENCE reservation_transport_sequence;
+CREATE SEQUENCE reservation_attraction_sequence;
