@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import model.shared.Database;
 
 public class Utilisateur{
@@ -238,7 +236,7 @@ public class Utilisateur{
         }
         return resultat;
     }
-    
+
     /* Setters */
     public void set_id(String n_id){
         this.id = n_id;
