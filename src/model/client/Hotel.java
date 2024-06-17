@@ -331,13 +331,14 @@ public class Hotel extends Partenaire{
 
     @Override
     public String get_categorie_reservation(){
-        return "CRS4";
+        return "CRS1";
     }
 
     /* Test */
     public static void main(String[] args) {
         try{
-            ArrayList<Commodite> ls = Hotel.get_hotel_par_id(null, "HOT1").get_liste_commodite();
+            Hotel h = Hotel.get_hotel_par_id(null, "HOT1");
+            ArrayList<Reservation> ls = h.get_liste_reservation();
             System.out.println(ls.size());
         }catch(Exception e){
             e.printStackTrace();

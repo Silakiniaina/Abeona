@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import model.shared.Database;
 
 public class Utilisateur{
@@ -210,6 +212,32 @@ public class Utilisateur{
             if(c != null){ c.close(); }
         }
     }
+
+    /* Fonction pour avoir l'historique de reservation */
+    public ArrayList<Reservation> get_historique_reservation() throws Exception{
+        ArrayList<Reservation> resultat = new ArrayList<Reservation>();
+        Connection c = null; 
+        PreparedStatement prstm = null;
+        ResultSet rs = null;
+        try{
+            c = Database.get_connection();
+            prstm = c.prepareStatement("SELECT * FROM reservation WHERE id_utilisateur = ?");
+            prstm.setString(1, this.get_id());
+            rs = prstm.executeQuery();
+            while(rs.next()){
+                Reservation a = new Reservation(rs.getDate(2), rs.getDate(3),rs.getInt(4),rs.getString(7),rs.getString(8),rs.getString(9));
+                a.set_id_reservation(rs.getString(1));
+                resultat.add(a);
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null) rs.close();
+            if(prstm != null) prstm.close();
+            if(c != null) c.close();
+        }
+        return resultat;
+    }
     /* Setters */
     public void set_id(String n_id){
         this.id = n_id;
@@ -260,8 +288,8 @@ public class Utilisateur{
         try {
             Utilisateur u = Utilisateur.login("pierre.martin1@example.com", "12345");
             if(u != null){
-                Transport a = Transport.get_transport_par_id(null, "TRN1");
-                u.reserver(a, Date.valueOf("2024-06-12"), Date.valueOf("2024-06-24"), 1);
+                ArrayList<Reservation> ls = u.get_historique_reservation();
+                System.out.println(ls.size());
             }else{
                 System.out.println("User null");
             }

@@ -70,6 +70,33 @@ public abstract class Partenaire {
         return resultat;
     };
 
+    /* Fonction pour avoir la liste des reservations */
+    public ArrayList<Reservation> get_liste_reservation() throws Exception{
+        ArrayList<Reservation> resultat = new ArrayList<Reservation>();
+        Connection c = null;
+        PreparedStatement prstm = null;
+        ResultSet rs = null;
+        try{
+            c = Database.get_connection();
+            prstm = c.prepareStatement("SELECT * FROM reservation WHERE id_categorie_reservation = ? AND id_partenaire = ?");
+            prstm.setString(1, this.get_categorie_reservation());
+            prstm.setString(2, this.get_id());
+            rs = prstm.executeQuery();
+            while(rs.next()){
+                Reservation a = new Reservation(rs.getDate(2), rs.getDate(3),rs.getInt(4),rs.getString(7),rs.getString(8),rs.getString(9));
+                a.set_id_reservation(rs.getString(1));
+                resultat.add(a);
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prstm != null){ prstm.close(); }
+            if(c != null){ c.close(); }
+        }
+        return resultat;
+    }
+
     /* Getters */
     public String get_id() {
         return id;
