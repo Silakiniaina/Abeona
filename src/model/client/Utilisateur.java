@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import model.shared.Database;
 
@@ -17,6 +18,11 @@ public class Utilisateur{
     private String id_genre;
     protected String mot_de_passe;
 
+    public static int UTILISATEUR_ALL = -1;
+    public static int UTILISATEUR_CET_ANNEE = 0;
+    public static int UTILISATEUR_CET_MOIS = 1;
+    public static int UTILISATEUR_AUJOURDHUI = 2;
+
     /* Constructor */
     public Utilisateur(String nom, String prenom, String mail, Date dtn, String id_g){
         this.set_nom(nom);
@@ -24,6 +30,36 @@ public class Utilisateur{
         this.set_email(mail);
         this.set_date_de_naissance(dtn);
         this.set_id_genre(id_g);
+    }
+
+    /* Fonction pour avoir tous les utilisateurs */
+    public static ArrayList<Utilisateur> get_utilisateur(int type) throws Exception{
+        ArrayList<Utilisateur> result = new ArrayList<Utilisateur>();
+        Connection c = null;
+        PreparedStatement prstm = null;
+        ResultSet rs = null;
+        try{
+            String sql = "SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,email,date_de_naissance,id_genre FROM ";
+            c = Database.get_connection();
+            if(type == UTILISATEUR_CET_ANNEE)sql += "v_utilisateur_cet_annee";
+            else if(type == UTILISATEUR_CET_MOIS) sql += "v_utilisateur_cet_mois";
+            else if(type == UTILISATEUR_AUJOURDHUI) sql += "v_utilisateur_aujourdhui";
+            else if(type == UTILISATEUR_ALL) sql += "utilisateur ";
+            prstm = c.prepareStatement(sql);
+            rs = prstm.executeQuery();
+            while (rs.next()) {
+                Utilisateur u =  new Utilisateur(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6));
+                u.set_id(rs.getString(1));
+                result.add(u);
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null) rs.close();
+            if(prstm != null) prstm.close();
+            if(c != null) c.close();
+        }
+        return result;
     }
 
     /* Fonction pour avoir un utilisateur via son id */
@@ -237,6 +273,32 @@ public class Utilisateur{
         return resultat;
     }
 
+    /* Fonction pour avoir les nombres des utilisateurs */
+    public HashMap<String ,Integer> get_nombre_utilisateur()throws Exception{
+        HashMap<String, Integer> result = new HashMap<String, Integer>();
+        Connection c = null;
+        PreparedStatement prstm = null;
+        ResultSet rs = null;
+        try{
+            c = Database.get_connection();
+            prstm = c.prepareStatement("SELECT * FROM v_nombre_utilisateur");
+            rs = prstm.executeQuery();
+            if (rs.next()) {
+                result.put("total", rs.getInt(1));
+                result.put("annee", rs.getInt(2));
+                result.put("mois", rs.getInt(3));
+                result.put("jour", rs.getInt(4));
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null) rs.close();
+            if(prstm != null) prstm.close();
+            if(c != null) c.close();
+        }
+        return result;
+    }
+    
     /* Setters */
     public void set_id(String n_id){
         this.id = n_id;
@@ -285,13 +347,8 @@ public class Utilisateur{
 
     public static void main(String[] argv ){
         try {
-            Utilisateur u = Utilisateur.login("pierre.martin1@example.com", "12345");
-            if(u != null){
-                ArrayList<Reservation> ls = u.get_historique_reservation();
-                System.out.println(ls.size());
-            }else{
-                System.out.println("User null");
-            }
+            ArrayList<Utilisateur> ls = Utilisateur.get_utilisateur(Utilisateur.UTILISATEUR_AUJOURDHUI);
+            System.out.println(ls.size());
         } catch (Exception e) {
             e.printStackTrace();
         }

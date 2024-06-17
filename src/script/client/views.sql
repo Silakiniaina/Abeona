@@ -223,6 +223,66 @@ CREATE OR REPLACE VIEW v_nombre_evenement AS
     v_nombre_evenement_jour AS vnj
 ;
 
+-- UTILISATEUR --
+CREATE VIEW v_utilisateur_cet_annee AS 
+    SELECT 
+        * 
+    FROM utilisateur 
+    WHERE DATE_PART('year', date_insertion) = DATE_PART('year', CURRENT_DATE)
+;
+
+CREATE VIEW v_utilisateur_cet_mois AS 
+    SELECT 
+        * 
+    FROM v_utilisateur_cet_annee 
+    WHERE DATE_PART('month', date_insertion) = DATE_PART('month', CURRENT_DATE)
+;
+
+CREATE VIEW v_utilisateur_aujourdhui AS 
+    SELECT 
+        * 
+    FROM v_utilisateur_cet_mois 
+    WHERE DATE(date_insertion) = CURRENT_DATE
+;
+
+CREATE OR REPLACE VIEW v_nombre_utilisateur_cet_mois AS 
+    SELECT 
+        COUNT(*) as mois 
+    FROM v_utilisateur_cet_mois
+;
+
+
+CREATE OR REPLACE VIEW v_nombre_utilisateur_cet_annee AS 
+    SELECT 
+        COUNT(*) as annee
+    FROM v_utilisateur_cet_annee 
+;
+
+CREATE OR REPLACE VIEW v_nombre_utilisateur_jour AS 
+    SELECT 
+        COUNT(*) as jour
+    FROM v_utilisateur_aujourdhui 
+;
+
+CREATE OR REPLACE VIEW v_nombre_utilisateur_total AS
+    SELECT
+        COUNT(*) as total
+    FROM Utilisateur
+;
+
+CREATE OR REPLACE VIEW v_nombre_utilisateur AS
+    SELECT 
+        vnt.total AS total,
+        vna.annee AS cet_annee,
+        vnm.mois AS cet_mois,
+        vnj.jour AS aujourdhui
+    FROM 
+        v_nombre_utilisateur_cet_mois AS vnm,
+        v_nombre_utilisateur_cet_annee  AS vna,
+        v_nombre_utilisateur_total  AS vnt,
+        v_nombre_utilisateur_jour AS vnj
+;
+
 CREATE VIEW v_commodite_hotel AS 
     SELECT 
         ch.id_hotel,c.id_commodite,c.libelle

@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.print.DocFlavor.STRING;
-
 import model.shared.Database;
 
 public class Evenement{
@@ -180,7 +178,6 @@ public class Evenement{
             if(c != null) c.close();
         }
     }
-
 
     /* Fonction pour avoir les evenements ce mois ci */
     public static ArrayList<Evenement> get_evenement(int type) throws Exception{
