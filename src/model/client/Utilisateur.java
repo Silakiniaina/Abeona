@@ -238,6 +238,7 @@ public class Utilisateur{
         }
         return resultat;
     }
+    
     /* Setters */
     public void set_id(String n_id){
         this.id = n_id;
