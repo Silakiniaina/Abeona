@@ -3,8 +3,6 @@ lib/
 docs/
 web/node_modules
 
-
-package-lock.json
 *.scss
 *.class
 build.sh
