@@ -156,6 +156,73 @@ CREATE VIEW v_evenement_calendrier_en_cours AS
     AND date_fin_evenement >= NOW()
 ;
 
+CREATE VIEW v_evenement_cet_annee AS 
+    SELECT
+        * 
+    FROM evenement 
+    WHERE DATE_PART('year', date_debut_evenement) = DATE_PART('year', CURRENT_DATE) 
+    OR DATE_PART('year', date_fin_evenement) = DATE_PART('year', CURRENT_DATE)
+;
+
+CREATE VIEW v_evenement_cet_mois AS 
+    SELECT 
+        * 
+    FROM v_evenement_cet_annee 
+    WHERE DATE_TRUNC('month', date_debut_evenement) = DATE_TRUNC('month', CURRENT_DATE) 
+    OR DATE_TRUNC('month', date_fin_evenement) = DATE_TRUNC('month', CURRENT_DATE)
+;
+
+CREATE VIEW v_evenement_aujourdhui AS 
+    SELECT 
+        * 
+    FROM v_evenement_cet_mois 
+    WHERE date_debut_evenement = CURRENT_DATE 
+    OR date_fin_evenement = CURRENT_DATE
+;
+
+CREATE VIEW v_nombre_evenement_mois AS 
+    SELECT 
+        COUNT(*) as mois 
+    FROM evenement 
+    WHERE DATE_TRUNC('month', date_debut_evenement) = DATE_TRUNC('month', CURRENT_DATE) 
+    OR DATE_TRUNC('month', date_fin_evenement) = DATE_TRUNC('month', CURRENT_DATE)
+;
+
+CREATE VIEW v_nombre_evenement_annee AS 
+    SELECT 
+        COUNT(*) as annee
+    FROM evenement 
+    WHERE DATE_PART('year', date_debut_evenement) = DATE_PART('year', CURRENT_DATE) 
+    OR DATE_PART('year', date_fin_evenement) = DATE_PART('year', CURRENT_DATE)
+;
+
+CREATE OR REPLACE VIEW v_nombre_evenement_jour AS 
+    SELECT 
+        COUNT(*) as jour
+    FROM evenement 
+    WHERE date_debut_evenement = CURRENT_DATE 
+    OR date_fin_evenement = CURRENT_DATE
+;
+
+CREATE OR REPLACE VIEW v_nombre_evenement_total AS
+    SELECT
+        COUNT(*) as total
+    FROM evenement
+;
+
+CREATE OR REPLACE VIEW v_nombre_evenement AS
+    SELECT 
+        vnt.total AS total,
+        vna.annee AS cet_annee,
+        vnm.mois AS cet_mois,
+        vnj.jour AS aujourdhui
+    FROM 
+    v_nombre_evenement_mois AS vnm,
+    v_nombre_evenement_annee AS vna,
+    v_nombre_evenement_total AS vnt,
+    v_nombre_evenement_jour AS vnj
+;
+
 CREATE VIEW v_commodite_hotel AS 
     SELECT 
         ch.id_hotel,c.id_commodite,c.libelle
