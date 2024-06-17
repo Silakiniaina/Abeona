@@ -36,6 +36,35 @@ public class Evenement{
         this.set_id_ville(id_ville);
     }
 
+    /* Fonction pour avoir la liste des evenements */
+    public static ArrayList<Evenement> get_liste_evenement() throws Exception{
+        ArrayList<Evenement> resultat = new ArrayList<Evenement>();
+        Connection c = null;
+        PreparedStatement prsmt  = null;
+        ResultSet rs = null; 
+
+        try{
+            c = Database.get_connection();
+            if(c != null){
+                prsmt = c.prepareStatement("SELECT * FROM evenement");
+                rs = prsmt.executeQuery();
+                while (rs.next()) {
+                    Evenement ev = new Evenement(rs.getString(5), rs.getString(2), rs.getString(3), rs.getDate(9), rs.getDate(10), rs.getString(6), rs.getString(8), rs.getString(7));
+                    ev.set_id_evenement(rs.getString(1));
+                    resultat.add(ev);
+                }
+            }else{
+                throw new Exception("Aucune connexion ");
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null){ rs.close(); }
+            if(prsmt != null){ prsmt.close(); }
+            if(c != null){ c.close(); }
+        }
+        return resultat;
+    }
 
     /* Fonction pour avoir la liste des evenement du calendrier */
     public static ArrayList<Evenement> get_liste_evenement_calendrier(int type)throws Exception{
