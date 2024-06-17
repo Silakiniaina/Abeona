@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Statistique guide</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="node_modules/chart.js/dist/chart.umd.js"></script>
+    <script src="node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script src="assets/js/toggle.js" defer></script>
+    <script src="assets/js/chart_gestion.js" defer></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="" class="logo"> LOGO </a>
+      <div class="nav-links">
+        <ul class="list-container">
+          <li class=""><a href=""> Accueil </a></li>
+          <li><a href="">Reservations</a></li>
+          <li class="active"><a href="">Informations</a></li>
+          <li><a href="">Evenements</a></li>
+          <li><a href="">Aide</a></li>
+        </ul>
+        <ul class="list-container lang">
+          <li>
+            <a href="">FRS</a>
+          </li>
+          <li>
+            <a href="">MGA</a>
+          </li>
+        </ul>
+        <ul class="list-container">
+          <li class="container-profil">
+            <div class="profil-partenaire">
+              <img
+                src="assets/image_videos/login_2.png"
+                alt="profil partenaire"
+              />
+              <div class="status"></div>
+            </div>
+            <div class="descr-partenaire">
+              <h3>Partenaire Huhu</h3>
+              <p>partenaire Huhu</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <img
+        src="assets/Icons/icons8-menu-64.png"
+        alt="menu-icons"
+        class="menu-hamburger"
+      />
+    </nav>
+    <div class="section-1 row">
+      <section class="section-text">
+        <h1 style="text-align: center;">Les statistiques</h1>
+      </section>
+      <div class="button-group row">
+          <a class="btn abeona-custom_4">General</a>
+        <a class="btn abeona-custom_4">Hotel</a>
+        <a class="btn abeona-custom_4">Transport</a>
+        <a class="btn abeona-custom_4 active">Guide</a>
+      </div>
+    </div>
+    <div class="section-2 row chart">
+        <div class="chart_header">
+            <h1>Evolutions des nombres de reservations mensuels</h1>
+            <div class="options_container">
+                <div class="input-section type2">
+                    <label for="">Année</label>
+                    <select>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                    </select>
+                </div>
+                <div class="input-section type2">
+                    <label for="">Guide</label>
+                    <select>
+                        <option value="1">Guide 1</option>
+                        <option value="2">Guide 2</option>
+                        <option value="3">Guide 3</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="chart_container">
+          <div class="container">
+            <div class="header">
+              <div class="input_container">
+                <img src="assets/Icons/descr.svg" alt="desincrementation" class="desc_btn">
+                <!-- Mettre la date min et max de recherche -->
+                <input type="number" placeholder="previous years" data-max="2023" data-min="2005" value="2023">
+                <img src="assets/Icons/incr.svg" alt="incrementation" class="inc_btn">
+              </div>
+              <select name="" id="">
+                <option value="3">3 days</option>
+                <option value="5">5 days</option>
+                <option value="7">7 days</option>
+              </select>
+            </div>
+             <canvas class="my_chart" id="chart_canvas"></canvas>
+          </div>
+        </div>
+    </div>
+  </body>
+  <footer>
+    <div class="info row">
+      <div class="parametre">
+        <div class="input-section">
+          <select name="categorie" id="categorie" class="options">
+            <option value="">Français</option>
+            <option value="">Malgache</option>
+            <option value="">Anglais</option>
+          </select>
+          <label for="categorie" class="label-options">Langues</label>
+        </div>
+
+        <div class="input-section">
+          <select name="categorie" id="categorie" class="options">
+            <option value="">FR</option>
+            <option value="">MGA</option>
+            <option value="">US</option>
+          </select>
+          <label for="categorie" class="label-options">Devises</label>
+        </div>
+
+        <a class="btn"> Details </a>
+      </div>
+      <div class="contacts">
+        <div class="info-container">
+          <h2 class="titre">Compagnies</h2>
+          <ul>
+            <li><a href="">Accueil</a></li>
+            <li><a href="">Partenaires</a></li>
+            <li><a href="">A propos</a></li>
+          </ul>
+        </div>
+        <div class="info-container">
+          <h2 class="titre">Services</h2>
+          <ul>
+            <li><a href="">Proposition pack</a></li>
+            <li><a href="">Recherche de destination</a></li>
+            <li><a href="">Evaluation voyage</a></li>
+          </ul>
+        </div>
+        <div class="info-container">
+          <h2 class="titre">Aides</h2>
+          <ul>
+            <li><a href="">Contactez nous</a></li>
+            <li><a href="">Termes et conditions d'utilisation</a></li>
+            <li><a href="">A propos</a></li>
+          </ul>
+        </div>
+        <div class="info-container">
+          <h2 class="titre">Methode de paiement</h2>
+          <!-- <ul>
+                    <li>Accueil</li>
+                    <li>Partenaires</li>
+                    <li>A propos</li>
+                </ul> -->
+        </div>
+      </div>
+    </div>
+    <p class="copyright">Copyright 2024 Abeona. All rights reserved</p>
+  </footer>
+</html>

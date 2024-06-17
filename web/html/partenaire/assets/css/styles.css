@@ -446,6 +446,26 @@ header {
   position: relative;
   margin-bottom: 50px;
 }
+.input-section.type2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.input-section.type2 label {
+  font-size: 20px;
+  width: 20%;
+}
+.input-section.type2 select {
+  width: 50%;
+  height: 50px;
+  font-size: 20px;
+  padding: 10px;
+  font-weight: bolder;
+  border-radius: 10px;
+  border: solid black 2px;
+  background-color: transparent;
+}
 .input-section .label-options {
   position: absolute;
   top: -15px;
@@ -872,6 +892,83 @@ header {
   justify-content: space-between;
   width: 100%;
   height: 210vh;
+}
+.section-2.chart {
+  height: 140vh;
+  justify-content: space-evenly;
+}
+.section-2 .chart_header {
+  width: 74%;
+  height: 20vh;
+}
+.section-2 .chart_header .options_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 80%;
+}
+.section-2 .chart_header .options_container .input-section {
+  width: 35%;
+}
+.section-2 .chart_container {
+  height: 80vh;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section-2 .chart_container .container {
+  width: 85%;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px grey;
+  padding: 1.5%;
+}
+.section-2 .chart_container .container .my_chart {
+  height: 80%;
+  width: 70%;
+}
+.section-2 .chart_container .container .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 85%;
+  margin: auto;
+}
+.section-2 .chart_container .container .header .input_container {
+  height: 50px;
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.section-2 .chart_container .container .header .input_container img {
+  transition: transform 0.5s ease-in-out;
+  height: 50%;
+}
+.section-2 .chart_container .container .header .input_container img:hover {
+  transform: scale(1.12);
+  cursor: pointer;
+}
+.section-2 .chart_container .container .header .input_container input[type=number] {
+  text-align: center;
+  border: none;
+  width: 80%;
+  -moz-appearance: textfield;
+  background-color: #F1F7EE;
+}
+.section-2 .chart_container .container .header .input_container input[type=number]::-webkit-inner-spin-button, .section-2 .chart_container .container .header .input_container input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.section-2 .chart_container .container .header select {
+  border: none;
+  background-color: #F1F7EE;
+  padding: 10px;
+}
+.section-2 .chart_container .container .header input, .section-2 .chart_container .container .header select {
+  height: 45px;
+  font-size: 20px;
 }
 .section-2 .section-search {
   width: 80%;
