@@ -299,6 +299,51 @@ public class Utilisateur{
         return result;
     }
     
+
+    /* Fonction pour generer la requete sql de la recherche multicritere */
+    public static String get_recherche_query(String nom, String sexe, String email, Date date_de_naissance, Date date_fin_naissance,Integer status)throws Exception{
+        String result = "SELECT * FROM utilisateur WHERE 1=1";
+        if(nom != null) result += " AND nom_utilisateur LIKE ?";
+        if(sexe != null) result += " AND id_genre = ?";
+        if(email != null) result += " AND email LIKE = ? ";
+        if(date_de_naissance != null) result += " AND date_de_naissance >= ?";
+        if(date_fin_naissance != null) result += " AND date_fin_evenement <= ?";
+        if(status != null) result += " AND status = ?";
+        return result;
+    }
+
+    /* Fonction pour rechercher des evenement */
+    public static ArrayList<Evenement> rechercher_evenement(String nom, String sexe, String email, Date date_de_naissance, Date date_fin_naissance,Integer status) throws Exception{
+        ArrayList<Evenement> result = new ArrayList<Evenement>();
+        Connection c = null; 
+        PreparedStatement prstm = null; 
+        ResultSet rs = null;
+        try{
+            c = Database.get_connection();
+            int paramIndex = 1;
+            prstm = c.prepareStatement(Utilisateur.get_recherche_query(nom,sexe, email, date_de_naissance, date_fin_naissance,status));
+            if(nom != null) prstm.setString(paramIndex++, nom);
+            if(sexe != null) prstm.setString(paramIndex++, sexe);
+            if(email != null) prstm.setString(paramIndex++, email);
+            if(date_de_naissance != null) prstm.setDate(paramIndex++, date_de_naissance);
+            if(date_fin_naissance != null) prstm.setDate(paramIndex++, date_fin_naissance);
+            if(status != null) prstm.setInt(paramIndex++, status.intValue());
+            rs = prstm.executeQuery();
+            while(rs.next()){
+                Evenement ev =  new Evenement(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getDate(6), rs.getString(7), rs.getString(9), rs.getString(8));
+                ev.set_id_evenement(rs.getString(1));
+                result.add(ev);
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null) rs.close();
+            if(prstm != null) prstm.close();
+            if(c != null )c.close();
+        }
+        return result;
+    }
+
     /* Setters */
     public void set_id(String n_id){
         this.id = n_id;

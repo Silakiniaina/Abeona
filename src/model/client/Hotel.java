@@ -1,12 +1,14 @@
 package model.client;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.shared.Database;
+import model.shared.PartenaireUtils;
 
 public class Hotel extends Partenaire{ 
     private String adress;
@@ -102,7 +104,7 @@ public class Hotel extends Partenaire{
             connection = Database.get_connection();
             String sql = filter_query(dest,id_commodite, id_ville, evaluation);
             preparedStatement = connection.prepareStatement(sql);
-            int paramIndex = 0;
+            int paramIndex = 1;
             if(dest != null){
                 preparedStatement.setString(paramIndex++, dest.toLowerCase());
             }
@@ -203,6 +205,41 @@ public class Hotel extends Partenaire{
         return result;
     }
     
+    /* Fonction pour rechercher multicritere des tranports */
+    public static ArrayList<Hotel> rechercher_hotel(String nom, String evaluation,String id_ville, Date dateInsertionDebut,Date dateInsertionFin) throws Exception{
+        ArrayList<Hotel> result = new ArrayList<Hotel>();
+        Connection c = null; 
+        PreparedStatement prstm = null; 
+        ResultSet rs = null;
+        try{
+            c = Database.get_connection();
+            int paramIndex = 1;
+            prstm = c.prepareStatement(PartenaireUtils.get_recherche_query("hotel",nom,id_ville, evaluation, dateInsertionDebut, dateInsertionFin));
+            if(nom != null) prstm.setString(paramIndex++,nom);
+            if(id_ville != null)prstm.setString(paramIndex++, id_ville);
+            if(dateInsertionDebut != null) prstm.setDate(paramIndex++, dateInsertionDebut);
+            if(dateInsertionFin != null)prstm.setDate(paramIndex++, dateInsertionFin);
+            if(evaluation != null){
+                String[] split = evaluation.split("-");
+                prstm.setDouble(paramIndex++, Double.valueOf(split[0]));
+                prstm.setDouble(paramIndex++, Double.valueOf(split[1]));
+            }
+            rs = prstm.executeQuery();
+            while(rs.next()){
+                Hotel h = new Hotel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8),rs.getDouble(9));
+                h.set_id(rs.getString(1));
+                result.add(h);
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null) rs.close();
+            if(prstm != null) prstm.close();
+            if(c != null )c.close();
+        }
+        return result;
+    }
+
     /* Getters */
     public String get_description(){
         return description;
@@ -256,7 +293,7 @@ public class Hotel extends Partenaire{
     /* Test */
     public static void main(String[] args) {
         try{
-            ArrayList<Hotel> ls = Hotel.get_liste_hotel();
+            ArrayList<Hotel> ls = Hotel.rechercher_hotel(null,"2-5","VIL1",null,null);
             System.out.println(ls.size());
         }catch(Exception e){
             e.printStackTrace();

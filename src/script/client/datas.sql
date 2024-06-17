@@ -240,12 +240,12 @@ INSERT INTO achat_pack (prix, date_achat, id_utilisateur, id_pack) VALUES
 (800.00, '2023-05-05', 'USR5', 'PAK1');
 
 -- Insertion des données pour la table Reservation
-INSERT INTO Reservation (date_debut_reservation, date_fin_reservation, nombre_personne, id_utilisateur, id_categorie_reservation,id_partenaire) VALUES
-('2023-06-01', '2023-06-07', 2, 'USR1', 'CRS1','HOT1'),
-('2023-07-10', '2023-07-15', 1, 'USR1', 'CRS2','PAK1'),
-('2023-08-20', '2023-08-25', 4, 'USR2', 'CRS3','TRN1'),
-('2023-09-05', '2023-09-10', 3, 'USR1', 'CRS4','ATT1'),
-('2023-10-15', '2023-10-20', 2, 'USR2', 'CRS5','HOT1');
+INSERT INTO Reservation (date_debut_reservation, date_fin_reservation, nombre_personne,prix_unitaire, id_utilisateur, id_categorie_reservation,id_partenaire) VALUES
+('2023-06-01', '2023-06-07', 2, 120000.00,'USR1', 'CRS1','HOT1'),
+('2023-07-10', '2023-07-15', 1, 12000.00,'USR1', 'CRS2','PAK1'),
+('2023-08-20', '2023-08-25', 4, 340000.00,'USR2', 'CRS3','TRN1'),
+('2023-09-05', '2023-09-10', 3, 640000.00,'USR1', 'CRS4','ATT1'),
+('2023-10-15', '2023-10-20', 2, 10000.00,'USR2', 'CRS5','HOT1');
 
 -- Insertion des données pour la table Evenement
 INSERT INTO Evenement (description, lieu_evenement, titre_evenement, id_hotel, id_ville, id_categorie_evenement) VALUES
@@ -293,3 +293,7 @@ INSERT INTO Language_guide (id_guide, id_language) VALUES
 ('GUI3', 'LAN3'),
 ('GUI4', 'LAN4'),
 ('GUI5', 'LAN5');
+
+-- Insertion des donnees pour la table benefice
+INSERT INTO Benefice (pourcentage) VALUES 
+    (10);

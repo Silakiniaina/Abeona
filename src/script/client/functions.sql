@@ -387,3 +387,17 @@
     END;
     $$
     LANGUAGE plpgsql;
+
+    CREATE OR REPLACE FUNCTION generer_id_benefice()
+    RETURNS TEXT AS $$
+    DECLARE
+        evenement_seqval TEXT;
+        evenement_id TEXT;
+    BEGIN
+        SELECT nextval('benefice_seq') INTO evenement_seqval;
+        evenement_id := 'BEN' || evenement_seqval;
+        RETURN evenement_id;
+    END;
+    $$
+    LANGUAGE plpgsql;
+

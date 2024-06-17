@@ -1,11 +1,13 @@
 package model.client;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.shared.Database;
+import model.shared.PartenaireUtils;
 
 public class Transport extends Partenaire{
     private double tarif;
@@ -77,6 +79,40 @@ public class Transport extends Partenaire{
         return resultat;
     }
 
+    /* Fonction pour rechercher multicritere des tranports */
+    public static ArrayList<Transport> rechercher_transport(String nom, String evaluation, Date dateInsertionDebut,Date dateInsertionFin) throws Exception{
+        ArrayList<Transport> result = new ArrayList<Transport>();
+        Connection c = null; 
+        PreparedStatement prstm = null; 
+        ResultSet rs = null;
+        try{
+            c = Database.get_connection();
+            int paramIndex = 1;
+            prstm = c.prepareStatement(PartenaireUtils.get_recherche_query("transport",nom,null, evaluation, dateInsertionDebut, dateInsertionFin));
+            if(nom != null) prstm.setString(paramIndex++,nom);
+            if(dateInsertionDebut != null) prstm.setDate(paramIndex++, dateInsertionDebut);
+            if(dateInsertionFin != null)prstm.setDate(paramIndex++, dateInsertionFin);
+            if(evaluation != null){
+                String[] split = evaluation.split("-");
+                prstm.setDouble(paramIndex++, Double.valueOf(split[0]));
+                prstm.setDouble(paramIndex++, Double.valueOf(split[1]));
+            }
+            rs = prstm.executeQuery();
+            while(rs.next()){
+                Transport t = new Transport(rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(6), rs.getString(7),rs.getDouble(8));
+                t.set_id(rs.getString(1));
+                result.add(t);
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null) rs.close();
+            if(prstm != null) prstm.close();
+            if(c != null )c.close();
+        }
+        return result;
+    }
+
     /* Getters */
     public double get_tarif() {
         return tarif;
@@ -112,10 +148,8 @@ public class Transport extends Partenaire{
     /* Test */
     public static void main(String[] args) {
         try {
-            Transport t = Transport.get_transport_par_id(null, "TRN2");
-            if(t != null){
-                System.out.println(t.get_evaluation());
-            }
+            ArrayList<Transport> ls = Transport.rechercher_transport(null, "0-5", null, null);
+            System.out.println(ls.size());
         } catch (Exception e) {
             e.printStackTrace();
         }

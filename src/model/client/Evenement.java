@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import model.shared.Database;
+import model.shared.PartenaireUtils;
 
 public class Evenement{
     private String id_evenement;
@@ -27,6 +28,8 @@ public class Evenement{
     public static int EVENEMENT_CET_ANNEE = 5;
     public static int EVENEMENT_CET_MOIS = 6;
     public static int EVENEMENT_AUJOURDHUI = 7;
+    public static int EVENEMENT_CALENDRIER = 10;
+    public static int EVENEMENT_HOTEL  = 11;
 
     /* Constructor */
     public Evenement(String titre, String desc, String lieu, Date date_debut, Date date_fin, String id_hotel, String id_categ, String id_ville){
@@ -207,7 +210,7 @@ public class Evenement{
         return result;
     }
 
-    /* Fonction pour avoir les nombres des evenements */
+    /* Fonction pour avoir les nombres d'evenements */
     public static HashMap<String, Integer> get_nombre_evenement() throws Exception{
         HashMap<String, Integer> result = new HashMap<String, Integer>();
         Connection c = null;
@@ -232,6 +235,51 @@ public class Evenement{
         }
         return result;
     }
+
+    /* Fonction pour generer la requete sql de la recherche multicritere */
+    public static String get_recherche_query(int type,String titre, String categorie, String id_ville, Date date_debut_evenement, Date date_fin)throws Exception{
+        String result = "";
+        if(type == EVENEMENT_CALENDRIER)result += "SELECT * FROM v_evenement_calendrier WHERE 1=1";
+        else if(type == EVENEMENT_HOTEL)result += "SELECT * FROM v_evenement_hotel WHERE 1=1";
+        if(titre != null) result += " AND titre_evenement LIKE ?";
+        if(categorie != null) result += " AND id_categorie_evenement = ?";
+        if(id_ville != null) result += " AND id_ville = ? ";
+        if(date_debut_evenement != null) result += " AND date_debut_evenement >= ?";
+        if(date_fin != null) result += " AND date_fin_evenement <= ?";
+        return result;
+    }
+
+    /* Fonction pour rechercher des evenement */
+    public static ArrayList<Evenement> rechercher_evenement(int type,String nom, String categorie, String id_ville,Date date_debut,Date date_fin) throws Exception{
+        ArrayList<Evenement> result = new ArrayList<Evenement>();
+        Connection c = null; 
+        PreparedStatement prstm = null; 
+        ResultSet rs = null;
+        try{
+            c = Database.get_connection();
+            int paramIndex = 1;
+            prstm = c.prepareStatement(Evenement.get_recherche_query(type,nom,categorie, id_ville, date_debut, date_fin));
+            if(nom != null) prstm.setString(paramIndex++,nom);
+            if(categorie != null) prstm.setString(paramIndex++,categorie);
+            if(id_ville != null) prstm.setString(paramIndex++,id_ville);
+            if(date_debut != null) prstm.setDate(paramIndex++, date_debut);
+            if(date_fin != null)prstm.setDate(paramIndex++, date_fin);
+            rs = prstm.executeQuery();
+            while(rs.next()){
+                Evenement ev =  new Evenement(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getDate(6), rs.getString(7), rs.getString(9), rs.getString(8));
+                ev.set_id_evenement(rs.getString(1));
+                result.add(ev);
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(rs != null) rs.close();
+            if(prstm != null) prstm.close();
+            if(c != null )c.close();
+        }
+        return result;
+    }
+
     /* Getters */
     public String get_id_evenement() {
         return id_evenement;
@@ -293,11 +341,8 @@ public class Evenement{
     /* Test */
     public static void main(String[] args) {
         try{
-            HashMap<String, Integer> ls = Evenement.get_nombre_evenement();
-            System.out.println("total : "+ls.get("total"));
-            System.out.println("annee : "+ls.get("annee"));
-            System.out.println("mois : "+ls.get("mois"));
-            System.out.println("jours : "+ls.get("jour"));
+            ArrayList<Evenement> ls = Evenement.rechercher_evenement(Evenement.EVENEMENT_ALL, null, null, null, null, null);
+            System.out.println(ls.size());
         }catch(Exception e){
             e.printStackTrace();
         }

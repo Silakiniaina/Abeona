@@ -127,6 +127,30 @@ public abstract class Partenaire {
         return result;
     }
 
+    /* Fonction pour accepter ou decliner une inscription partenaire via son id */
+    public static void valider_inscription(String id, boolean valider) throws Exception{
+        Connection c = null; 
+        PreparedStatement prstm = null; 
+        try{
+            c = Database.get_connection();
+            c.setAutoCommit(false);
+            if(valider)prstm = c.prepareStatement("UPDATE partenaire SET status = 1 WHERE id_partenaire  = ? ");
+            else if(!valider) prstm =  c.prepareStatement("DELETE FROM partenaire WHERE id_partenaire = ?");
+            prstm.setString(1, id);
+            prstm.executeUpdate();
+            c.commit();
+        }catch(Exception e){
+            c.rollback();
+            throw e;
+        }finally{
+            if(prstm != null) prstm.close();
+            if(c != null ) c.close();
+        }
+    }
+
+    /* Fonction pour avoir le nombre des partenaires */
+    
+
     /* Getters */
     public String get_id() {
         return id;
@@ -161,4 +185,13 @@ public abstract class Partenaire {
         this.evaluation = ev;
     }
 
+
+    /* Test */
+    public static void main(String[] args) {
+        try {
+            Partenaire.valider_inscription("PAR1", false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

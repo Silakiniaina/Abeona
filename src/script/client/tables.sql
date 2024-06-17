@@ -254,6 +254,7 @@ CREATE TABLE Reservation(
     nombre_personne SMALLINT NOT NULL,
     date_insertion TIMESTAMP DEFAULT NOW(),
     date_validation DATE,
+    prix_unitaire NUMERIC(18,2) DEFAULT 0,
     id_utilisateur TEXT,
     id_categorie_reservation TEXT,
     id_partenaire TEXT NOT NULL,
@@ -311,4 +312,10 @@ CREATE TABLE language_guide(
     PRIMARY KEY(id_guide, id_language),
     FOREIGN KEY(id_guide) REFERENCES Guide(id_guide),
     FOREIGN KEY(id_language) REFERENCES language_(id_language)
+);
+
+CREATE TABLE benefice(
+    id_benefice TEXT DEFAULT generer_id_benefice(),
+    pourcentage INTEGER,
+    PRIMARY KEY(id_benefice)
 );

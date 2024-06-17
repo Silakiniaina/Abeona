@@ -172,6 +172,13 @@ CREATE VIEW v_evenement_calendrier AS
     WHERE id_hotel IS NULL
 ;
 
+CREATE VIEW v_evenement_hotel AS 
+    SELECT 
+        * 
+    FROM evenement 
+    WHERE id_hotel IS NOT NULL
+;
+
 CREATE VIEW v_evenement_calendrier_passe AS
     SELECT 
         * 
@@ -329,6 +336,114 @@ CREATE VIEW v_commodite_hotel AS
     ON ch.id_commodite = c.id_commodite
 ;
 
+-- PARTENAIRE --
+CREATE VIEW v_partenaire_active AS 
+    SELECT 
+        * 
+    FROM partenaire 
+    WHERE status = 1 
+;
+
+CREATE VIEW v_nombre_partenaire_mois as 
+    SELECT 
+        sum(n) AS mois
+    FROM(
+        SELECT 
+            COUNT(*) as n 
+        FROM hotel
+        UNION ALL
+        SELECT 
+            COUNT(*) as h
+        FROM transport
+        UNION ALL 
+        SELECT 
+            COUNT(*) as g
+        FROM guide
+        WHERE DATE_TRUNC('month', date_insertion) = DATE_TRUNC('month', CURRENT_DATE)
+    )
+;
+
+CREATE VIEW v_nombre_partenaire_annee as 
+    SELECT 
+        sum(n) AS annee
+    FROM(
+        SELECT 
+            COUNT(*) as n 
+        FROM hotel
+        UNION ALL
+        SELECT 
+            COUNT(*) as h
+        FROM transport
+        UNION ALL 
+        SELECT 
+            COUNT(*) as g
+        FROM guide
+        WHERE DATE_PART('year', date_insertion) = DATE_PART('year', CURRENT_DATE)
+    )
+;
+
+CREATE VIEW v_nombre_partenaire_jour as 
+    SELECT 
+        sum(n) AS jour
+    FROM(
+        SELECT 
+            COUNT(*) as n 
+        FROM hotel
+        UNION ALL
+        SELECT 
+            COUNT(*) as h
+        FROM transport
+        UNION ALL 
+        SELECT 
+            COUNT(*) as g
+        FROM guide
+        WHERE DATE(date_insertion) = CURRENT_DATE
+    )
+;
+
+CREATE OR REPLACE VIEW v_nombre_partenaire_total AS
+    SELECT 
+        sum(n) AS total
+    FROM(
+        SELECT 
+            COUNT(*) as n 
+        FROM hotel
+        UNION ALL
+        SELECT 
+            COUNT(*) as h
+        FROM transport
+        UNION ALL 
+        SELECT 
+            COUNT(*) as g
+        FROM guide
+    )
+;
+
+CREATE OR REPLACE VIEW v_nombre_partenaire AS
+    SELECT 
+        vnt.total AS total,
+        vna.annee AS cet_annee,
+        vnm.mois AS cet_mois,
+        vnj.jour AS jours
+    FROM 
+        v_nombre_partenaire_mois AS vnm,
+        v_nombre_partenaire_annee AS vna,
+        v_nombre_partenaire_total AS vnt,
+        v_nombre_partenaire_jour AS vnj
+;
+
+-- Benefice --
+CREATE OR REPLACE VIEW v_benefice AS
+    SELECT 
+        DATE_PART('YEAR', date_debut_reservation) AS annee,
+        DATE_PART('MONTH', date_debut_reservation) AS mois,
+        id_categorie_reservation,
+        ((SELECT CAST(pourcentage AS NUMERIC) FROM benefice WHERE id_benefice = 'BEN1') / 100) * SUM(prix_unitaire) AS total_prix
+    FROM 
+        Reservation as r
+    GROUP BY 
+        id_categorie_reservation, mois, annee
+;
 
 SELECT 
     h.*,

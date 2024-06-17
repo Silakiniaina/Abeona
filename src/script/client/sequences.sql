@@ -28,3 +28,4 @@ CREATE SEQUENCE evaluation_seq;
 CREATE SEQUENCE achat_pack_seq;
 CREATE SEQUENCE reservation_seq;
 CREATE SEQUENCE evenement_seq;
+CREATE SEQUENCE benefice_seq;
