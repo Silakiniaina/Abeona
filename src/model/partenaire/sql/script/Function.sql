@@ -236,3 +236,81 @@ END;
 $$
 LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION generate_id_reservation_chambre(sequence TEXT)
+RETURNS TEXT AS $$
+DECLARE
+    seq TEXT;
+    id TEXT;
+    current_date DATE;
+    last_date DATE;
+BEGIN
+    SELECT CURRENT_DATE INTO current_date;
+
+    SELECT last_reset_date INTO last_date
+    FROM reset_date WHERE sequence_name = sequence;
+
+    IF current_date > last_date THEN
+        EXECUTE 'ALTER SEQUENCE ' || sequence || ' RESTART WITH 1';
+
+        UPDATE reset_date SET last_reset_date = current_date WHERE sequence_name = sequence;
+    END IF;
+
+    SELECT nextval(sequence) INTO seq;
+    id := 'RC' || REPLACE(current_date::TEXT,'-','') || LPAD(id::TEXT,10,'0');
+    RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION generate_id_reservation_transport(sequence TEXT)
+RETURNS TEXT AS $$
+DECLARE
+    seq TEXT;
+    id TEXT;
+    current_date DATE;
+    last_date DATE;
+BEGIN
+    SELECT CURRENT_DATE INTO current_date;
+
+    SELECT last_reset_date INTO last_date
+    FROM reset_date WHERE sequence_name = sequence;
+
+    IF current_date > last_date THEN
+        EXECUTE 'ALTER SEQUENCE ' || sequence || ' RESTART WITH 1';
+
+        UPDATE reset_date SET last_reset_date = current_date WHERE sequence_name = sequence;
+    END IF;
+
+    SELECT nextval(sequence) INTO seq;
+    id := 'RT' || REPLACE(current_date::TEXT,'-','') || LPAD(id::TEXT,10,'0');
+    RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION generate_id_reservation_attraction(sequence TEXT)
+RETURNS TEXT AS $$
+DECLARE
+    seq TEXT;
+    id TEXT;
+    current_date DATE;
+    last_date DATE;
+BEGIN
+    SELECT CURRENT_DATE INTO current_date;
+
+    SELECT last_reset_date INTO last_date
+    FROM reset_date WHERE sequence_name = sequence;
+
+    IF current_date > last_date THEN
+        EXECUTE 'ALTER SEQUENCE ' || sequence || ' RESTART WITH 1';
+
+        UPDATE reset_date SET last_reset_date = current_date WHERE sequence_name = sequence;
+    END IF;
+
+    SELECT nextval(sequence) INTO seq;
+    id := 'RA' || REPLACE(current_date::TEXT,'-','') || LPAD(id::TEXT,10,'0');
+    RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+

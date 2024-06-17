@@ -117,3 +117,38 @@ CREATE TABLE language_guide (
     id_language TEXT NOT NULL REFERENCES language(id_language),
     id_guide TEXT NOT NULL REFERENCES guide(id_guide) 
 );
+
+CREATE TABLE reset_date (
+    sequence_name VARCHAR(255),
+    last_reset_date DATE DEFAULT now()
+);
+
+CREATE TABLE reservation_chambres (
+    id_reservation_chambre TEXT DEFAULT generate_id_reservation_chambre('reservation_chambres_sequence'),
+    id_utilisateur TEXT NOT NULL REFERENCES utilisateurs(id_utilisateur),
+    id_chambre TEXT NOT NULL REFERENCES chambres(id_chambre),
+    date_insertion TIMESTAMP DEFAULT now(),
+    date_debut DATE NOT NULL,
+    date_fin DATE NOT NULL
+);
+
+CREATE TABLE reservation_transport (
+    id_reservation_transport TEXT DEFAULT generate_id_reservation_transport('reservation_transport_sequence'),
+    id_utilisateur TEXT NOT NULL REFERENCES utilisateur(id_utilisateur),
+    id_transport TEXT NOT NULL REFERENCES transport(id_transport),
+    id_ville_depart TEXT NOT NULL REFERENCES ville(id_ville),
+    id_ville_arrive TEXT NOT NULL REFERENCES ville(id_ville),
+    date_insertion TIMESTAMP DEFAULT now(),
+    date_reservation TIMESTAMP
+);
+
+CREATE TABLE reservation_attraction (
+    id_reservation_attraction TEXT DEFAULT generate_id_reservation_attraction('reservation_attraction_sequence'),
+    id_utilisateur TEXT NOT NULL REFERENCES utilisateurs(id_utilisateur),
+    id_attraction TEXT NOT NULL REFERENCES attractions(id_attraction),
+    nombre_personne INT CHECK (nombre_personne > 0),
+    tarif DOUBLE PRECISION CHECK (tarif > 0),
+    date_insertion TIMESTAMP DEFAULT now(),
+    date_debut DATE NOT NULL,
+    date_fin DATE NOT NULL
+);
