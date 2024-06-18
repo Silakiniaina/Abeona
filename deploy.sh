@@ -15,7 +15,7 @@ javac -d "$bin" -cp "$lib/*" "$temp"/*.java
 rm -R "$temp"
 
 src_dir="bin"
-web_dir="web"
+web_dir="web/jsp"
 lib_dir="lib"
 assets_dir="assets"
 config_dir="config"
