@@ -41,9 +41,9 @@ public class Utilisateur{
         try{
             String sql = "SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,email,date_de_naissance,id_genre FROM ";
             c = Database.get_connection();
-            if(type == UTILISATEUR_CET_ANNEE)sql += "v_utilisateur_cet_annee";
-            else if(type == UTILISATEUR_CET_MOIS) sql += "v_utilisateur_cet_mois";
-            else if(type == UTILISATEUR_AUJOURDHUI) sql += "v_utilisateur_aujourdhui";
+            if(type == UTILISATEUR_CET_ANNEE)sql += "v_utilisateur_par_annee WHERE annee = DATE_PART('year',CURRENT_DATE)";
+            else if(type == UTILISATEUR_CET_MOIS) sql += "v_utilisateur_cet_mois  WHERE annee = DATE_PART('year',CURRENT_DATE) AND month = DATE_PART('month',CURRENT_DATE)";
+            else if(type == UTILISATEUR_AUJOURDHUI) sql += "v_utilisateur_aujourdhui date_insertion = CURRENT_DATE";
             else if(type == UTILISATEUR_ALL) sql += "utilisateur ";
             prstm = c.prepareStatement(sql);
             rs = prstm.executeQuery();
