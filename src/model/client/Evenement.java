@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import model.shared.Database;
-import model.shared.PartenaireUtils;
 
 public class Evenement{
     private String id_evenement;

@@ -156,6 +156,13 @@ INSERT INTO Utilisateur (nom_utilisateur, prenom_utilisateur, date_de_naissance,
 ('Lefevre', 'Emma', '1995-03-25', 'emma.lefevre1@example.com',digest('12345','sha1'), 'GEN2', 'CTU4'),
 ('Leroy', 'Luc', '1998-07-30', 'luc.leroy1@example.com',digest('12345','sha1'),'GEN2', 'CTU5');
 
+INSERT INTO Utilisateur (nom_utilisateur, prenom_utilisateur, date_de_naissance, email, mot_de_passe, id_genre, id_categorie_utilisateur,date_insertion) VALUES
+('Dupont', 'Jean', '1990-05-15', 'jean.dupont1@example.com',digest('12345','sha1'), 'GEN1', 'CTU1','2020-05-02'),
+('Durand', 'Sophie', '1985-08-20', 'sophie.durand1@example.com',digest('12345','sha1'), 'GEN2', 'CTU2','2023-01-12'),
+('Martin', 'Pierre', '1982-10-10', 'pierre.martin1@example.com',digest('12345','sha1'), 'GEN1', 'CTU3','2021-04-17'),
+('Lefevre', 'Emma', '1995-03-25', 'emma.lefevre1@example.com',digest('12345','sha1'), 'GEN2', 'CTU4','2023-04-23'),
+('Leroy', 'Luc', '1998-07-30', 'luc.leroy1@example.com',digest('12345','sha1'),'GEN2', 'CTU5','2019-08-12');
+
 -- Insertion des données pour la table Ville
 INSERT INTO Ville (nom_ville, id_region) VALUES
 ('Antananarivo', 'REG1'),
@@ -297,3 +304,4 @@ INSERT INTO Language_guide (id_guide, id_language) VALUES
 -- Insertion des donnees pour la table benefice
 INSERT INTO Benefice (pourcentage) VALUES 
     (10);
+
