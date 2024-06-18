@@ -148,9 +148,6 @@ public abstract class Partenaire {
         }
     }
 
-    /* Fonction pour avoir le nombre des partenaires */
-    
-
     /* Getters */
     public String get_id() {
         return id;

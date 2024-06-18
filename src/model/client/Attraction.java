@@ -125,7 +125,7 @@ public class Attraction extends Partenaire{
                 est_nouvelle_connexion = true;
             }
             else { c = con; }
-            prsmt = c.prepareStatement("SELECT * FROM v_attraction_with_evaluation WHERE id_attraction = ? ");
+            prsmt = c.prepareStatement("SELECT * FROM v_evaluation_attraction WHERE id_attraction = ? ");
             prsmt.setString(1,id);
             rs = prsmt.executeQuery();
             if (rs.next()) {

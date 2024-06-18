@@ -30,7 +30,7 @@ public class Guide extends Partenaire{
         ResultSet rs = null;
         try{
             c = Database.get_connection();
-            prstm = c.prepareStatement("SELECT * FROM v_guide_with_evaluation");
+            prstm = c.prepareStatement("SELECT * FROM v_evaluation_guide");
             rs = prstm.executeQuery();
             while ( rs.next()) {
                 Guide g = new Guide(rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(6),rs.getDouble(7));
@@ -62,7 +62,7 @@ public class Guide extends Partenaire{
             }else{
                 c = con;
             }
-            prstm = c.prepareStatement("SELECT * FROM v_guide_with_evaluation WHERE id_guide = ?");
+            prstm = c.prepareStatement("SELECT * FROM v_evaluation_guide WHERE id_guide = ?");
             prstm.setString(1, id);
             rs = prstm.executeQuery();
             if( rs.next()) {

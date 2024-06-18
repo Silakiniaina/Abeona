@@ -189,9 +189,9 @@ public class Evenement{
         ResultSet rs = null;
         try{
             c = Database.get_connection();
-            if(type == EVENEMENT_CET_ANNEE)prstm = c.prepareStatement("SELECT * FROM v_evenement_cet_annee");
-            else if(type == EVENEMENT_CET_MOIS)prstm = c.prepareStatement("SELECT * FROM v_evenement_cet_mois");
-            else if(type == EVENEMENT_AUJOURDHUI)prstm = c.prepareStatement("SELECT * FROM v_evenement_aujourdhui");
+            if(type == EVENEMENT_CET_ANNEE)prstm = c.prepareStatement("SELECT * FROM v_evenement_par_annee WHERE annee = DATE_PART('year',CURRENT_DATE)");
+            else if(type == EVENEMENT_CET_MOIS)prstm = c.prepareStatement("SELECT * FROM v_evenement_cet_mois WHERE annee = DATE_PART('year',CURRENT_DATE) AND DATE_PART('month',date_debut_evenement) = DATE_PART('month', CURRENT_DATE)");
+            else if(type == EVENEMENT_AUJOURDHUI)prstm = c.prepareStatement("SELECT * FROM v_evenement_aujourdhui WHERE CURRENT_DATE BETWEEN date_debut_evenement AND date_fin_evenement");
             else if(type == EVENEMENT_ALL) prstm = c.prepareStatement("SELECT * FROM evenement");
             rs = prstm.executeQuery();
             while (rs.next()) {

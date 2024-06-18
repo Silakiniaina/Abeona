@@ -46,7 +46,7 @@ public class Hotel extends Partenaire{
                 est_nouvelle_connexion = true;
             }
             else { c = con; }
-            prsmt = c.prepareStatement("SELECT * FROM v_hotel_with_evaluation WHERE id_hotel = ? ");
+            prsmt = c.prepareStatement("SELECT * FROM v_evaluation_hotel WHERE id_hotel = ? ");
             prsmt.setString(1,id);
             rs = prsmt.executeQuery();
             if (rs.next()) {
@@ -143,7 +143,7 @@ public class Hotel extends Partenaire{
 
     /* Function pour construire dynamiquement le requete de filtre */
     public static String filter_query(String dest,ArrayList<String> id_commodite, ArrayList<String> id_ville, ArrayList<String> evaluation) {
-        StringBuilder sql = new StringBuilder("SELECT * FROM v_hotel_with_evaluation WHERE 1=1");
+        StringBuilder sql = new StringBuilder("SELECT * FROM v_evaluatio_hotel WHERE 1=1");
         if(dest != null){
             sql.append(" AND LOWER(nom_hotel) LIKE ? ");
         }

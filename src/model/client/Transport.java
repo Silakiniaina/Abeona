@@ -31,7 +31,7 @@ public class Transport extends Partenaire{
         ResultSet rs = null;
         try{
             c = Database.get_connection();
-            prstm = c.prepareStatement("SELECT * FROM v_transport_with_evaluation");
+            prstm = c.prepareStatement("SELECT * FROM v_evaluation_transport");
             rs = prstm.executeQuery();
             while(rs.next()){
                 Transport t = new Transport(rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(6), rs.getString(7),rs.getDouble(8));
@@ -62,7 +62,7 @@ public class Transport extends Partenaire{
             }else{
                 c = con;
             }
-            prstm = c.prepareStatement("SELECT * FROM v_transport_with_evaluation WHERE id_transport = ?");
+            prstm = c.prepareStatement("SELECT * FROM v_evaluation_transport WHERE id_transport = ?");
             prstm.setString(1, id);
             rs = prstm.executeQuery();
             if(rs.next()){
