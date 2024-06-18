@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/admin/sidebar.css">
+    <link rel="stylesheet" href="/assets/css/admin/style.css">
+    <link rel="stylesheet" href="/assets/icons/fontawesome/css/all.css">
+    <title>Gestion partenaire</title>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="aside">
+        <div class="aside__header">
+            <div class="aside__header--logo">
+                <i class="fa fa-parachute-box"aria-hidden="true"></i>
+            </div>
+            <div class="aside__header--brand">
+                <p>Abeona Travel</p>
+            </div>
+        </div>
+        <div class="aside__list">
+            <a class="aside__list__item" href="#">
+                <div class="aside__list__item-img">
+                    <i class="fa fa-chart-line"></i>
+                </div>
+                <div class="aside__list__item-label">Statistiques</div>
+            </a>
+            <a class="aside__list__item" href="partenaire.html">
+                <div class="aside__list__item-img">
+                    <i class="fa fa-hotel"></i>
+                </div>
+                <div class="aside__list__item-label">Partenaires</div>
+            </a>
+            <a class="aside__list__item" href="utilisateur.html">
+                <div class="aside__list__item-img">
+                    <i class="fa fa-users"></i>
+                </div>
+                <div class="aside__list__item-label">Utilisateur</div>
+            </a>
+            <a class="aside__list__item" href="#">
+                <div class="aside__list__item-img">
+                    <i class="fa fa-piggy-bank"></i>
+                </div>
+                <div class="aside__list__item-label">Revenu</div>
+            </a>
+            <a class="aside__list__item active" href="evenement.html">
+                <div class="aside__list__item-img">
+                    <i class="fa fa-calendar-check"></i>
+                </div>
+                <div class="aside__list__item-label">Evenement</div>
+            </a>
+        </div>
+        <div class="aside__profile">
+            <div class="aside__profile-img">
+                <img src="/assets/images/img.jpg" alt="Sanda">
+                <span></span>
+            </div>
+            <div class="aside__profile__label">
+                <div class="aside__profile__label-name">Sanda Silakiniaina</div>
+                <div class="aside__profile__label-function">Administrator</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main">
+
+        <!-- Nombre -->
+        <h2 class="main__title">Nombre de partenaire</h2>
+        <div class="main__number">
+            <div class="main__number__wrapper">
+                <div class="main__number__wrapper__img">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <div class="main__number__wrapper__content">
+                    <div class="main__number__wrapper__content-title">Total evenements cet annee</div>
+                    <div class="main__number__wrapper__content-value">545</div>
+                </div>
+            </div>
+            <div class="main__number__wrapper">
+                <div class="main__number__wrapper__img">
+                    <i class="fa fa-calendar-alt"></i>
+                </div>
+                <div class="main__number__wrapper__content">
+                    <div class="main__number__wrapper__content-title">Evenements cet mois</div>
+                    <div class="main__number__wrapper__content-value">20</div>
+                </div>
+            </div>
+            <div class="main__number__wrapper">
+                <div class="main__number__wrapper__img">
+                    <i class="fa fa-calendar-check"></i>
+                </div>
+                <div class="main__number__wrapper__content">
+                    <div class="main__number__wrapper__content-title">s aujourd'hui</div>
+                    <div class="main__number__wrapper__content-value">2</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- List of partenaire -->
+        <h2 class="main__title">Liste des evenements</h2>
+        <div class="main__list">
+            <div class="main__list__tabs">
+                <div class="main__list__tabs__filter">
+                    <form action="" id="filter-container">
+                        <div class="form-content input_name">
+                            <label for="input_nom">Nom</label>
+                            <input type="text" name="nom" id="input_nom">
+                        </div>
+                        <div class="form-content input_city">
+                            <label for="input_ville">Ville</label>
+                            <select name="ville" id="input_ville">
+                                <option value="">Tous</option>
+                                <option value="">Ville 1</option>
+                                <option value="">Ville 2</option>
+                                <option value="">Ville 3</option>
+                            </select>
+                        </div>
+                        <div class="form-content input_eval">
+                            <label for="input_evaluation">Evaluation</label>
+                            <input type="number" name="evaluation" id="input_evaluation">
+                        </div>
+                        <div class="form-content input_date_insertion_debut">
+                            <label for="input_date_i_d">Date insertion debut</label>
+                            <input type="date" name="" id="input_date_i_d">
+                        </div>
+                        <div class="form-content input_date_insertion_fin">
+                            <label for="input_i_f">Date insertion fin</label>
+                            <input type="date" name="" id="input_i_f">
+                        </div>
+                        <button type="submit">Rechercher</button>
+                    </form>
+                </div>
+                <div class="main__list__tabs__header" id="list_tabs">
+                    <button class="main__list__tabs__header__content active" data-tab="evenement-calendrier">CALENDRIER</button>
+                    <button class="main__list__tabs__header__content" data-tab="evenement-hotel">HOTEL</button>
+                    <button class="main__list__tabs__header__content" data-tab="evenement-attraction">ATTRACTION</button>
+                </div>
+                <div class="main__list__tabs__body">
+                    <div id="evenement-calendrier_container" class="main__list__tabs__body__content">
+                        <div class="table-container-evenement-calendrier" id="evenement-calendrier"></div>
+                    </div>
+                    <div id="evenement-hotel" class="main__list__tabs__body__content active">
+                        <div class="table-container-evenement-hotel" id="evenement-hotel"></div>
+                    </div>
+                    <div id="evenement-attraction" class="main__list__tabs__body__content">
+                        <div class="table-container-evenement-attraction" id="evenement-attraction"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/assets/icons/fontawesome/js/all.js"></script>
+    <script src="/assets/js/admin/functions.js"></script>
+    <script src="/assets/js/admin/sidebar.js"></script>
+    <script src="/assets/js/admin/evenement.js"></script>
+</body>
+
+</html>
