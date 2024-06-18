@@ -8,5 +8,6 @@
 <body>
     <h1>Hello, Bienvenue dans Abeona</h1>
     <h2>Votre agence de voyage</h2>
+    <a href="home">Test home</a>
 </body>
 </html>
