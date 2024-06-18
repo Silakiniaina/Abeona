@@ -9,7 +9,11 @@ public class Connexion
 {
     public static Connection getConnection() throws SQLException 
     {
+<<<<<<< Updated upstream
         String url = "jdbc:postgresql://localhost:5432/db_abeona";
+=======
+        String url = "jdbc:postgresql://localhost:5432/abeonas";
+>>>>>>> Stashed changes
         String utilisateur = "postgres";
         String motDePasse = "root";
 

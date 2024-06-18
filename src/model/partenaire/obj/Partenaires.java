@@ -14,17 +14,28 @@ import utils.security.Encryption;
 
 public class Partenaires{
 	String id_partenaire;
+<<<<<<< Updated upstream
 	String email_contact;
 	String nom_partenaire;
+=======
+	String nom_partenaire;
+	String email_partenaire;
+>>>>>>> Stashed changes
 	String mot_de_passe;
 	Date date_insertion;
 
 	public Partenaires() throws Exception {
 	}
 
+<<<<<<< Updated upstream
 	public Partenaires(String id_partenaire, String email_contact, String nom_partenaire, String mot_de_passe, Date date_insertion) throws Exception {
 		this.id_partenaire = id_partenaire;
 		this.email_contact = email_contact;
+=======
+	public Partenaires(String id_partenaire,String nom_partenaire, String email_partenaire, String mot_de_passe, Date date_insertion) throws Exception {
+		this.id_partenaire = id_partenaire;
+		this.email_partenaire = email_partenaire;
+>>>>>>> Stashed changes
 		this.nom_partenaire = nom_partenaire;
 		this.mot_de_passe = mot_de_passe;
 		this.date_insertion = date_insertion;
@@ -34,8 +45,13 @@ public class Partenaires{
 		this.id_partenaire = newId_partenaire;
 	}
 
+<<<<<<< Updated upstream
 	public void setEmail_contact(String newEmail_contact) throws Exception {
 		this.email_contact = newEmail_contact;
+=======
+	public void setemail_partenaire(String newemail_partenaire) throws Exception {
+		this.email_partenaire = newemail_partenaire;
+>>>>>>> Stashed changes
 	}
 
 	public void setNom_partenaire(String newNom_partenaire) throws Exception {
@@ -54,8 +70,13 @@ public class Partenaires{
 		return this.id_partenaire;
 	}
 
+<<<<<<< Updated upstream
 	public String getEmail_contact(){
 		return this.email_contact;
+=======
+	public String getemail_partenaire(){
+		return this.email_partenaire;
+>>>>>>> Stashed changes
 	}
 
 	public String getNom_partenaire(){
@@ -85,8 +106,13 @@ public class Partenaires{
 			while (resultSet.next()) {
 				Partenaires obj = new Partenaires(
 				resultSet.getString("id_partenaire"),
+<<<<<<< Updated upstream
 				resultSet.getString("email_contact"),
 				resultSet.getString("nom_partenaire"),
+=======
+				resultSet.getString("nom_partenaire"),
+				resultSet.getString("email_partenaire"),
+>>>>>>> Stashed changes
 				resultSet.getString("mot_de_passe"),
 				resultSet.getDate("date_insertion")
 				);
@@ -110,10 +136,13 @@ public class Partenaires{
 			}
 		}
 
+<<<<<<< Updated upstream
 		if (partenairess.isEmpty()) {
 			throw new Exception("No Partenairess found");
 		}
 
+=======
+>>>>>>> Stashed changes
 		return partenairess;
 	}
 
@@ -133,8 +162,13 @@ public class Partenaires{
 			if (resultSet.next()) {
 				partenaires = new Partenaires(
 				resultSet.getString("id_partenaire"),
+<<<<<<< Updated upstream
 				resultSet.getString("email_contact"),
 				resultSet.getString("nom_partenaire"),
+=======
+				resultSet.getString("nom_partenaire"),
+				resultSet.getString("email_partenaire"),
+>>>>>>> Stashed changes
 				resultSet.getString("mot_de_passe"),
 				resultSet.getDate("date_insertion")
 				);
@@ -163,15 +197,25 @@ public class Partenaires{
 
 
 	public void insert() throws Exception {
+<<<<<<< Updated upstream
         
+=======
+>>>>>>> Stashed changes
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = Connexion.getConnection();
+<<<<<<< Updated upstream
             String query = "INSERT INTO Partenaires (id_partenaire,email_contact,nom_partenaire,mot_de_passe,date_insertion) VALUES (generate_id_partenaire(),?,?,?,?)";
             statement = connection.prepareStatement(query);
             statement.setObject(1, getEmail_contact(),Types.OTHER);
             statement.setString(2, getNom_partenaire());
+=======
+            String query = "INSERT INTO Partenaires (id_partenaire,nom_partenaire,email_partenaire,mot_de_passe,date_insertion) VALUES (generate_id_partenaire(),?,?,?,?)";
+            statement = connection.prepareStatement(query);
+            statement.setObject(1, getNom_partenaire(),Types.OTHER);
+            statement.setString(2, getemail_partenaire());
+>>>>>>> Stashed changes
             statement.setString(3, Encryption.toSHA256(getMot_de_passe()));
             statement.setDate(4, getDate_insertion());
             statement.executeUpdate();
@@ -197,10 +241,17 @@ public class Partenaires{
         PreparedStatement statement = null;
         try {
             connection = Connexion.getConnection();
+<<<<<<< Updated upstream
             String query = "UPDATE Partenaires SET email_contact = ? ,nom_partenaire = ? ,mot_de_passe = ? ,date_insertion = ?  WHERE id_partenaire = ? ";
             statement = connection.prepareStatement(query);
             statement.setObject(1, getEmail_contact(),Types.OTHER);
             statement.setString(2, getNom_partenaire());
+=======
+            String query = "UPDATE Partenaires SET nom_partenaire = ? ,email_partenaire = ? ,mot_de_passe = ? ,date_insertion = ?  WHERE id_partenaire = ? ";
+            statement = connection.prepareStatement(query);
+            statement.setObject(1, getNom_partenaire(),Types.OTHER);
+            statement.setString(2, getemail_partenaire());
+>>>>>>> Stashed changes
             statement.setString(3, Encryption.toSHA256(getMot_de_passe()));
             statement.setDate(4, getDate_insertion());
             statement.setString(5, getId_partenaire());

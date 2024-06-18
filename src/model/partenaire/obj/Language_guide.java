@@ -10,15 +10,27 @@ import java.util.List;
 import connection.Connexion;
 
 public class Language_guide{
+<<<<<<< Updated upstream
 	String id_language;
 	String id_guide;
+=======
+	String id_guide;
+    String id_language;
+	
+>>>>>>> Stashed changes
 
 	public Language_guide() throws Exception {
 	}
 
+<<<<<<< Updated upstream
 	public Language_guide(String id_language, String id_guide) throws Exception {
 		this.id_language = id_language;
 		this.id_guide = id_guide;
+=======
+	public Language_guide(String id_guide, String id_language) throws Exception {
+		this.id_guide = id_guide;
+        this.id_language = id_language;
+>>>>>>> Stashed changes
 	}
 
 	public void setId_language(String newId_language) throws Exception {
@@ -51,8 +63,13 @@ public class Language_guide{
 
 			while (resultSet.next()) {
 				Language_guide obj = new Language_guide(
+<<<<<<< Updated upstream
 				resultSet.getString("id_language"),
 				resultSet.getString("id_guide")
+=======
+				resultSet.getString("id_guide"),
+                resultSet.getString("id_language")
+>>>>>>> Stashed changes
 				);
 				language_guides.add(obj);
 			}
@@ -74,10 +91,13 @@ public class Language_guide{
 			}
 		}
 
+<<<<<<< Updated upstream
 		if (language_guides.isEmpty()) {
 			throw new Exception("No Language_guides found");
 		}
 
+=======
+>>>>>>> Stashed changes
 		return language_guides;
 	}
 
@@ -87,10 +107,17 @@ public class Language_guide{
         PreparedStatement statement = null;
         try {
             connection = Connexion.getConnection();
+<<<<<<< Updated upstream
             String query = "INSERT INTO Language_guide (id_language,id_guide) VALUES (?,?)";
             statement = connection.prepareStatement(query);
             statement.setString(1, getId_language());
             statement.setString(2, getId_guide());
+=======
+            String query = "INSERT INTO Language_guide (id_guide,id_language) VALUES (?,?)";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, getId_guide());
+            statement.setString(2, getId_language());
+>>>>>>> Stashed changes
             statement.executeUpdate();
             System.out.println("Donnees Language_guide inserer avec succes");
         } catch (Exception e) {

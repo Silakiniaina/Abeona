@@ -12,6 +12,7 @@ import connection.Connexion;
 
 public class Hotels{
 	String id_hotel;
+<<<<<<< Updated upstream
 	String id_partenaire;
 	String nom_hotel;
 	String description;
@@ -20,10 +21,20 @@ public class Hotels{
 	String id_ville;
 	String adresse;
 	Date date_insertion;
+=======
+	String nom_hotel;
+	String description;
+	String adresse_hotel;
+	Date date_insertion;
+	String id_partenaire;
+	String id_categorie_hotel;
+	String id_ville;
+>>>>>>> Stashed changes
 
 	public Hotels() throws Exception {
 	}
 
+<<<<<<< Updated upstream
 	public Hotels(String id_hotel, String id_partenaire, String nom_hotel, String description, String id_categorie_hotel, double evaluation, String id_ville, String adresse, Date date_insertion) throws Exception {
 		this.id_hotel = id_hotel;
 		this.id_partenaire = id_partenaire;
@@ -36,14 +47,31 @@ public class Hotels{
 		this.date_insertion = date_insertion;
 	}
 
+=======
+	public Hotels(String id_hotel, String nom_hotel, String description, String adresse_hotel, Date date_insertion, String id_partenaire, String id_categorie_hotel, String id_ville) throws Exception {
+		this.id_hotel = id_hotel;
+		this.nom_hotel = nom_hotel;
+		this.description = description;
+		this.adresse_hotel = adresse_hotel;
+		this.date_insertion = date_insertion;
+		this.id_partenaire = id_partenaire;
+		this.id_categorie_hotel = id_categorie_hotel;
+		this.id_ville = id_ville;
+	}
+
+
+>>>>>>> Stashed changes
 	public void setId_hotel(String newId_hotel) throws Exception {
 		this.id_hotel = newId_hotel;
 	}
 
+<<<<<<< Updated upstream
 	public void setId_partenaire(String newId_partenaire) throws Exception {
 		this.id_partenaire = newId_partenaire;
 	}
 
+=======
+>>>>>>> Stashed changes
 	public void setNom_hotel(String newNom_hotel) throws Exception {
 		this.nom_hotel = newNom_hotel;
 	}
@@ -52,6 +80,7 @@ public class Hotels{
 		this.description = newDescription;
 	}
 
+<<<<<<< Updated upstream
 	public void setId_categorie_hotel(String newId_categorie_hotel) throws Exception {
 		this.id_categorie_hotel = newId_categorie_hotel;
 	}
@@ -66,18 +95,39 @@ public class Hotels{
 
 	public void setAdresse(String newAdresse) throws Exception {
 		this.adresse = newAdresse;
+=======
+	public void setAdresse_hotel(String newAdresse_hotel) throws Exception {
+		this.adresse_hotel = newAdresse_hotel;
+>>>>>>> Stashed changes
 	}
 
 	public void setDate_insertion(Date newDate_insertion) throws Exception {
 		this.date_insertion = newDate_insertion;
 	}
 
+<<<<<<< Updated upstream
 	public String getId_hotel(){
 		return this.id_hotel;
 	}
 
 	public String getId_partenaire(){
 		return this.id_partenaire;
+=======
+	public void setId_partenaire(String newId_partenaire) throws Exception {
+		this.id_partenaire = newId_partenaire;
+	}
+
+	public void setId_categorie_hotel(String newId_categorie_hotel) throws Exception {
+		this.id_categorie_hotel = newId_categorie_hotel;
+	}
+
+	public void setId_ville(String newId_ville) throws Exception {
+		this.id_ville = newId_ville;
+	}
+
+	public String getId_hotel(){
+		return this.id_hotel;
+>>>>>>> Stashed changes
 	}
 
 	public String getNom_hotel(){
@@ -88,18 +138,36 @@ public class Hotels{
 		return this.description;
 	}
 
+<<<<<<< Updated upstream
 	public String getId_categorie_hotel(){
 		return this.id_categorie_hotel;
 	}
 
 	public double getEvaluation(){
 		return this.evaluation;
+=======
+	public String getAdresse_hotel(){
+		return this.adresse_hotel;
+	}
+
+	public Date getDate_insertion(){
+		return this.date_insertion;
+	}
+
+	public String getId_partenaire(){
+		return this.id_partenaire;
+	}
+
+	public String getId_categorie_hotel(){
+		return this.id_categorie_hotel;
+>>>>>>> Stashed changes
 	}
 
 	public String getId_ville(){
 		return this.id_ville;
 	}
 
+<<<<<<< Updated upstream
 	public String getAdresse(){
 		return this.adresse;
 	}
@@ -107,6 +175,8 @@ public class Hotels{
 	public Date getDate_insertion(){
 		return this.date_insertion;
 	}
+=======
+>>>>>>> Stashed changes
 
 	public List<Hotels> getAll() throws Exception {
 		List<Hotels> hotelss = new ArrayList<>();
@@ -122,6 +192,7 @@ public class Hotels{
 
 			while (resultSet.next()) {
 				Hotels obj = new Hotels(
+<<<<<<< Updated upstream
 				resultSet.getString("id_hotel"),
 				resultSet.getString("id_partenaire"),
 				resultSet.getString("nom_hotel"),
@@ -132,6 +203,17 @@ public class Hotels{
 				resultSet.getString("adresse"),
 				resultSet.getDate("date_insertion")
 				);
+=======
+					resultSet.getString("id_hotel"),
+					resultSet.getString("nom_hotel"),
+					resultSet.getString("description"),
+					resultSet.getString("adresse_hotel"),
+					resultSet.getDate("date_insertion"),
+					resultSet.getString("id_partenaire"),
+					resultSet.getString("id_categorie_hotel"),
+					resultSet.getString("id_ville")
+					);
+>>>>>>> Stashed changes
 				hotelss.add(obj);
 			}
 		} catch (SQLException e) {
@@ -152,10 +234,13 @@ public class Hotels{
 			}
 		}
 
+<<<<<<< Updated upstream
 		if (hotelss.isEmpty()) {
 			throw new Exception("No Hotelss found");
 		}
 
+=======
+>>>>>>> Stashed changes
 		return hotelss;
 	}
 
@@ -174,6 +259,7 @@ public class Hotels{
 
 			if (resultSet.next()) {
 				hotels = new Hotels(
+<<<<<<< Updated upstream
 				resultSet.getString("id_hotel"),
 				resultSet.getString("id_partenaire"),
 				resultSet.getString("nom_hotel"),
@@ -183,6 +269,16 @@ public class Hotels{
 				resultSet.getString("id_ville"),
 				resultSet.getString("adresse"),
 				resultSet.getDate("date_insertion")
+=======
+					resultSet.getString("id_hotel"),
+					resultSet.getString("nom_hotel"),
+					resultSet.getString("description"),
+					resultSet.getString("adresse_hotel"),
+					resultSet.getDate("date_insertion"),
+					resultSet.getString("id_partenaire"),
+					resultSet.getString("id_categorie_hotel"),
+					resultSet.getString("id_ville")
+>>>>>>> Stashed changes
 				);
 			}
 		} catch (SQLException e) {
@@ -212,6 +308,7 @@ public class Hotels{
         PreparedStatement statement = null;
         try {
             connection = Connexion.getConnection();
+<<<<<<< Updated upstream
             String query = "INSERT INTO Hotels (id_hotel,id_partenaire,nom_hotel,description,id_categorie_hotel,evaluation,id_ville,adresse,date_insertion) VALUES (generate_id_hotel(),?,?,?,?,?,?,?,?)";
             statement = connection.prepareStatement(query);
             statement.setString(1, getId_partenaire());
@@ -224,6 +321,20 @@ public class Hotels{
             statement.setDate(8, getDate_insertion());
             statement.executeUpdate();
             System.out.println("Donnees Hotels inserer avec succes");
+=======
+            String query = "INSERT INTO Hotel (id_hotel,nom_hotel,description,adresse_hotel,date_insertion,id_partenaire,id_categorie_hotel,id_ville) VALUES (?,?,?,?,?,?,?,?)";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, getId_hotel());
+            statement.setString(2, getNom_hotel());
+            statement.setString(3, getDescription());
+            statement.setString(4, getAdresse_hotel());
+            statement.setDate(5, getDate_insertion());
+            statement.setString(6, getId_partenaire());
+            statement.setString(7, getId_categorie_hotel());
+            statement.setString(8, getId_ville());
+            statement.executeUpdate();
+            System.out.println("Donnees Hotel inserer avec succes");
+>>>>>>> Stashed changes
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         } finally {
@@ -245,6 +356,7 @@ public class Hotels{
         PreparedStatement statement = null;
         try {
             connection = Connexion.getConnection();
+<<<<<<< Updated upstream
             String query = "UPDATE Hotels SET id_partenaire = ? ,nom_hotel = ? ,description = ? ,id_categorie_hotel = ? ,evaluation = ? ,id_ville = ? ,adresse = ? ,date_insertion = ?  WHERE id_hotel = ? ";
             statement = connection.prepareStatement(query);
             statement.setString(1, getId_partenaire());
@@ -258,6 +370,20 @@ public class Hotels{
             statement.setString(9, getId_hotel());
             statement.executeUpdate();
             System.out.println("Donnees Hotels mise a jour avec succes");
+=======
+            String query = "UPDATE Hotel SET nom_hotel = ? ,description = ? ,adresse_hotel = ? ,date_insertion = ? ,id_partenaire = ? ,id_categorie_hotel = ? ,id_ville = ?  WHERE id_hotel = ? ";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, getNom_hotel());
+            statement.setString(2, getDescription());
+            statement.setString(3, getAdresse_hotel());
+            statement.setDate(4, getDate_insertion());
+            statement.setString(5, getId_partenaire());
+            statement.setString(6, getId_categorie_hotel());
+            statement.setString(7, getId_ville());
+            statement.setString(8, getId_hotel());
+            statement.executeUpdate();
+            System.out.println("Donnees Hotel mise a jour avec succes");
+>>>>>>> Stashed changes
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }finally{
@@ -279,7 +405,11 @@ public class Hotels{
         PreparedStatement statement = null;
         try {
             connection = Connexion.getConnection();
+<<<<<<< Updated upstream
             String query = "DELETE  FROM Hotels WHERE id_hotel = ? ";
+=======
+            String query = "DELETE  FROM Hotel WHERE id_hotel = ? ";
+>>>>>>> Stashed changes
             statement = connection.prepareStatement(query);
             statement.setString(1, id_hotel);
             statement.executeUpdate();

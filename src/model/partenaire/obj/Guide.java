@@ -14,7 +14,11 @@ import connection.Connexion;
 public class Guide{
 	String id_guide;
 	String nom_guide;
+<<<<<<< Updated upstream
 	String biographie;
+=======
+	String description;
+>>>>>>> Stashed changes
 	String disponiblite;
 	Date date_insertion;
 	String id_partenaire;
@@ -22,10 +26,17 @@ public class Guide{
 	public Guide() throws Exception {
 	}
 
+<<<<<<< Updated upstream
 	public Guide(String id_guide, String nom_guide, String biographie, String disponiblite, Date date_insertion, String id_partenaire) throws Exception {
 		this.id_guide = id_guide;
 		this.nom_guide = nom_guide;
 		this.biographie = biographie;
+=======
+	public Guide(String id_guide, String nom_guide, String description, String disponiblite, Date date_insertion, String id_partenaire) throws Exception {
+		this.id_guide = id_guide;
+		this.nom_guide = nom_guide;
+		this.description = description;
+>>>>>>> Stashed changes
 		this.disponiblite = disponiblite;
 		this.date_insertion = date_insertion;
 		this.id_partenaire = id_partenaire;
@@ -39,8 +50,13 @@ public class Guide{
 		this.nom_guide = newNom_guide;
 	}
 
+<<<<<<< Updated upstream
 	public void setBiographie(String newBiographie) throws Exception {
 		this.biographie = newBiographie;
+=======
+	public void setdescription(String newdescription) throws Exception {
+		this.description = newdescription;
+>>>>>>> Stashed changes
 	}
 
 	public void setDisponiblite(String newDisponiblite) throws Exception {
@@ -63,8 +79,13 @@ public class Guide{
 		return this.nom_guide;
 	}
 
+<<<<<<< Updated upstream
 	public String getBiographie(){
 		return this.biographie;
+=======
+	public String getdescription(){
+		return this.description;
+>>>>>>> Stashed changes
 	}
 
 	public String getDisponiblite(){
@@ -95,7 +116,11 @@ public class Guide{
 				Guide obj = new Guide(
 				resultSet.getString("id_guide"),
 				resultSet.getString("nom_guide"),
+<<<<<<< Updated upstream
 				resultSet.getString("biographie"),
+=======
+				resultSet.getString("description"),
+>>>>>>> Stashed changes
 				resultSet.getString("disponiblite"),
 				resultSet.getDate("date_insertion"),
 				resultSet.getString("id_partenaire")
@@ -144,7 +169,11 @@ public class Guide{
 				guide = new Guide(
 				resultSet.getString("id_guide"),
 				resultSet.getString("nom_guide"),
+<<<<<<< Updated upstream
 				resultSet.getString("biographie"),
+=======
+				resultSet.getString("description"),
+>>>>>>> Stashed changes
 				resultSet.getString("disponiblite"),
 				resultSet.getDate("date_insertion"),
 				resultSet.getString("id_partenaire")
@@ -177,10 +206,17 @@ public class Guide{
         PreparedStatement statement = null;
         try {
             connection = Connexion.getConnection();
+<<<<<<< Updated upstream
             String query = "INSERT INTO Guide (id_guide,nom_guide,biographie,disponiblite,date_insertion,id_partenaire) VALUES (generate_id_guide(),?,?,?,?,?)";
             statement = connection.prepareStatement(query);
             statement.setString(1, getNom_guide());
             statement.setString(2, getBiographie());
+=======
+            String query = "INSERT INTO Guide (id_guide,nom_guide,description,disponiblite,date_insertion,id_partenaire) VALUES (generate_id_guide(),?,?,?,?,?)";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, getNom_guide());
+            statement.setString(2, getdescription());
+>>>>>>> Stashed changes
             statement.setObject(3, getDisponiblite(),Types.OTHER);
             statement.setDate(4, getDate_insertion());
             statement.setString(5, getId_partenaire());
@@ -207,10 +243,17 @@ public class Guide{
         PreparedStatement statement = null;
         try {
             connection = Connexion.getConnection();
+<<<<<<< Updated upstream
             String query = "UPDATE Guide SET nom_guide = ? ,biographie = ? ,disponiblite = ? ,date_insertion = ? ,id_partenaire = ?  WHERE id_guide = ? ";
             statement = connection.prepareStatement(query);
             statement.setString(1, getNom_guide());
             statement.setString(2, getBiographie());
+=======
+            String query = "UPDATE Guide SET nom_guide = ? ,description = ? ,disponiblite = ? ,date_insertion = ? ,id_partenaire = ?  WHERE id_guide = ? ";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, getNom_guide());
+            statement.setString(2, getdescription());
+>>>>>>> Stashed changes
             statement.setObject(3, getDisponiblite());
             statement.setDate(4, getDate_insertion());
             statement.setString(5, getId_partenaire());
