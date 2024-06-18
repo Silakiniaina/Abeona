@@ -19,7 +19,7 @@ set "src_dir=bin"
 set "web_dir=web/jsp"
 set "lib_dir=lib"
 set "assets_dir=assets"
-set "config_dir=config"
+set "config_dir=conf"
 set "target_name=Abeona"
 
 @REM Eto ilay chemin makany amin'ny webapps anareo no apetraka 

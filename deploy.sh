@@ -18,7 +18,7 @@ src_dir="bin"
 web_dir="web/jsp"
 lib_dir="lib"
 assets_dir="assets"
-config_dir="config"
+config_dir="conf"
 
 target_name="Abeona"
 
