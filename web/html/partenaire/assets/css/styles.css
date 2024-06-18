@@ -36,12 +36,11 @@ header {
   top: 0;
   position: fixed;
   z-index: 50;
-  padding: 50px 50px 40px 50px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: #92AA83;
   align-items: center;
-  height: 5vh;
+  height: 10vh;
   width: 100%;
   box-sizing: border-box;
   backdrop-filter: blur(5px);
@@ -64,6 +63,8 @@ header {
 }
 .navbar .nav-links > .list-container .container-profil .profil-partenaire {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 .navbar .nav-links > .list-container .container-profil .profil-partenaire img {
   width: 55px;
@@ -77,11 +78,16 @@ header {
   height: 15px;
   width: 15px;
   position: absolute;
-  background-color: #46f412;
   border-radius: 15px;
   top: 45px;
   left: 37px;
   border: solid 1px white;
+}
+.navbar .nav-links > .list-container .container-profil .profil-partenaire .status.online {
+  background-color: #46f412;
+}
+.navbar .nav-links > .list-container .container-profil .profil-partenaire .status.offline {
+  background-color: rgba(128, 128, 128, 0.5);
 }
 .navbar .nav-links > .list-container .container-profil .descr-partenaire {
   padding: 5px;
@@ -143,13 +149,21 @@ header {
 .navbar .logo {
   font-size: 2em;
   font-weight: bold;
-  width: 20%;
+  height: 2vw;
+  width: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar .logo img {
+  height: 100%;
+  width: 100%;
 }
 .navbar .nav-links {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 80%;
+  width: 80vw;
 }
 .navbar .nav-links > ul > li {
   margin: 0 30px;
@@ -185,15 +199,17 @@ header {
   margin-left: 0;
 }
 
-@media screen and (max-width:1800px) {
+@media screen and (max-width:1600px) {
   .navbar {
     padding: 0;
     height: 0;
   }
   .navbar .logo {
     position: absolute;
-    top: 50px;
+    top: 20px;
     left: 30px;
+    height: 5vw;
+    width: 5vw;
   }
   .navbar .nav-links {
     margin-left: -100%;
@@ -240,13 +256,13 @@ header {
   width: 50vw;
   margin: auto;
 }
-@media screen and (max-width:1800px) {
+@media screen and (max-width:1600px) {
   .register_services_1 {
     width: 70vw;
     margin: 0 15vw;
   }
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1500px) {
   .register_services_1 {
     width: 80vw;
     margin: 0 5vw;
@@ -262,13 +278,13 @@ header {
   transition: 0.5s ease-in-out;
   margin: 0 3vw;
 }
-@media screen and (max-width:1800px) {
+@media screen and (max-width:1600px) {
   .register_services_1 .container_appear {
     width: 40vw;
     margin: 0 5vw;
   }
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1500px) {
   .register_services_1 .container_appear {
     width: 50vw;
     margin: 0 8vw;
@@ -283,12 +299,12 @@ header {
 .register_services_1 .container_next {
   left: 100vw;
 }
-@media screen and (max-width:1800px) {
+@media screen and (max-width:1600px) {
   .register_services_1 .container_next {
     width: 40vw;
   }
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1500px) {
   .register_services_1 .container_next {
     width: 50vw;
   }
@@ -571,7 +587,7 @@ header {
   height: 90vh;
   padding: 5vh 10vw;
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1500px) {
   .inscription_section {
     padding: 5vh 0;
     background: transparent;
@@ -589,7 +605,7 @@ header {
   margin-top: 50px;
   margin-bottom: 50px;
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1500px) {
   .inscription_section form {
     width: 86%;
   }
@@ -604,7 +620,7 @@ header {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1500px) {
   .inscription_section .inscription_container {
     width: 100vw;
   }
@@ -643,7 +659,7 @@ header {
   background: #ffffff;
   transform: rotate(179.4deg);
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1500px) {
   .inscription_section .inscription_container .img-desc .rectangle_1 {
     left: 140px;
   }
@@ -663,7 +679,7 @@ header {
   background: #ffffff;
   transform: rotate(-90.24deg);
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1500px) {
   .inscription_section .inscription_container .img-desc .rectangle_2 {
     left: 150px;
   }
@@ -683,7 +699,7 @@ header {
   background: #fefefe;
   transform: rotate(179.4deg);
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1500px) {
   .inscription_section .inscription_container .img-desc .rectangle_3 {
     left: 471px;
   }
@@ -703,7 +719,7 @@ header {
   background: #ffffff;
   transform: rotate(-90.24deg);
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1500px) {
   .inscription_section .inscription_container .img-desc .rectangle_4 {
     left: 460px;
   }
@@ -789,7 +805,7 @@ header {
   padding: 0;
   margin-top: 50px;
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1500px) {
   .first_container .container_commodite form {
     width: 80%;
   }
@@ -827,7 +843,7 @@ header {
   padding: 0;
   margin-top: 50px;
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1500px) {
   .first_container .container_forms form {
     width: 80%;
   }
@@ -849,7 +865,7 @@ header {
   padding: 70px 0 0 0;
   margin: 0;
 }
-@media screen and (max-width:1800px) {
+@media screen and (max-width:1600px) {
   .section-1 {
     padding: 0;
   }
@@ -877,9 +893,9 @@ header {
   justify-content: space-around;
   position: absolute;
   top: 88vh;
-  left: 12%;
+  left: 14.5%;
 }
-@media screen and (max-width:1800px) {
+@media screen and (max-width:1600px) {
   .section-1 .button-group {
     top: 80vh;
   }
@@ -1038,7 +1054,7 @@ header {
   flex-wrap: wrap;
   height: 150vh;
 }
-@media screen and (max-width:1800px) {
+@media screen and (max-width:1600px) {
   .section-2 .section-resultat .resultat {
     overflow-y: scroll;
   }
@@ -1061,12 +1077,12 @@ header {
   margin: auto;
   margin-top: 5%;
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1500px) {
   .section-2 .section-resultat .resultat .container-hotel, .section-2 .section-resultat .resultat .container-transport {
     width: 20%;
   }
 }
-@media screen and (max-width:1800px) {
+@media screen and (max-width:1600px) {
   .section-2 .section-resultat .resultat .container-hotel, .section-2 .section-resultat .resultat .container-transport {
     width: 23%;
   }
@@ -1155,7 +1171,7 @@ header {
   justify-content: space-between;
   z-index: 50;
 }
-@media screen and (max-width:1800px) {
+@media screen and (max-width:1600px) {
   .section-2 .section-resultat .resultat .container-hotel .descr_trans, .section-2 .section-resultat .resultat .container-transport .descr_trans {
     left: 22px;
   }
