@@ -234,6 +234,7 @@ form button, form input, form select, .main__list__tabs__filter form button, .ma
 .main__list__tabs__body__content table th, .main__list__tabs__body__content table td {
   text-align: left;
   font-size: 13px;
+  padding: 10px 0;
 }
 .main__list__tabs__body__content table #id_user {
   width: 50px;
@@ -251,17 +252,16 @@ form button, form input, form select, .main__list__tabs__filter form button, .ma
   width: 100px;
 }
 .main__list__tabs__body__content table th {
-  font-family: poppins-bold;
+  font-family: "poppins-bold";
 }
 .main__list__tabs__body__content table td {
-  font-family: poppins-regular;
-  padding: 10px 0px;
+  font-family: "poppins-regular";
+  padding: 10px 0;
 }
 .main__list__tabs__body__content table td .actions {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 100%;
   gap: 10px;
 }
 .main__list__tabs__body__content table td .actions button {
@@ -272,13 +272,13 @@ form button, form input, form select, .main__list__tabs__filter form button, .ma
   cursor: pointer;
 }
 .main__list__tabs__body__content table td .actions .delete {
-  border: 2px solid #363D32;
-  background-color: #FFFFFF;
+  border: 2px solid #333;
+  background-color: #fff;
 }
 .main__list__tabs__body__content table td .actions .edit {
-  border: 2px solid #363D32;
-  background-color: #363D32;
-  color: #FFFFFF;
+  border: 2px solid #333;
+  background-color: #333;
+  color: #fff;
 }
 .main__list__tabs__body__content .pagination {
   display: flex;

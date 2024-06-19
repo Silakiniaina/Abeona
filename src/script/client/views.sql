@@ -113,9 +113,19 @@ CREATE OR REPLACE VIEW v_ranking_attraction_province AS
 ---------------------------------------- Liste des evenements du calendrier -------------------------------------------------------
 CREATE VIEW v_evenement_calendrier AS 
     SELECT 
-        * 
+        id_evenement AS id,
+        titre_evenement AS titre ,
+        description,
+        lieu_evenement as lieu,
+        date_debut_evenement AS date_debut,
+        date_fin_evenement AS date_fin, 
+        id_hotel,
+        id_ville as ville, 
+        id_categorie_evenement as categorie ,
+        date_insertion as insertion
     FROM evenement 
     WHERE id_hotel IS NULL
+    ORDER BY date_debut_evenement DESC
 ;
 
 ---------------------------------------- Liste des evenements hotel ----------------------------------------------------------------

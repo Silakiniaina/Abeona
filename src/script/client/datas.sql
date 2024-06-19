@@ -269,6 +269,10 @@ INSERT INTO Evenement (description, lieu_evenement, titre_evenement, id_ville, i
 ('Concours de boisson', 'Cafeterie', 'buvons ', 'VIL4', 'CEV4','2024-04-24','2024-04-25'),
 ('Exposition  huhu', 'Huhu', 'huhu', 'VIL5', 'CEV5','2024-05-01','2024-05-30');
 
+INSERT INTO Evenement (description, lieu_evenement, titre_evenement, id_ville, id_categorie_evenement,date_debut_evenement,date_fin_evenement) VALUES
+('Fete des enfants', 'Salle 1', 'en_fete','VIL1', 'CEV1','2024-06-19','2024-06-24')
+;
+
 -- Insertion des données pour la table Preference_utilisateur
 INSERT INTO Preference_utilisateur (id_utilisateur, id_categorie_attraction) VALUES
 ('USR1', 'CAT1'),

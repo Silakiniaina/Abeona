@@ -1,3 +1,5 @@
+const ITEMS_PER_PAGE = 20;
+
 /* Fonction pour enlever tout focus d'une liste */
 function remove_focus(list_onglet){
     for(let i=0; i<list_onglet.length; i++){
@@ -74,17 +76,49 @@ function generer_td_values(td, value){
     }
 }
 
+function processString(str) {
+    if(str.includes('_')){
+        const parts = str.split('_');
+        if (parts.length === 2) {
+            return parts[0];
+        } else if (parts.length === 3 && parts[0].includes('id')) {
+            return parts[1];
+        } else if (parts.some(part => part.includes('date'))) {
+            return parts[0] + ' ' + parts[1];
+        }
+    }else{
+        return str;
+    }
+
+}
+
+function enlever_colonne(array, keyToExclude) {
+    return array.map(obj => {
+        const result = {};
+
+        // Copy all key-value pairs except the one to exclude
+        Object.keys(obj).forEach(key => {
+            if (key !== keyToExclude) {
+                result[key] = obj[key];
+            }
+        });
+
+        return result;
+    });
+}
+
 /* Fonction qui permet de generer un tableau a partir d'un json */
 function creer_table_from_json(jsonData) {
-    const data = typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData;
     const table = document.createElement('table');
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
 
-    Object.keys(data[0]).forEach(key => {
+    jsonData = enlever_colonne(jsonData, "description");
+
+    Object.keys(jsonData[0]).forEach(key => {
         const th = document.createElement('th');
-        th.textContent = key;
-        th.id=key;
+        th.textContent = processString(key);
+        th.id = key;
         headerRow.appendChild(th);
     });
 
@@ -93,18 +127,18 @@ function creer_table_from_json(jsonData) {
     headerRow.appendChild(actionHeader);
     thead.appendChild(headerRow);
     table.appendChild(thead);
-    
+
     const tbody = document.createElement('tbody');
-    data.forEach(item => {
+    jsonData.forEach(item => {
         const row = document.createElement('tr');
         Object.entries(item).forEach(([key, value]) => {
             const td = document.createElement('td');
-            generer_td_values(td, value);
+            generer_td_values(td, value); 
             row.appendChild(td);
         });
         const actionCell = document.createElement('td');
-        var actions = {'delete':'trash','edit':'pen'};
-        actionCell.appendChild(generer_action_buttons(actions));
+        const actions = { 'delete': 'trash', 'edit': 'pen' };
+        actionCell.appendChild(generer_action_buttons(actions)); 
         row.appendChild(actionCell);
         tbody.appendChild(row);
     });
@@ -113,7 +147,15 @@ function creer_table_from_json(jsonData) {
     return table;
 }
 
-const ITEMS_PER_PAGE = 20;
+async function recuperer_data_puis_afficher(tabId) {
+    try {
+        const data = await fetch_data(tabId);
+        afficher_table(tabId, data, 1);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
 
 /* Display data in the table */
 function afficher_table(tab, data, page=1) {
@@ -123,109 +165,79 @@ function afficher_table(tab, data, page=1) {
     const table = creer_table_from_json(data);
     tableContainer.appendChild(table);
 }
+const ajax = (method, link, formData) =>{
+    return new Promise((resolve, reject) =>{
+        let xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = () =>{
+            if(xhr.readyState == 4){
+                if(xhr.status == 200){
+                    if(xhr.responseText){
+                        resolve(xhr.responseText);
+                    }else{
+                        reject(xhr.responseText);
+                    }
+                }else{
+                    reject(xhr.responseText);
+                }
+            }else{
+
+            }
+        }
+
+        xhr.open(method, link);
+        xhr.send(formData);
+    });
+};
 
 /* Function pour fetcher les datas d'un tab correspondant au pagination 
     ici tu appel des ajax pour les recuperer
 */
-function fetch_data(tabid,page_num){
-    var result = []
-    if(tabid === 'hotel'){
-        result = [
-            {"id": "H1","nom": "Hotel Sunshine","description": "A cozy hotel with a beautiful view of the city.","adress": "123 Sunshine St, Pleasantville","dti": "2024-06-15T10:00:00Z"},
-            {"id": "H1","nom": "Hotel Sunshine","description": "A cozy hotel with a beautiful view of the city.","adress": "123 Sunshine St, Pleasantville","dti": "2024-06-15T10:00:00Z"},
-            {"id": "H1","nom": "Hotel Sunshine","description": "A cozy hotel with a beautiful view of the city.","adress": "123 Sunshine St, Pleasantville","dti": "2024-06-15T10:00:00Z"},
-            {"id": "H1","nom": "Hotel Sunshine","description": "A cozy hotel with a beautiful view of the city.","adress": "123 Sunshine St, Pleasantville","dti": "2024-06-15T10:00:00Z"},
-            {"id": "H1","nom": "Hotel Sunshine","description": "A cozy hotel with a beautiful view of the city.","adress": "123 Sunshine St, Pleasantville","dti": "2024-06-15T10:00:00Z"},
-            {"id": "H1","nom": "Hotel Sunshine","description": "A cozy hotel with a beautiful view of the city.","adress": "123 Sunshine St, Pleasantville","dti": "2024-06-15T10:00:00Z"},
-            {"id": "H1","nom": "Hotel Sunshine","description": "A cozy hotel with a beautiful view of the city.","adress": "123 Sunshine St, Pleasantville","dti": "2024-06-15T10:00:00Z"},
-            {"id": "H1","nom": "Hotel Sunshine","description": "A cozy hotel with a beautiful view of the city.","adress": "123 Sunshine St, Pleasantville","dti": "2024-06-15T10:00:00Z"},
-            {"id": "H1","nom": "Hotel Sunshine","description": "A cozy hotel with a beautiful view of the city.","adress": "123 Sunshine St, Pleasantville","dti": "2024-06-15T10:00:00Z"},
-            {"id": "H1","nom": "Hotel Sunshine","description": "A cozy hotel with a beautiful view of the city.","adress": "123 Sunshine St, Pleasantville","dti": "2024-06-15T10:00:00Z"},
-            {"id": "H1","nom": "Hotel Sunshine","description": "A cozy hotel with a beautiful view of the city.","adress": "123 Sunshine St, Pleasantville","dti": "2024-06-15T10:00:00Z"},
-            {"id": "H1","nom": "Hotel Sunshine","description": "A cozy hotel with a beautiful view of the city.","adress": "123 Sunshine St, Pleasantville","dti": "2024-06-15T10:00:00Z"},
-            {"id": "H1","nom": "Hotel Sunshine","description": "A cozy hotel with a beautiful view of the city.","adress": "123 Sunshine St, Pleasantville","dti": "2024-06-15T10:00:00Z"}
-        ]
+function fetch_data(tabid) {
+    var tab = document.getElementById("tab");
+    var type = document.getElementById("type");  
+    if(tabid === 'hotel' || tabid === 'transport' || tabid === 'guide'){
+        tab.value = "p";
+        if (tabid === 'hotel') type.value = "h";
+        else if(tabid === 'transport')type.value = "t";
+        else if (tabid === 'guide') type.value = "g";
+    }else if (tabid === 'utilisateur')tab.value = "u";
+    else if (tabid === 'evenement-calendrier' || tabid === 'evenement-hotel'){
+        tab.value = "e";
+        if(tabid === 'evenement-calendrier')type.value = "c";
+        else if(tabid === 'evenement-hotel')type.value = "h";
+    }
+    let btn = document.getElementById("submit_filter");
+    btn.onclick = (e) => {
+        e.preventDefault();
+        console.log("clicked");
+        var formData = new FormData(document.getElementById("filter-container"));
 
-    }else if(tabid === 'transport'){
-        result = [
-            {"id": "T1","nom": "City Bus","description": "Public bus service within the city.","tarif": 2.50,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "T1","nom": "City Bus","description": "Public bus service within the city.","tarif": 2.50,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "T1","nom": "City Bus","description": "Public bus service within the city.","tarif": 2.50,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "T1","nom": "City Bus","description": "Public bus service within the city.","tarif": 2.50,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "T1","nom": "City Bus","description": "Public bus service within the city.","tarif": 2.50,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "T1","nom": "City Bus","description": "Public bus service within the city.","tarif": 2.50,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "T1","nom": "City Bus","description": "Public bus service within the city.","tarif": 2.50,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "T1","nom": "City Bus","description": "Public bus service within the city.","tarif": 2.50,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "T1","nom": "City Bus","description": "Public bus service within the city.","tarif": 2.50,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "T1","nom": "City Bus","description": "Public bus service within the city.","tarif": 2.50,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "T1","nom": "City Bus","description": "Public bus service within the city.","tarif": 2.50,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "T1","nom": "City Bus","description": "Public bus service within the city.","tarif": 2.50,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "T1","nom": "City Bus","description": "Public bus service within the city.","tarif": 2.50,"dti": "2024-06-15T10:00:00Z"}
-        ]
-            
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ": " + pair[1]);
+        }
 
-    }else if(tabid === 'guide'){
-        result = [
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"},
-            {"id": "G1","nom": "Beloha","description": "Man with lorem ipsum","tarif": 2000,"dti": "2024-06-15T10:00:00Z"}
-        ]
-    }else if(tabid === 'utilisateur'){
-        result = [
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",},
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false",}
-        ]
-    }else if(tabid === 'evenement-calendrier'){
-        result = [
-            {"id":"USR1","nom":"Sanda Silakiniaiana","dtn":"12-07-2005","genre":"Homme","email":"sandasilakiniaina4@gmail.com","status":"false"}
-        ]
+        ajax('POST', 'recherche', formData)
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    };
+}
+
+/* Recuperer les valeurs des inputs */
+function get_form_data(tabid){
+    let result = new FormData();
+    if(tabid === 'e'){
+        let input_nom = document.getElementById("input_nom");
+        console.log(nom.value);
+        result.append("nom",input_nom.value);
+        // result.append("categorie",document.getElementById("input_categorie").value);
+        // result.append("ville",document.getElementById("input_ville").value);
+        // result.append("date_debut",document.getElementById("input_date_d").value);
+        // result.append("date_fin",document.getElementById("input_date_f").value);
     }
     return result;
 }
@@ -287,8 +299,7 @@ async function activer_switch_tab(list_tab){
         Array.from(list_container).forEach(content => content.classList.remove('active'));
         document.getElementById(`${tabId}_container`).classList.add('active');
         try{
-            const data = fetch_data(tabId,1);
-            afficher_table(tabId, data,1);
+            recuperer_data_puis_afficher(tabId);
             var pagination = generer_pagination(tabId,120,ITEMS_PER_PAGE);
             var container = document.getElementById(tabId+"_container");
             container.appendChild(pagination);

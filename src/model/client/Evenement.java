@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.gson.Gson;
+
 import model.shared.Database;
 
 public class Evenement{
@@ -43,7 +45,7 @@ public class Evenement{
     }
 
     /* Fonction pour avoir la liste des evenement du calendrier */
-    public static ArrayList<Evenement> get_liste_evenement_calendrier(int type)throws Exception{
+    public static ArrayList<Evenement> get_liste_evenement_calendrier()throws Exception{
         ArrayList<Evenement> resultat = new ArrayList<Evenement>();
         Connection c = null;
         PreparedStatement prsmt  = null;
@@ -52,13 +54,10 @@ public class Evenement{
         try{
             c = Database.get_connection();
             if(c != null){
-                if(type == EVENEMENT_CALENDRIER_PASSE) prsmt = c.prepareStatement("SELECT * FROM v_evenement_calendrier_passe");
-                else if( type == EVENEMENT_CALENDRIER_FUTUR) prsmt = c.prepareStatement("SELECT * FROM v_evenement_calendrier_futur");
-                else if(type == EVENEMENT_CALENDRIER_ENCOURS) prsmt = c.prepareStatement("SELECT * FROM v_evenement_calendrier_en_cours");
-                else if(type == EVENEMENT_ALL) prsmt = c.prepareStatement("SELECT * FROM v_evenement_calendrier");
+                prsmt = c.prepareStatement("SELECT * FROM v_evenement_calendrier");
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    Evenement ev = new Evenement(rs.getString(5), rs.getString(2), rs.getString(3), rs.getDate(9), rs.getDate(10), rs.getString(6), rs.getString(8), rs.getString(7));
+                    Evenement ev = new Evenement(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getDate(6), rs.getString(7), rs.getString(9), rs.getString(8));
                     ev.set_id_evenement(rs.getString(1));
                     resultat.add(ev);
                 }
@@ -190,8 +189,8 @@ public class Evenement{
         try{
             c = Database.get_connection();
             if(type == EVENEMENT_CET_ANNEE)prstm = c.prepareStatement("SELECT * FROM v_evenement_par_annee WHERE annee = DATE_PART('year',CURRENT_DATE)");
-            else if(type == EVENEMENT_CET_MOIS)prstm = c.prepareStatement("SELECT * FROM v_evenement_cet_mois WHERE annee = DATE_PART('year',CURRENT_DATE) AND DATE_PART('month',date_debut_evenement) = DATE_PART('month', CURRENT_DATE)");
-            else if(type == EVENEMENT_AUJOURDHUI)prstm = c.prepareStatement("SELECT * FROM v_evenement_aujourdhui WHERE CURRENT_DATE BETWEEN date_debut_evenement AND date_fin_evenement");
+            else if(type == EVENEMENT_CET_MOIS)prstm = c.prepareStatement("SELECT * FROM v_evenement_par_annee WHERE annee = DATE_PART('year',CURRENT_DATE) AND DATE_PART('month',date_debut_evenement) = DATE_PART('month', CURRENT_DATE)");
+            else if(type == EVENEMENT_AUJOURDHUI)prstm = c.prepareStatement("SELECT * FROM v_evenement_par_annee WHERE CURRENT_DATE BETWEEN date_debut_evenement AND date_fin_evenement");
             else if(type == EVENEMENT_ALL) prstm = c.prepareStatement("SELECT * FROM evenement");
             rs = prstm.executeQuery();
             while (rs.next()) {
@@ -340,8 +339,8 @@ public class Evenement{
     /* Test */
     public static void main(String[] args) {
         try{
-            ArrayList<Evenement> ls = Evenement.rechercher_evenement(Evenement.EVENEMENT_ALL, null, null, null, null, null);
-            System.out.println(ls.size());
+            ArrayList<Evenement> ls = Evenement.get_liste_evenement_calendrier();
+            System.out.println(new Gson().toJson(ls));
         }catch(Exception e){
             e.printStackTrace();
         }

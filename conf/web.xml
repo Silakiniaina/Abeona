@@ -8,4 +8,24 @@
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>evenement</servlet-name>
+        <servlet-class>controller.admin.EvenementServlet</servlet-class>
+    </servlet>
+    <!--  Mapping des URLs pour le DispatcherServlet  -->
+    <servlet-mapping>
+        <servlet-name>evenement</servlet-name>
+        <url-pattern>/evenement</url-pattern>
+    </servlet-mapping>
+
+        <servlet>
+        <servlet-name>recherche</servlet-name>
+        <servlet-class>controller.admin.RechercheServlet</servlet-class>
+    </servlet>
+    <!--  Mapping des URLs pour le DispatcherServlet  -->
+    <servlet-mapping>
+        <servlet-name>recherche</servlet-name>
+        <url-pattern>/recherche</url-pattern>
+    </servlet-mapping>
 </web-app>
