@@ -1,0 +1,127 @@
+@font-face {
+  font-family: poppins-black;
+  src: url("/assets/font/Poppins-Black.ttf");
+}
+@font-face {
+  font-family: poppins-bold;
+  src: url("/assets/font/Poppins-Bold.ttf");
+}
+@font-face {
+  font-family: poppins-extrabold;
+  src: url("/assets/font/Poppins-ExtraBold.ttf");
+}
+@font-face {
+  font-family: poppins-extralight;
+  src: url("/assets/font/Poppins-ExtraLight.ttf");
+}
+@font-face {
+  font-family: poppins-light;
+  src: url("/assets/font/Poppins-Light.ttf");
+}
+@font-face {
+  font-family: poppins-medium;
+  src: url("/assets/font/Poppins-Medium.ttf");
+}
+@font-face {
+  font-family: poppins-regular;
+  src: url("/assets/font/Poppins-Regular.ttf");
+}
+@font-face {
+  font-family: poppins-semibold;
+  src: url("/assets/font/Poppins-SemiBold.ttf");
+}
+@font-face {
+  font-family: poppins-thin;
+  src: url("/assets/font/Poppins-Thin.ttf");
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  background-size: cover;
+  backdrop-filter: blur(10px);
+  align-items: center;
+  justify-content: center;
+}
+.modal .modal_content {
+  position: relative;
+  z-index: 2;
+  border: 1px solid #363D32;
+  width: 30%;
+  height: 95%;
+  background-size: cover;
+  background-color: #92AA83;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0px;
+}
+.modal .modal_content .title {
+  padding: 20px;
+  text-wrap: wrap;
+  font-size: 32px;
+  text-align: center;
+}
+.modal .modal_content form {
+  flex-direction: column;
+  width: 100%;
+  height: 70%;
+}
+.modal .modal_content form .form-content {
+  width: 100%;
+  padding: 1% 5%;
+}
+.modal .modal_content form .form-content input, .modal .modal_content form .form-content select, .modal .modal_content form .form-content textarea {
+  width: 100%;
+  height: 50px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.modal .modal_content form .form-content textarea {
+  height: 80px;
+  font-family: poppins-regular;
+}
+.modal .modal_content form button {
+  background-color: #363D32;
+  width: 90%;
+  height: 60px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.modal .modal_content form button:hover, .modal .modal_content form button:focus {
+  color: #363D32;
+  background-color: #E1FF45;
+}
+.modal .modal_content .close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 10px;
+  right: 10px;
+  color: #FFFFFF;
+  background-color: #E1FF45;
+  float: right;
+  font-size: 38px;
+  font-weight: bold;
+  width: 40px;
+  color: #363D32;
+  height: 40px;
+  border-radius: 30px;
+  text-align: center;
+}
+.modal .modal_content .close:hover, .modal .modal_content .close:focus {
+  color: #E1FF45;
+  text-decoration: none;
+  background-color: #363D32;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=modal.css.map */

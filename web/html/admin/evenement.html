@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/admin/sidebar.css">
     <link rel="stylesheet" href="/assets/css/admin/style.css">
+    <link rel="stylesheet" href="/assets/css/shared/modal.css">
     <link rel="stylesheet" href="/assets/icons/fontawesome/css/all.css">
     <title>Gestion partenaire</title>
 </head>
@@ -99,8 +100,41 @@
             </div>
         </div>
 
+        <!-- Modal insertion -->
+        <div class="modal" id="evenement_modal">
+            <div class="modal_content">
+                <h2 class="title">Insertion Evenement Calendrier</h2>
+                <span class="close">&times;</span>
+                <form action="" id="insertion">
+                    <div class="form-content input_lieu">
+                        <label for="input_titre">Titre evenement </label>
+                        <input type="text" name="titre" id="input_titre" placeholder="Titre..."required>
+                    </div> 
+                    <div class="form-content input_city">
+                        <label for="input_categorie">Categorie Evenement</label>
+                        <select name="categorie" id="input_categorie">
+                            <option value="">Categorie 1</option>
+                            <option value="">Categorie 2</option>
+                            <option value="">Categorie 3</option>
+                        </select>
+                    </div>
+                    <div class="form-content input_date_insertion_fin">
+                        <label for="input_i_f">Date Evenement</label>
+                        <input type="date" name="" id="input_i_f" required>
+                    </div>
+                    <div class="form-content input_desc">
+                        <label for="input_description">Description</label>
+                        <textarea name="description" placeholder="Description..." id="input_description"required></textarea>
+                    </div>
+                    <button type="submit">Inserer</button>
+                </form>
+            </div>
+        </div>
         <!-- List of partenaire -->
-        <h2 class="main__title">Liste des evenements</h2>
+        <div class="head">
+            <h2 class="main__title">Liste des evenements</h2>
+            <button id="btn_modal">Add</button>
+        </div>
         <div class="main__list">
             <div class="main__list__tabs">
                 <div class="main__list__tabs__filter">
@@ -136,7 +170,6 @@
                 <div class="main__list__tabs__header" id="list_tabs">
                     <button class="main__list__tabs__header__content active" data-tab="evenement-calendrier">CALENDRIER</button>
                     <button class="main__list__tabs__header__content" data-tab="evenement-hotel">HOTEL</button>
-                    <button class="main__list__tabs__header__content" data-tab="evenement-attraction">ATTRACTION</button>
                 </div>
                 <div class="main__list__tabs__body">
                     <div id="evenement-calendrier_container" class="main__list__tabs__body__content">
@@ -145,14 +178,10 @@
                     <div id="evenement-hotel" class="main__list__tabs__body__content active">
                         <div class="table-container-evenement-hotel" id="evenement-hotel"></div>
                     </div>
-                    <div id="evenement-attraction" class="main__list__tabs__body__content">
-                        <div class="table-container-evenement-attraction" id="evenement-attraction"></div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
     <script src="/assets/icons/fontawesome/js/all.js"></script>
     <script src="/assets/js/admin/functions.js"></script>
     <script src="/assets/js/admin/sidebar.js"></script>

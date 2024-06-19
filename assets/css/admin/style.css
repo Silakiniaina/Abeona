@@ -45,7 +45,7 @@
   font-size: 12px;
 }
 
-.main__list__tabs__filter form button, .main__list__tabs__filter form .form-content input, .main__list__tabs__filter form .form-content select {
+form button, form input, form select, .main__list__tabs__filter form button, .main__list__tabs__filter form .form-content input, .main__list__tabs__filter form .form-content select {
   width: 170px;
   height: 40px;
   border: 1px solid #363D32;
@@ -59,6 +59,12 @@
   background-color: #FFFFFF;
   padding: 10px 2%;
   margin-left: 300px;
+}
+.main .head {
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  gap: 50%;
 }
 .main .status {
   display: flex;
@@ -299,6 +305,58 @@
 .main__list__tabs__body__content .pagination .active {
   background-color: #92AA83;
   color: #FFFFFF;
+}
+
+#btn_modal {
+  background-color: #363D32;
+  width: 300px;
+  color: #E1FF45;
+  font-weight: bold;
+  font-size: 18px;
+  height: 60px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s ease-in;
+}
+
+#btn_modal:hover {
+  background-color: #E1FF45;
+  color: #363D32;
+  border: none;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+}
+form .form-content {
+  display: flex;
+  flex-direction: column;
+  gap: -1;
+}
+form .form-content label {
+  font-family: poppins-bold;
+  font-size: 12px;
+  margin-left: 10px;
+}
+form input, form select {
+  padding: 5px 10px;
+}
+form button {
+  margin-top: 18.8px;
+  background-color: #92AA83;
+  font-family: poppins-extrabold;
+  color: #FFFFFF;
+  border: none;
+  transition: 0.2s ease-in;
+}
+form button:hover,
+form button:focus {
+  background-color: #E1FF45;
+  color: #363D32;
 }
 
 /*# sourceMappingURL=style.css.map */
