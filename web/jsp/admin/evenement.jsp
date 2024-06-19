@@ -1,11 +1,13 @@
 <%@include file="../shared/sidebar.jsp" %>
 
 <%@page import="model.client.Ville" %>   
+<%@page import="model.client.CategorieEvenement" %>   
 <%@page import="model.client.Evenement" %>   
 <%@page import="java.util.HashMap" %> 
 <%@page import="java.util.ArrayList" %> 
 <%
     ArrayList<Ville> listeVille = (ArrayList<Ville>)request.getAttribute("listeVille");
+    ArrayList<CategorieEvenement> categories = (ArrayList<CategorieEvenement>)request.getAttribute("categories");
     ArrayList<Evenement> listeEvenement = (ArrayList<Evenement>)request.getAttribute("listeEvenement");
     HashMap<String, Integer> nombre = (HashMap<String, Integer>)request.getAttribute("nombreEvenement");
 %>
@@ -47,7 +49,7 @@
             <div class="modal_content">
                 <h2 class="title">Insertion Evenement Calendrier</h2>
                 <span class="close">&times;</span>
-                <form action="" id="insertion">
+                <form action="evenement" method="POST" id="insertion">
                     <div class="form-content input_lieu">
                         <label for="input_titre">Titre evenement </label>
                         <input type="text" name="titre" id="input_titre" placeholder="Titre..."required>
@@ -55,18 +57,18 @@
                     <div class="form-content input_city">
                         <label for="input_categorie">Categorie Evenement</label>
                         <select name="categorie" id="input_categorie">
-                        <% for(Ville v: listeVille){ %>
-                            <option value="<%= v.get_id_ville() %>"><%= v.get_nom_ville() %></option>
+                        <% for(CategorieEvenement c: categories){ %>
+                            <option value="<%= c.get_id_categorie_evenement() %>"><%= c.get_libelle() %></option>
                         <% } %>
                         </select>
                     </div>
                     <div class="form-content input_date_insertion_fin">
                         <label for="input_i_f">Date Evenement</label>
-                        <input type="date" name="" id="input_i_f" required>
+                        <input type="date" name="date_evenement" id="input_i_f" required>
                     </div>
                     <div class="form-content input_desc">
                         <label for="input_description">Description</label>
-                        <textarea name="description" placeholder="Description..." id="input_description"required></textarea>
+                        <textarea name="desc" placeholder="Description..." id="input_description"required></textarea>
                     </div>
                     <button type="submit">Inserer</button>
                 </form>
