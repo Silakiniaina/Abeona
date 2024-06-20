@@ -142,6 +142,7 @@ public class Attraction extends Partenaire{
         return resultat;
     }
 
+    /* Fonction pour filtrer  */
     /* Getters */
     public String get_description(){
         return description;

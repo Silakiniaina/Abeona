@@ -269,16 +269,13 @@ CREATE TABLE evenement(
     id_evenement TEXT DEFAULT generer_id_evenement(),
     titre_evenement VARCHAR(150) NOT NULL,
     description TEXT NOT NULL,
-    lieu_evenement VARCHAR(150),
     date_debut_evenement DATE DEFAULT NOW(),
     date_fin_evenement DATE DEFAULT NOW(),
     id_hotel TEXT,
-    id_ville TEXT,
-    id_categorie_evenement TEXT ,
+    id_categorie_evenement TEXT NOT NULL,
     date_insertion TIMESTAMP DEFAULT NOW(),
     PRIMARY KEY(id_evenement),
     FOREIGN KEY(id_hotel) REFERENCES Hotel(id_hotel),
-    FOREIGN KEY(id_ville) REFERENCES Ville(id_ville),
     FOREIGN KEY(id_categorie_evenement) REFERENCES categorie_evenement(id_categorie_evenement)
 );
 

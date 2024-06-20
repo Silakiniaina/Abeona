@@ -16,9 +16,7 @@ public class Evenement{
     private String nom_evenement;
     private Date date_debut_evenement;
     private Date date_fin_evenement;
-    private String lieu_evenement;
     private String description;
-    private String ville; 
     private String id_hotel;
     private String id_categorie_evenement;
 
@@ -33,15 +31,13 @@ public class Evenement{
     public static int EVENEMENT_HOTEL  = 11;
 
     /* Constructor */
-    public Evenement(String titre, String desc, String lieu, Date date_debut, Date date_fin, String id_hotel, String id_categ, String id_ville){
+    public Evenement(String titre, String desc ,Date date_debut, Date date_fin, String id_hotel, String id_categ){
         this.set_nom_evenement(titre);
         this.set_description(desc);
-        this.set_lieu_evenement(lieu);
         this.set_date_debut_evenement(date_debut);
         this.set_date_fin_evenement(date_fin);
         this.set_id_hotel(id_hotel);
         this.set_id_categorie_evenement(id_categ);
-        this.set_id_ville(id_ville);
     }
 
     /* Fonction pour avoir la liste des evenement du calendrier */
@@ -57,7 +53,7 @@ public class Evenement{
                 prsmt = c.prepareStatement("SELECT * FROM v_evenement_calendrier");
                 rs = prsmt.executeQuery();
                 while (rs.next()) {
-                    Evenement ev = new Evenement(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getDate(6), rs.getString(7), rs.getString(9), rs.getString(8));
+                    Evenement ev = new Evenement(rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7));
                     ev.set_id_evenement(rs.getString(1));
                     resultat.add(ev);
                 }
@@ -92,7 +88,7 @@ public class Evenement{
             prsmt.setString(1,id);
             rs = prsmt.executeQuery();
             if (rs.next()) {
-                resultat = new Evenement(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getDate(6), rs.getString(7), rs.getString(9), rs.getString(8));
+                resultat = new Evenement(rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7));
                 resultat.set_id_evenement(rs.getString(1));
             }
         } catch (Exception e) {
@@ -112,16 +108,14 @@ public class Evenement{
         try{
             c = Database.get_connection();
             c.setAutoCommit(false);
-            prstm = c.prepareStatement("UPDATE evenement SET description = ? , lieu_evenement = ?, titre_evenement = ? , date_debut_evenement = ? , date_fin_evenement = ? , id_hotel = ?, id_ville = ? , id_categorie_evenement = ? , date_insertion = NOW( ) WHERE id_evenement = ? ");
+            prstm = c.prepareStatement("UPDATE evenement SET description = ?, titre_evenement = ? , date_debut_evenement = ? , date_fin_evenement = ? , id_hotel = ?, id_categorie_evenement = ? , date_insertion = NOW( ) WHERE id_evenement = ? ");
             prstm.setString(1, evenement.get_description());
-            prstm.setString(2, evenement.get_lieu_evenement());
-            prstm.setString(3, evenement.get_nom_evenement());
-            prstm.setDate(4, evenement.get_date_debut_evenement());
-            prstm.setDate(5, evenement.get_date_fin_evenement());
-            prstm.setString(6, evenement.get_id_hotel());
-            prstm.setString(7, evenement.get_id_ville());
-            prstm.setString(8, evenement.get_id_categorie_evenement());
-            prstm.setString(9, this.get_id_evenement());
+            prstm.setString(2, evenement.get_nom_evenement());
+            prstm.setDate(3, evenement.get_date_debut_evenement());
+            prstm.setDate(4, evenement.get_date_fin_evenement());
+            prstm.setString(5, evenement.get_id_hotel());
+            prstm.setString(6, evenement.get_id_categorie_evenement());
+            prstm.setString(7, this.get_id_evenement());
             prstm.executeUpdate();
             c.commit();
         }catch(Exception e){
@@ -140,15 +134,13 @@ public class Evenement{
         try{
             c = Database.get_connection();
             c.setAutoCommit(false);
-            prstm = c.prepareStatement("INSERT INTO evenement (description,lieu_evenement,titre_evenement,date_debut_evenement, date_fin_evenement,id_hotel,id_ville,id_categorie_evenement) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            prstm = c.prepareStatement("INSERT INTO evenement (description,titre_evenement,date_debut_evenement, date_fin_evenement,id_hotel,id_categorie_evenement) VALUES (?, ?, ?, ?, ?, ?)");
             prstm.setString(1, this.get_description());
-            prstm.setString(2, this.get_lieu_evenement());
-            prstm.setString(3, this.get_nom_evenement());
-            prstm.setDate(4, this.get_date_debut_evenement());
-            prstm.setDate(5, this.get_date_fin_evenement());
-            prstm.setString(6, this.get_id_hotel());
-            prstm.setString(7, this.get_id_ville());
-            prstm.setString(8, this.get_id_categorie_evenement());
+            prstm.setString(2, this.get_nom_evenement());
+            prstm.setDate(3, this.get_date_debut_evenement());
+            prstm.setDate(4, this.get_date_fin_evenement());
+            prstm.setString(5, this.get_id_hotel());
+            prstm.setString(6, this.get_id_categorie_evenement());
             prstm.executeUpdate();
             c.commit();
         }catch(Exception e){
@@ -194,7 +186,7 @@ public class Evenement{
             else if(type == EVENEMENT_ALL) prstm = c.prepareStatement("SELECT * FROM evenement");
             rs = prstm.executeQuery();
             while (rs.next()) {
-                Evenement ev =  new Evenement(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getDate(6), rs.getString(7), rs.getString(9), rs.getString(8));
+                Evenement ev =  new Evenement(rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7));
                 ev.set_id_evenement(rs.getString(1));
                 result.add(ev);
             }
@@ -235,20 +227,21 @@ public class Evenement{
     }
 
     /* Fonction pour generer la requete sql de la recherche multicritere */
-    public static String get_recherche_query(int type,String titre, String categorie, String id_ville, Date date_debut_evenement, Date date_fin)throws Exception{
+    public static String get_recherche_query(int type,String titre, String categorie, Date date_debut_evenement, Date date_fin)throws Exception{
         String result = "";
         if(type == EVENEMENT_CALENDRIER)result += "SELECT * FROM v_evenement_calendrier WHERE 1=1";
         else if(type == EVENEMENT_HOTEL)result += "SELECT * FROM v_evenement_hotel WHERE 1=1";
+        else if(type == EVENEMENT_ALL)result += "SELECT * FROM v_evenement_par_annee WHERE 1=1";
         if(titre != null) result += " AND titre_evenement LIKE ?";
         if(categorie != null) result += " AND id_categorie_evenement = ?";
-        if(id_ville != null) result += " AND id_ville = ? ";
         if(date_debut_evenement != null) result += " AND date_debut_evenement >= ?";
         if(date_fin != null) result += " AND date_fin_evenement <= ?";
+        System.out.println(result);
         return result;
     }
 
     /* Fonction pour rechercher des evenement */
-    public static ArrayList<Evenement> rechercher_evenement(int type,String nom, String categorie, String id_ville,Date date_debut,Date date_fin) throws Exception{
+    public static ArrayList<Evenement> rechercher_evenement(int type,String nom, String categorie,Date date_debut,Date date_fin) throws Exception{
         ArrayList<Evenement> result = new ArrayList<Evenement>();
         Connection c = null; 
         PreparedStatement prstm = null; 
@@ -256,15 +249,14 @@ public class Evenement{
         try{
             c = Database.get_connection();
             int paramIndex = 1;
-            prstm = c.prepareStatement(Evenement.get_recherche_query(type,nom,categorie, id_ville, date_debut, date_fin));
+            prstm = c.prepareStatement(Evenement.get_recherche_query(type,nom,categorie, date_debut, date_fin));
             if(nom != null) prstm.setString(paramIndex++,nom);
             if(categorie != null) prstm.setString(paramIndex++,categorie);
-            if(id_ville != null) prstm.setString(paramIndex++,id_ville);
             if(date_debut != null) prstm.setDate(paramIndex++, date_debut);
             if(date_fin != null)prstm.setDate(paramIndex++, date_fin);
             rs = prstm.executeQuery();
             while(rs.next()){
-                Evenement ev =  new Evenement(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getDate(6), rs.getString(7), rs.getString(9), rs.getString(8));
+                Evenement ev =  new Evenement(rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7));
                 ev.set_id_evenement(rs.getString(1));
                 result.add(ev);
             }
@@ -294,14 +286,8 @@ public class Evenement{
     public String get_description() {
         return description;
     }
-    public String get_id_ville() {
-        return ville;
-    }
     public String get_id_hotel(){
         return id_hotel;
-    }
-    public String get_lieu_evenement(){
-        return lieu_evenement;
     }
     public String get_id_categorie_evenement(){
         return this.id_categorie_evenement;
@@ -323,23 +309,17 @@ public class Evenement{
     public void set_description(String description) {
         this.description = description;
     }
-    public void set_id_ville(String ville) {
-        this.ville = ville;
-    }
     public void set_id_hotel(String hotel) {
         this.id_hotel = hotel;
     }
     public void set_id_categorie_evenement(String id){
         this.id_categorie_evenement = id;
     }
-    public void set_lieu_evenement(String l){
-        this.lieu_evenement = l;
-    }
 
     /* Test */
     public static void main(String[] args) {
         try{
-            ArrayList<Evenement> ls = Evenement.get_liste_evenement_calendrier();
+            ArrayList<Evenement> ls = Evenement.rechercher_evenement(Evenement.EVENEMENT_ALL,null,null,null,null);
             System.out.println(new Gson().toJson(ls));
         }catch(Exception e){
             e.printStackTrace();

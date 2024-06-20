@@ -76,7 +76,16 @@
                     <i class="fa fa-calendar"></i>
                 </div>
                 <div class="main__number__wrapper__content">
-                    <div class="main__number__wrapper__content-title">Total evenements cet annee</div>
+                    <div class="main__number__wrapper__content-title">Total evenements</div>
+                    <div class="main__number__wrapper__content-value">545</div>
+                </div>
+            </div>
+            <div class="main__number__wrapper">
+                <div class="main__number__wrapper__img">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <div class="main__number__wrapper__content">
+                    <div class="main__number__wrapper__content-title">Cet annee</div>
                     <div class="main__number__wrapper__content-value">545</div>
                 </div>
             </div>
@@ -85,7 +94,7 @@
                     <i class="fa fa-calendar-alt"></i>
                 </div>
                 <div class="main__number__wrapper__content">
-                    <div class="main__number__wrapper__content-title">Evenements cet mois</div>
+                    <div class="main__number__wrapper__content-title">Cet mois</div>
                     <div class="main__number__wrapper__content-value">20</div>
                 </div>
             </div>
@@ -94,7 +103,7 @@
                     <i class="fa fa-calendar-check"></i>
                 </div>
                 <div class="main__number__wrapper__content">
-                    <div class="main__number__wrapper__content-title">s aujourd'hui</div>
+                    <div class="main__number__wrapper__content-title">Aujourd'hui</div>
                     <div class="main__number__wrapper__content-value">2</div>
                 </div>
             </div>
@@ -144,48 +153,67 @@
                             <input type="text" name="nom" id="input_nom">
                         </div>
                         <div class="form-content input_city">
-                            <label for="input_ville">Ville</label>
+                            <label for="input_ville">Categorie</label>
                             <select name="ville" id="input_ville">
                                 <option value="">Tous</option>
-                                <option value="">Ville 1</option>
-                                <option value="">Ville 2</option>
-                                <option value="">Ville 3</option>
+                                <option value="">Categorie 1</option>
+                                <option value="">Categorie 2</option>
+                                <option value="">Categorie 3</option>
                             </select>
                         </div>
-                        <div class="form-content input_eval">
-                            <label for="input_evaluation">Evaluation</label>
-                            <input type="number" name="evaluation" id="input_evaluation">
-                        </div>
-                        <div class="form-content input_date_insertion_debut">
-                            <label for="input_date_i_d">Date insertion debut</label>
+                        <div class="form-content input_date_evenement_debut">
+                            <label for="input_date_i_d">Date evenement debut</label>
                             <input type="date" name="" id="input_date_i_d">
                         </div>
-                        <div class="form-content input_date_insertion_fin">
-                            <label for="input_i_f">Date insertion fin</label>
+                        <div class="form-content input_date_evenement_fin">
+                            <label for="input_i_f">Date evenement fin</label>
                             <input type="date" name="" id="input_i_f">
                         </div>
                         <button type="submit">Rechercher</button>
                     </form>
                 </div>
-                <div class="main__list__tabs__header" id="list_tabs">
-                    <button class="main__list__tabs__header__content active" data-tab="evenement-calendrier">CALENDRIER</button>
-                    <button class="main__list__tabs__header__content" data-tab="evenement-hotel">HOTEL</button>
-                </div>
                 <div class="main__list__tabs__body">
                     <div id="evenement-calendrier_container" class="main__list__tabs__body__content">
-                        <div class="table-container-evenement-calendrier" id="evenement-calendrier"></div>
-                    </div>
-                    <div id="evenement-hotel" class="main__list__tabs__body__content active">
-                        <div class="table-container-evenement-hotel" id="evenement-hotel"></div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Titre</th>
+                                    <th>Categorie</th>
+                                    <th>Description</th>
+                                    <th>Date debut</th>
+                                    <th>Date fin</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>EVT1</td>
+                                    <td>Fete Nationale</td>
+                                    <td>Global</td>
+                                    <td>Fetin'ny ankizy</td>
+                                    <td>2024-06-25</td>
+                                    <td>2024-06-26</td>
+                                    <td>
+                                        <div class="actions">
+                                            <button class="delete">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                            <button class="edit">
+                                                <i class="fa fa-pen"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="/assets/icons/fontawesome/js/all.js"></script>
-    <script src="/assets/js/admin/functions.js"></script>
     <script src="/assets/js/admin/sidebar.js"></script>
-    <script src="/assets/js/admin/evenement.js"></script>
 </body>
 
 </html>

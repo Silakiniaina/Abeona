@@ -313,8 +313,8 @@ public class Utilisateur{
     }
 
     /* Fonction pour rechercher des evenement */
-    public static ArrayList<Evenement> rechercher_evenement(String nom, String sexe, String email, Date date_de_naissance, Date date_fin_naissance,Integer status) throws Exception{
-        ArrayList<Evenement> result = new ArrayList<Evenement>();
+    public static ArrayList<Utilisateur> rechercher_utilisateur(String nom, String sexe, String email, Date date_de_naissance, Date date_fin_naissance,Integer status) throws Exception{
+        ArrayList<Utilisateur> result = new ArrayList<Utilisateur>();
         Connection c = null; 
         PreparedStatement prstm = null; 
         ResultSet rs = null;
@@ -330,9 +330,9 @@ public class Utilisateur{
             if(status != null) prstm.setInt(paramIndex++, status.intValue());
             rs = prstm.executeQuery();
             while(rs.next()){
-                Evenement ev =  new Evenement(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getDate(6), rs.getString(7), rs.getString(9), rs.getString(8));
-                ev.set_id_evenement(rs.getString(1));
-                result.add(ev);
+                Utilisateur u = new Utilisateur(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6));
+                u.set_id(rs.getString(1));
+                result.add(u);
             }
         }catch(Exception e){
             throw e;

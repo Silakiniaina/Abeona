@@ -220,13 +220,17 @@ form button, form input, form select, .main__list__tabs__filter form button, .ma
   color: #FFFFFF;
   border: none;
 }
-.main__list__tabs__body__content {
-  display: none;
+.main__list__tabs__body {
+  display: flex;
   align-items: center;
-  padding: 20px;
+  justify-content: center;
+  flex-direction: column;
 }
-.main__list__tabs__body__content.active {
-  display: block;
+.main__list__tabs__body__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 .main__list__tabs__body__content table {
   width: 100%;
@@ -234,51 +238,38 @@ form button, form input, form select, .main__list__tabs__filter form button, .ma
 .main__list__tabs__body__content table th, .main__list__tabs__body__content table td {
   text-align: left;
   font-size: 13px;
-  padding: 10px 0;
-}
-.main__list__tabs__body__content table #id_user {
-  width: 50px;
-}
-.main__list__tabs__body__content table #nom {
-  width: 20%;
-}
-.main__list__tabs__body__content table #date_de_naissance {
-  width: 5%;
-}
-.main__list__tabs__body__content table #status {
-  width: 50px;
-}
-.main__list__tabs__body__content table #act {
-  width: 100px;
 }
 .main__list__tabs__body__content table th {
-  font-family: "poppins-bold";
+  font-family: poppins-bold;
 }
 .main__list__tabs__body__content table td {
-  font-family: "poppins-regular";
-  padding: 10px 0;
+  font-family: poppins-regular;
+  padding: 10px 0px;
 }
 .main__list__tabs__body__content table td .actions {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  width: 140px;
   gap: 10px;
 }
-.main__list__tabs__body__content table td .actions button {
+.main__list__tabs__body__content table td .actions a {
   width: 60px;
   height: 30px;
-  font-size: 14px;
+  font-size: 20px;
   border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
 .main__list__tabs__body__content table td .actions .delete {
-  border: 2px solid #333;
-  background-color: #fff;
+  border: 2px solid #363D32;
+  background-color: #FFFFFF;
 }
 .main__list__tabs__body__content table td .actions .edit {
-  border: 2px solid #333;
-  background-color: #333;
-  color: #fff;
+  border: 2px solid #363D32;
+  background-color: #363D32;
+  color: #FFFFFF;
 }
 .main__list__tabs__body__content .pagination {
   display: flex;

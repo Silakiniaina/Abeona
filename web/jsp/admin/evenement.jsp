@@ -6,7 +6,6 @@
 <%@page import="java.util.HashMap" %> 
 <%@page import="java.util.ArrayList" %> 
 <%
-    ArrayList<Ville> listeVille = (ArrayList<Ville>)request.getAttribute("listeVille");
     ArrayList<CategorieEvenement> categories = (ArrayList<CategorieEvenement>)request.getAttribute("categories");
     ArrayList<Evenement> listeEvenement = (ArrayList<Evenement>)request.getAttribute("listeEvenement");
     HashMap<String, Integer> nombre = (HashMap<String, Integer>)request.getAttribute("nombreEvenement");
@@ -20,8 +19,17 @@
                     <i class="fa fa-calendar"></i>
                 </div>
                 <div class="main__number__wrapper__content">
-                    <div class="main__number__wrapper__content-title">Total evenements cet annee</div>
+                    <div class="main__number__wrapper__content-title">Total evenements</div>
                     <div class="main__number__wrapper__content-value"><%= nombre.get("total") %></div>
+                </div>
+            </div>
+            <div class="main__number__wrapper">
+                <div class="main__number__wrapper__img">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <div class="main__number__wrapper__content">
+                    <div class="main__number__wrapper__content-title">Cet annee</div>
+                    <div class="main__number__wrapper__content-value"><%= nombre.get("annee") %></div>
                 </div>
             </div>
             <div class="main__number__wrapper">
@@ -29,7 +37,7 @@
                     <i class="fa fa-calendar-alt"></i>
                 </div>
                 <div class="main__number__wrapper__content">
-                    <div class="main__number__wrapper__content-title">Evenements cet mois</div>
+                    <div class="main__number__wrapper__content-title">Cet mois</div>
                     <div class="main__number__wrapper__content-value"><%= nombre.get("mois") %></div>
                 </div>
             </div>
@@ -57,14 +65,18 @@
                     <div class="form-content input_city">
                         <label for="input_categorie">Categorie Evenement</label>
                         <select name="categorie" id="input_categorie">
-                        <% for(CategorieEvenement c: categories){ %>
-                            <option value="<%= c.get_id_categorie_evenement() %>"><%= c.get_libelle() %></option>
-                        <% } %>
+                            <% for(CategorieEvenement c : categories){ %>
+                                <option value="<%= c.get_id_categorie_evenement() %>"><%= c.get_libelle() %></option>
+                            <% } %>
                         </select>
                     </div>
+                    <div class="form-content input_date_insertion_debut">
+                        <label for="input_i_d">Date Debut Evenement</label>
+                        <input type="date" name="date_debut" id="input_i_d" required>
+                    </div>
                     <div class="form-content input_date_insertion_fin">
-                        <label for="input_i_f">Date Evenement</label>
-                        <input type="date" name="date_evenement" id="input_i_f" required>
+                        <label for="input_i_f">Date Fin Evenement</label>
+                        <input type="date" name="date_fin" id="input_i_f" required>
                     </div>
                     <div class="form-content input_desc">
                         <label for="input_description">Description</label>
@@ -82,52 +94,82 @@
         <div class="main__list">
             <div class="main__list__tabs">
                 <div class="main__list__tabs__filter">
-                    <form action="" method="POST" id="filter-container">
+                    <form action="evenement?mode=s" method="GET" id="filter-container">
                         <div class="form-content input_name">
                             <label for="input_nom">Nom</label>
                             <input type="text" name="nom" id="input_nom">
                         </div>
                         <div class="form-content input_city">
-                            <label for="input_ville">Categorie</label>
-                            <select name="categorie" id="input_categorie">
-                                <option value="">Tous</option>
-                            </select>
+                        <label for="input_categorie">Categorie Evenement</label>
+                        <select name="categorie" id="input_categorie">
+                            <% for(CategorieEvenement c : categories){ %>
+                                <option value="<%= c.get_id_categorie_evenement() %>"><%= c.get_libelle() %></option>
+                            <% } %>
+                        </select>
                         </div>
-                        <div class="form-content input_city">
-                            <label for="input_ville">Ville</label>
-                            <select name="id_ville" id="input_ville">
-                                <% for(Ville v: listeVille){ %>
-                                    <option value="<%= v.get_id_ville() %>"><%= v.get_nom_ville() %></option>
-                                <% } %>
-                            </select>
+                        <div class="form-content input_date_evenement_debut">
+                            <label for="input_date_i_d">Date evenement debut</label>
+                            <input type="date" name="" id="input_date_i_d">
                         </div>
-                        <div class="form-content input_date_insertion_debut">
-                            <label for="input_date_i_d">Date debut</label>
-                            <input type="date" name="date_debut" id="input_date_d">
+                        <div class="form-content input_date_evenement_fin">
+                            <label for="input_i_f">Date evenement fin</label>
+                            <input type="date" name="" id="input_i_f">
                         </div>
-                        <div class="form-content input_date_insertion_fin">
-                            <label for="input_i_f">Date fin</label>
-                            <input type="date" name="date_fin" id="input_date_f">
-                        </div>
-                        <input type="hidden" id="tab" name="tab"value="hoho">
-                        <input type="hidden" id="type" name="type" value="hoho">
-                        <button type="submit" id="submit_filter">Rechercher</button>
+                        <input type="hidden" name="mode" value="s">
+                        <button type="submit">Rechercher</button>
                     </form>
-                </div>
-                <div class="main__list__tabs__header" id="list_tabs">
-                    <button class="main__list__tabs__header__content active" data-tab="evenement-calendrier">CALENDRIER</button>
-                    <button class="main__list__tabs__header__content" data-tab="evenement-hotel">HOTEL</button>
                 </div>
                 <div class="main__list__tabs__body">
                     <div id="evenement-calendrier_container" class="main__list__tabs__body__content">
-                        <div class="table-container-evenement-calendrier" id="evenement-calendrier"></div>
-                    </div>
-                    <div id="evenement-hotel" class="main__list__tabs__body__content active">
-                        <div class="table-container-evenement-hotel" id="evenement-hotel"></div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Titre</th>
+                                    <th>Categorie</th>
+                                    <th>Description</th>
+                                    <th>Date debut</th>
+                                    <th>Date fin</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(Evenement e : listeEvenement){ %>
+                                <tr>
+                                    <td><%= e.get_id_evenement() %></td>
+                                    <td><%= e.get_nom_evenement() %></td>
+                                    <% 
+                                        String id = "";
+                                        for(CategorieEvenement c : categories){ 
+                                            if(c.get_id_categorie_evenement().equals(e.get_id_categorie_evenement())){
+                                                id = c.get_libelle();
+                                                break;
+                                            }
+                                        }
+                                    %>
+                                    <td>
+                                        <%= id %>
+                                    </td>
+                                    <td><%= e.get_description() %></td>
+                                    <td><%= e.get_date_debut_evenement() %></td>
+                                    <td><%= e.get_date_fin_evenement() %></td>
+                                    <td>
+                                        <div class="actions">
+                                            <a href="evenement?mode=d&&id=<%= e.get_id_evenement() %>"class="delete">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                            <a href="evenement?mode=u&&id=<%= e.get_id_evenement() %>" class="edit">
+                                                <i class="fa fa-pen"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 <%@include file="../shared/footer.jsp" %>

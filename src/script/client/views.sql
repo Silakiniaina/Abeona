@@ -113,16 +113,7 @@ CREATE OR REPLACE VIEW v_ranking_attraction_province AS
 ---------------------------------------- Liste des evenements du calendrier -------------------------------------------------------
 CREATE VIEW v_evenement_calendrier AS 
     SELECT 
-        id_evenement AS id,
-        titre_evenement AS titre ,
-        description,
-        lieu_evenement as lieu,
-        date_debut_evenement AS date_debut,
-        date_fin_evenement AS date_fin, 
-        id_hotel,
-        id_ville as ville, 
-        id_categorie_evenement as categorie ,
-        date_insertion as insertion
+    *
     FROM evenement 
     WHERE id_hotel IS NULL
     ORDER BY date_debut_evenement DESC
@@ -182,11 +173,13 @@ CREATE OR REPLACE VIEW v_nombre_utilisateur AS
     SELECT 
         total,
         cet_annee,
-        cet_mois
+        cet_mois,
+        actif
     FROM 
-        ( SELECT sum(nombre) as cet_annee FROM v_statistique_nombre_utilisateur WHERE annee = DATE_PART('year',CURRENT_DATE) ),
-        ( SELECT sum(nombre) as cet_mois FROM v_statistique_nombre_utilisateur WHERE mois = DATE_PART('month',CURRENT_DATE)),
-        ( SELECT sum(nombre) as total FROM v_statistique_nombre_utilisateur )
+        ( SELECT count(*) as cet_annee FROM v_utilisateur_par_annee WHERE annee = DATE_PART('year',CURRENT_DATE)),
+        ( SELECT count(*) as cet_mois FROM v_utilisateur_par_annee WHERE annee = DATE_PART('year',CURRENT_DATE) AND month = DATE_PART('month',CURRENT_DATE)),
+        (SELECT count(*) as actif FROM v_utilisateur_par_annee WHERE status = 1),
+        ( SELECT count(*) as total FROM v_utilisateur_par_annee )
 ;
 
 ------------------------------------- Liste des commodites des hotels -----------------------------------------------------------
