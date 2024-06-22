@@ -75,6 +75,9 @@ CREATE TABLE chambres (
     date_insertion DATE DEFAULT now()
 );
 
+ALTER TABLE chambres 
+ADD COLUMN checking_time TIME DEFAULT '10:00:00';
+
 CREATE TABLE evenement (
     id_evenement TEXT PRIMARY KEY DEFAULT generate_id_evenement(),
     nom_evenement VARCHAR(255) NOT NULL,
@@ -151,4 +154,8 @@ CREATE TABLE reservation_attraction (
     date_insertion TIMESTAMP DEFAULT now(),
     date_debut DATE NOT NULL,
     date_fin DATE NOT NULL
+);
+
+CREATE TABLE update_log (
+    actual TIMESTAMP
 );
